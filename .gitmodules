@@ -1,0 +1,3 @@
+[submodule "server-ent"]
+	path = server-ent
+	url = git@github.com-xuanquy:quynguyenxuan/ent-boilderplate.git
