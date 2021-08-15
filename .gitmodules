@@ -1,3 +1,6 @@
 [submodule "server-ent"]
 	path = server-ent
 	url = git@github.com-xuanquy:quynguyenxuan/ent-boilderplate.git
+[submodule "server-nest"]
+	path = server-nest
+	url = git@github.com-xuanquy:quynguyenxuan/nest-boilderplate.git
