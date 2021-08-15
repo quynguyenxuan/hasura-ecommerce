@@ -16,5 +16,6 @@
     "./.vscode/schemas/SingleTableYAML.schema.json": "**/table.yaml"
   },
   "pgFormatter.commaBreak": true,
-  "pgFormatter.wrapLimit": 80
+  "pgFormatter.wrapLimit": 80,
+  "go.inferGopath": false
 }
