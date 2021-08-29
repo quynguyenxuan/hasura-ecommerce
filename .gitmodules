@@ -4,3 +4,6 @@
 [submodule "server-nest"]
 	path = server-nest
 	url = git@github.com-xuanquy:quynguyenxuan/nest-boilderplate.git
+[submodule "admin"]
+	path = admin
+	url = git@github.com-xuanquy:quynguyenxuan/admin-boilderplate.git
