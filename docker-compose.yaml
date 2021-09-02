@@ -40,10 +40,12 @@ services:
       context: ./www
       dockerfile: Dockerfile
     restart: always
+    working_dir: /app
     volumes:
       - ./www:/app/
-      - /app/node_modules
-      - /app/.next
+      # - /app/node_modules
+      # - /app/.next
+      #  - ./server-ent:/go/src/entgo.io/quynguyen-todo
     ports:
       - 3000:3000
     environment:
