@@ -12,6 +12,7 @@ columns and relationships of "address" */
 	city?:true,
 	created_at?:true,
 	id?:true,
+	name?:true,
 orders_with_billing_address?: [{	/** distinct select on columns */
 	distinct_on?:ValueTypes["order_select_column"][],	/** limit the number of rows returned */
 	limit?:number,	/** skip the first n rows. Use only with order_by */
@@ -82,6 +83,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	/** input type for inserting array relation for remote table "address" */
 ["address_arr_rel_insert_input"]: {
 	data:ValueTypes["address_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["address_on_conflict"]
 };
 	/** aggregate avg on columns */
@@ -97,14 +99,15 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 };
 	/** Boolean expression to filter rows from the table "address". All fields are combined with a logical 'AND'. */
 ["address_bool_exp"]: {
-	_and?:(ValueTypes["address_bool_exp"] | undefined)[],
+	_and?:ValueTypes["address_bool_exp"][],
 	_not?:ValueTypes["address_bool_exp"],
-	_or?:(ValueTypes["address_bool_exp"] | undefined)[],
+	_or?:ValueTypes["address_bool_exp"][],
 	address_line_one?:ValueTypes["String_comparison_exp"],
 	address_line_two?:ValueTypes["String_comparison_exp"],
 	city?:ValueTypes["String_comparison_exp"],
 	created_at?:ValueTypes["timestamptz_comparison_exp"],
 	id?:ValueTypes["Int_comparison_exp"],
+	name?:ValueTypes["String_comparison_exp"],
 	orders_with_billing_address?:ValueTypes["order_bool_exp"],
 	orders_with_shipping_address?:ValueTypes["order_bool_exp"],
 	state?:ValueTypes["String_comparison_exp"],
@@ -115,7 +118,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 };
 	/** unique or primary key constraints on table "address" */
 ["address_constraint"]:address_constraint;
-	/** input type for incrementing integer column in table "address" */
+	/** input type for incrementing numeric columns in table "address" */
 ["address_inc_input"]: {
 	id?:number,
 	user_id?:number
@@ -127,6 +130,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	city?:string,
 	created_at?:ValueTypes["timestamptz"],
 	id?:number,
+	name?:string,
 	orders_with_billing_address?:ValueTypes["order_arr_rel_insert_input"],
 	orders_with_shipping_address?:ValueTypes["order_arr_rel_insert_input"],
 	state?:string,
@@ -142,6 +146,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	city?:true,
 	created_at?:true,
 	id?:true,
+	name?:true,
 	state?:true,
 	updated_at?:true,
 	user_id?:true,
@@ -155,6 +160,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	city?:ValueTypes["order_by"],
 	created_at?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	name?:ValueTypes["order_by"],
 	state?:ValueTypes["order_by"],
 	updated_at?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"],
@@ -167,6 +173,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	city?:true,
 	created_at?:true,
 	id?:true,
+	name?:true,
 	state?:true,
 	updated_at?:true,
 	user_id?:true,
@@ -180,6 +187,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	city?:ValueTypes["order_by"],
 	created_at?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	name?:ValueTypes["order_by"],
 	state?:ValueTypes["order_by"],
 	updated_at?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"],
@@ -187,15 +195,16 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 };
 	/** response of any mutation on the table "address" */
 ["address_mutation_response"]: AliasType<{
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows?:true,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning?:ValueTypes["address"],
 		__typename?: true
 }>;
 	/** input type for inserting object relation for remote table "address" */
 ["address_obj_rel_insert_input"]: {
 	data:ValueTypes["address_insert_input"],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["address_on_conflict"]
 };
 	/** on conflict condition type for table "address" */
@@ -204,13 +213,14 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	update_columns:ValueTypes["address_update_column"][],
 	where?:ValueTypes["address_bool_exp"]
 };
-	/** ordering options when selecting data from "address" */
+	/** Ordering options when selecting data from "address". */
 ["address_order_by"]: {
 	address_line_one?:ValueTypes["order_by"],
 	address_line_two?:ValueTypes["order_by"],
 	city?:ValueTypes["order_by"],
 	created_at?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	name?:ValueTypes["order_by"],
 	orders_with_billing_address_aggregate?:ValueTypes["order_aggregate_order_by"],
 	orders_with_shipping_address_aggregate?:ValueTypes["order_aggregate_order_by"],
 	state?:ValueTypes["order_by"],
@@ -219,7 +229,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	user_id?:ValueTypes["order_by"],
 	zipcode?:ValueTypes["order_by"]
 };
-	/** primary key columns input for table: "address" */
+	/** primary key columns input for table: address */
 ["address_pk_columns_input"]: {
 	id:number
 };
@@ -232,6 +242,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	city?:string,
 	created_at?:ValueTypes["timestamptz"],
 	id?:number,
+	name?:string,
 	state?:string,
 	updated_at?:ValueTypes["timestamptz"],
 	user_id?:number,
@@ -325,7 +336,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	name:string,
 	password:string
 };
-	/** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 ["Boolean_comparison_exp"]: {
 	_eq?:boolean,
 	_gt?:boolean,
@@ -340,7 +351,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	["CreatePaymentIntentInput"]: {
 	paymentAmount:number
 };
-	/** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 ["Int_comparison_exp"]: {
 	_eq?:number,
 	_gt?:number,
@@ -352,21 +363,8 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 	_neq?:number,
 	_nin?:number[]
 };
-	["json"]:unknown;
-	/** expression to compare columns of type json. All fields are combined with logical 'AND'. */
-["json_comparison_exp"]: {
-	_eq?:ValueTypes["json"],
-	_gt?:ValueTypes["json"],
-	_gte?:ValueTypes["json"],
-	_in?:ValueTypes["json"][],
-	_is_null?:boolean,
-	_lt?:ValueTypes["json"],
-	_lte?:ValueTypes["json"],
-	_neq?:ValueTypes["json"],
-	_nin?:ValueTypes["json"][]
-};
 	["jsonb"]:unknown;
-	/** expression to compare columns of type jsonb. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 ["jsonb_comparison_exp"]: {
 	/** is the column contained in the given json value */
 	_contained_in?:ValueTypes["jsonb"],
@@ -401,6 +399,7 @@ count?: [{	columns?:ValueTypes["address_select_column"][],	distinct?:boolean},tr
 };
 	/** mutation root */
 ["mutation_root"]: AliasType<{
+actionLoginTest?: [{	params:ValueTypes["SampleInput"]},ValueTypes["SampleOutput"]],
 adminSignup?: [{	params:ValueTypes["AdminSignupInput"]},ValueTypes["JWT"]],
 createPaymentIntent?: [{	params:ValueTypes["CreatePaymentIntentInput"]},ValueTypes["PaymentIntentClientSecret"]],
 delete_address?: [{	/** filter the rows which have to be deleted */
@@ -412,6 +411,9 @@ delete_order_by_pk?: [{	id:number},ValueTypes["order"]],
 delete_order_product?: [{	/** filter the rows which have to be deleted */
 	where:ValueTypes["order_product_bool_exp"]},ValueTypes["order_product_mutation_response"]],
 delete_order_product_by_pk?: [{	id:number},ValueTypes["order_product"]],
+delete_order_status?: [{	/** filter the rows which have to be deleted */
+	where:ValueTypes["order_status_bool_exp"]},ValueTypes["order_status_mutation_response"]],
+delete_order_status_by_pk?: [{	status:string},ValueTypes["order_status"]],
 delete_product?: [{	/** filter the rows which have to be deleted */
 	where:ValueTypes["product_bool_exp"]},ValueTypes["product_mutation_response"]],
 delete_product_by_pk?: [{	id:number},ValueTypes["product"]],
@@ -445,6 +447,12 @@ insert_order_product?: [{	/** the rows to be inserted */
 insert_order_product_one?: [{	/** the row to be inserted */
 	object:ValueTypes["order_product_insert_input"],	/** on conflict condition */
 	on_conflict?:ValueTypes["order_product_on_conflict"]},ValueTypes["order_product"]],
+insert_order_status?: [{	/** the rows to be inserted */
+	objects:ValueTypes["order_status_insert_input"][],	/** on conflict condition */
+	on_conflict?:ValueTypes["order_status_on_conflict"]},ValueTypes["order_status_mutation_response"]],
+insert_order_status_one?: [{	/** the row to be inserted */
+	object:ValueTypes["order_status_insert_input"],	/** on conflict condition */
+	on_conflict?:ValueTypes["order_status_on_conflict"]},ValueTypes["order_status"]],
 insert_product?: [{	/** the rows to be inserted */
 	objects:ValueTypes["product_insert_input"][],	/** on conflict condition */
 	on_conflict?:ValueTypes["product_on_conflict"]},ValueTypes["product_mutation_response"]],
@@ -477,33 +485,38 @@ insert_user_one?: [{	/** the row to be inserted */
 	on_conflict?:ValueTypes["user_on_conflict"]},ValueTypes["user"]],
 login?: [{	params:ValueTypes["LoginInput"]},ValueTypes["JWT"]],
 signup?: [{	params:ValueTypes["SignupInput"]},ValueTypes["JWT"]],
-update_address?: [{	/** increments the integer columns with given value of the filtered values */
+update_address?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["address_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["address_set_input"],	/** filter the rows which have to be updated */
 	where:ValueTypes["address_bool_exp"]},ValueTypes["address_mutation_response"]],
-update_address_by_pk?: [{	/** increments the integer columns with given value of the filtered values */
+update_address_by_pk?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["address_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["address_set_input"],	pk_columns:ValueTypes["address_pk_columns_input"]},ValueTypes["address"]],
-update_order?: [{	/** increments the integer columns with given value of the filtered values */
+update_order?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["order_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["order_set_input"],	/** filter the rows which have to be updated */
 	where:ValueTypes["order_bool_exp"]},ValueTypes["order_mutation_response"]],
-update_order_by_pk?: [{	/** increments the integer columns with given value of the filtered values */
+update_order_by_pk?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["order_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["order_set_input"],	pk_columns:ValueTypes["order_pk_columns_input"]},ValueTypes["order"]],
-update_order_product?: [{	/** increments the integer columns with given value of the filtered values */
+update_order_product?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["order_product_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["order_product_set_input"],	/** filter the rows which have to be updated */
 	where:ValueTypes["order_product_bool_exp"]},ValueTypes["order_product_mutation_response"]],
-update_order_product_by_pk?: [{	/** increments the integer columns with given value of the filtered values */
+update_order_product_by_pk?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["order_product_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["order_product_set_input"],	pk_columns:ValueTypes["order_product_pk_columns_input"]},ValueTypes["order_product"]],
+update_order_status?: [{	/** sets the columns of the filtered rows to the given values */
+	_set?:ValueTypes["order_status_set_input"],	/** filter the rows which have to be updated */
+	where:ValueTypes["order_status_bool_exp"]},ValueTypes["order_status_mutation_response"]],
+update_order_status_by_pk?: [{	/** sets the columns of the filtered rows to the given values */
+	_set?:ValueTypes["order_status_set_input"],	pk_columns:ValueTypes["order_status_pk_columns_input"]},ValueTypes["order_status"]],
 update_product?: [{	/** append existing jsonb value of filtered columns with new jsonb value */
 	_append?:ValueTypes["product_append_input"],	/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 	_delete_at_path?:ValueTypes["product_delete_at_path_input"],	/** delete the array element with specified index (negative integers count from
 the end). throws an error if top level container is not an array */
 	_delete_elem?:ValueTypes["product_delete_elem_input"],	/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-	_delete_key?:ValueTypes["product_delete_key_input"],	/** increments the integer columns with given value of the filtered values */
+	_delete_key?:ValueTypes["product_delete_key_input"],	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["product_inc_input"],	/** prepend existing jsonb value of filtered columns with new jsonb value */
 	_prepend?:ValueTypes["product_prepend_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["product_set_input"],	/** filter the rows which have to be updated */
@@ -513,7 +526,7 @@ update_product_by_pk?: [{	/** append existing jsonb value of filtered columns wi
 	_delete_at_path?:ValueTypes["product_delete_at_path_input"],	/** delete the array element with specified index (negative integers count from
 the end). throws an error if top level container is not an array */
 	_delete_elem?:ValueTypes["product_delete_elem_input"],	/** delete key/value pair or string element. key/value pairs are matched based on their key value */
-	_delete_key?:ValueTypes["product_delete_key_input"],	/** increments the integer columns with given value of the filtered values */
+	_delete_key?:ValueTypes["product_delete_key_input"],	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["product_inc_input"],	/** prepend existing jsonb value of filtered columns with new jsonb value */
 	_prepend?:ValueTypes["product_prepend_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["product_set_input"],	pk_columns:ValueTypes["product_pk_columns_input"]},ValueTypes["product"]],
@@ -522,31 +535,31 @@ update_product_category_enum?: [{	/** sets the columns of the filtered rows to t
 	where:ValueTypes["product_category_enum_bool_exp"]},ValueTypes["product_category_enum_mutation_response"]],
 update_product_category_enum_by_pk?: [{	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["product_category_enum_set_input"],	pk_columns:ValueTypes["product_category_enum_pk_columns_input"]},ValueTypes["product_category_enum"]],
-update_product_review?: [{	/** increments the integer columns with given value of the filtered values */
+update_product_review?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["product_review_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["product_review_set_input"],	/** filter the rows which have to be updated */
 	where:ValueTypes["product_review_bool_exp"]},ValueTypes["product_review_mutation_response"]],
-update_product_review_by_pk?: [{	/** increments the integer columns with given value of the filtered values */
+update_product_review_by_pk?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["product_review_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["product_review_set_input"],	pk_columns:ValueTypes["product_review_pk_columns_input"]},ValueTypes["product_review"]],
-update_site_admin?: [{	/** increments the integer columns with given value of the filtered values */
+update_site_admin?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["site_admin_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["site_admin_set_input"],	/** filter the rows which have to be updated */
 	where:ValueTypes["site_admin_bool_exp"]},ValueTypes["site_admin_mutation_response"]],
-update_site_admin_by_pk?: [{	/** increments the integer columns with given value of the filtered values */
+update_site_admin_by_pk?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["site_admin_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["site_admin_set_input"],	pk_columns:ValueTypes["site_admin_pk_columns_input"]},ValueTypes["site_admin"]],
-update_user?: [{	/** increments the integer columns with given value of the filtered values */
+update_user?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["user_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["user_set_input"],	/** filter the rows which have to be updated */
 	where:ValueTypes["user_bool_exp"]},ValueTypes["user_mutation_response"]],
-update_user_by_pk?: [{	/** increments the integer columns with given value of the filtered values */
+update_user_by_pk?: [{	/** increments the numeric columns with given value of the filtered values */
 	_inc?:ValueTypes["user_inc_input"],	/** sets the columns of the filtered rows to the given values */
 	_set?:ValueTypes["user_set_input"],	pk_columns:ValueTypes["user_pk_columns_input"]},ValueTypes["user"]],
 		__typename?: true
 }>;
 	["numeric"]:unknown;
-	/** expression to compare columns of type numeric. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
 ["numeric_comparison_exp"]: {
 	_eq?:ValueTypes["numeric"],
 	_gt?:ValueTypes["numeric"],
@@ -569,6 +582,9 @@ columns and relationships of "order" */
 	created_at?:true,
 	id?:true,
 	is_shipped?:true,
+	/** An object relationship */
+	order_status?:ValueTypes["order_status"],
+	order_total?:true,
 products?: [{	/** distinct select on columns */
 	distinct_on?:ValueTypes["order_product_select_column"][],	/** limit the number of rows returned */
 	limit?:number,	/** skip the first n rows. Use only with order_by */
@@ -584,6 +600,7 @@ products_aggregate?: [{	/** distinct select on columns */
 	/** An object relationship */
 	shipping_address?:ValueTypes["address"],
 	shipping_address_id?:true,
+	status?:true,
 	updated_at?:true,
 	/** An object relationship */
 	user?:ValueTypes["user"],
@@ -628,12 +645,14 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 	/** input type for inserting array relation for remote table "order" */
 ["order_arr_rel_insert_input"]: {
 	data:ValueTypes["order_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["order_on_conflict"]
 };
 	/** aggregate avg on columns */
 ["order_avg_fields"]: AliasType<{
 	billing_address_id?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	user_id?:true,
 		__typename?: true
@@ -642,22 +661,26 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 ["order_avg_order_by"]: {
 	billing_address_id?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
 	/** Boolean expression to filter rows from the table "order". All fields are combined with a logical 'AND'. */
 ["order_bool_exp"]: {
-	_and?:(ValueTypes["order_bool_exp"] | undefined)[],
+	_and?:ValueTypes["order_bool_exp"][],
 	_not?:ValueTypes["order_bool_exp"],
-	_or?:(ValueTypes["order_bool_exp"] | undefined)[],
+	_or?:ValueTypes["order_bool_exp"][],
 	billing_address?:ValueTypes["address_bool_exp"],
 	billing_address_id?:ValueTypes["Int_comparison_exp"],
 	created_at?:ValueTypes["timestamptz_comparison_exp"],
 	id?:ValueTypes["Int_comparison_exp"],
 	is_shipped?:ValueTypes["Boolean_comparison_exp"],
+	order_status?:ValueTypes["order_status_bool_exp"],
+	order_total?:ValueTypes["numeric_comparison_exp"],
 	products?:ValueTypes["order_product_bool_exp"],
 	shipping_address?:ValueTypes["address_bool_exp"],
 	shipping_address_id?:ValueTypes["Int_comparison_exp"],
+	status?:ValueTypes["order_status_enum_comparison_exp"],
 	updated_at?:ValueTypes["timestamptz_comparison_exp"],
 	user?:ValueTypes["user_bool_exp"],
 	user_id?:ValueTypes["Int_comparison_exp"]
@@ -666,10 +689,11 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 ["order_by"]:order_by;
 	/** unique or primary key constraints on table "order" */
 ["order_constraint"]:order_constraint;
-	/** input type for incrementing integer column in table "order" */
+	/** input type for incrementing numeric columns in table "order" */
 ["order_inc_input"]: {
 	billing_address_id?:number,
 	id?:number,
+	order_total?:ValueTypes["numeric"],
 	shipping_address_id?:number,
 	user_id?:number
 };
@@ -680,9 +704,12 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 	created_at?:ValueTypes["timestamptz"],
 	id?:number,
 	is_shipped?:boolean,
+	order_status?:ValueTypes["order_status_obj_rel_insert_input"],
+	order_total?:ValueTypes["numeric"],
 	products?:ValueTypes["order_product_arr_rel_insert_input"],
 	shipping_address?:ValueTypes["address_obj_rel_insert_input"],
 	shipping_address_id?:number,
+	status?:ValueTypes["order_status_enum"],
 	updated_at?:ValueTypes["timestamptz"],
 	user?:ValueTypes["user_obj_rel_insert_input"],
 	user_id?:number
@@ -692,6 +719,7 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 	billing_address_id?:true,
 	created_at?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	updated_at?:true,
 	user_id?:true,
@@ -702,6 +730,7 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 	billing_address_id?:ValueTypes["order_by"],
 	created_at?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	updated_at?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
@@ -711,6 +740,7 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 	billing_address_id?:true,
 	created_at?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	updated_at?:true,
 	user_id?:true,
@@ -721,21 +751,23 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 	billing_address_id?:ValueTypes["order_by"],
 	created_at?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	updated_at?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
 	/** response of any mutation on the table "order" */
 ["order_mutation_response"]: AliasType<{
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows?:true,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning?:ValueTypes["order"],
 		__typename?: true
 }>;
 	/** input type for inserting object relation for remote table "order" */
 ["order_obj_rel_insert_input"]: {
 	data:ValueTypes["order_insert_input"],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["order_on_conflict"]
 };
 	/** on conflict condition type for table "order" */
@@ -744,21 +776,24 @@ count?: [{	columns?:ValueTypes["order_select_column"][],	distinct?:boolean},true
 	update_columns:ValueTypes["order_update_column"][],
 	where?:ValueTypes["order_bool_exp"]
 };
-	/** ordering options when selecting data from "order" */
+	/** Ordering options when selecting data from "order". */
 ["order_order_by"]: {
 	billing_address?:ValueTypes["address_order_by"],
 	billing_address_id?:ValueTypes["order_by"],
 	created_at?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
 	is_shipped?:ValueTypes["order_by"],
+	order_status?:ValueTypes["order_status_order_by"],
+	order_total?:ValueTypes["order_by"],
 	products_aggregate?:ValueTypes["order_product_aggregate_order_by"],
 	shipping_address?:ValueTypes["address_order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
+	status?:ValueTypes["order_by"],
 	updated_at?:ValueTypes["order_by"],
 	user?:ValueTypes["user_order_by"],
 	user_id?:ValueTypes["order_by"]
 };
-	/** primary key columns input for table: "order" */
+	/** primary key columns input for table: order */
 ["order_pk_columns_input"]: {
 	id:number
 };
@@ -817,6 +852,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 	/** input type for inserting array relation for remote table "order_product" */
 ["order_product_arr_rel_insert_input"]: {
 	data:ValueTypes["order_product_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["order_product_on_conflict"]
 };
 	/** aggregate avg on columns */
@@ -836,9 +872,9 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 };
 	/** Boolean expression to filter rows from the table "order_product". All fields are combined with a logical 'AND'. */
 ["order_product_bool_exp"]: {
-	_and?:(ValueTypes["order_product_bool_exp"] | undefined)[],
+	_and?:ValueTypes["order_product_bool_exp"][],
 	_not?:ValueTypes["order_product_bool_exp"],
-	_or?:(ValueTypes["order_product_bool_exp"] | undefined)[],
+	_or?:ValueTypes["order_product_bool_exp"][],
 	created_at?:ValueTypes["timestamptz_comparison_exp"],
 	id?:ValueTypes["Int_comparison_exp"],
 	order?:ValueTypes["order_bool_exp"],
@@ -850,7 +886,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 };
 	/** unique or primary key constraints on table "order_product" */
 ["order_product_constraint"]:order_product_constraint;
-	/** input type for incrementing integer column in table "order_product" */
+	/** input type for incrementing numeric columns in table "order_product" */
 ["order_product_inc_input"]: {
 	id?:number,
 	order_id?:number,
@@ -908,24 +944,19 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 };
 	/** response of any mutation on the table "order_product" */
 ["order_product_mutation_response"]: AliasType<{
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows?:true,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning?:ValueTypes["order_product"],
 		__typename?: true
 }>;
-	/** input type for inserting object relation for remote table "order_product" */
-["order_product_obj_rel_insert_input"]: {
-	data:ValueTypes["order_product_insert_input"],
-	on_conflict?:ValueTypes["order_product_on_conflict"]
-};
 	/** on conflict condition type for table "order_product" */
 ["order_product_on_conflict"]: {
 	constraint:ValueTypes["order_product_constraint"],
 	update_columns:ValueTypes["order_product_update_column"][],
 	where?:ValueTypes["order_product_bool_exp"]
 };
-	/** ordering options when selecting data from "order_product" */
+	/** Ordering options when selecting data from "order_product". */
 ["order_product_order_by"]: {
 	created_at?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
@@ -936,7 +967,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 	quantity?:ValueTypes["order_by"],
 	updated_at?:ValueTypes["order_by"]
 };
-	/** primary key columns input for table: "order_product" */
+	/** primary key columns input for table: order_product */
 ["order_product_pk_columns_input"]: {
 	id:number
 };
@@ -1066,14 +1097,118 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 	created_at?:ValueTypes["timestamptz"],
 	id?:number,
 	is_shipped?:boolean,
+	order_total?:ValueTypes["numeric"],
 	shipping_address_id?:number,
+	status?:ValueTypes["order_status_enum"],
 	updated_at?:ValueTypes["timestamptz"],
 	user_id?:number
 };
+	/** columns and relationships of "order_status" */
+["order_status"]: AliasType<{
+orders?: [{	/** distinct select on columns */
+	distinct_on?:ValueTypes["order_select_column"][],	/** limit the number of rows returned */
+	limit?:number,	/** skip the first n rows. Use only with order_by */
+	offset?:number,	/** sort the rows by one or more columns */
+	order_by?:ValueTypes["order_order_by"][],	/** filter the rows returned */
+	where?:ValueTypes["order_bool_exp"]},ValueTypes["order"]],
+orders_aggregate?: [{	/** distinct select on columns */
+	distinct_on?:ValueTypes["order_select_column"][],	/** limit the number of rows returned */
+	limit?:number,	/** skip the first n rows. Use only with order_by */
+	offset?:number,	/** sort the rows by one or more columns */
+	order_by?:ValueTypes["order_order_by"][],	/** filter the rows returned */
+	where?:ValueTypes["order_bool_exp"]},ValueTypes["order_aggregate"]],
+	status?:true,
+		__typename?: true
+}>;
+	/** aggregated selection of "order_status" */
+["order_status_aggregate"]: AliasType<{
+	aggregate?:ValueTypes["order_status_aggregate_fields"],
+	nodes?:ValueTypes["order_status"],
+		__typename?: true
+}>;
+	/** aggregate fields of "order_status" */
+["order_status_aggregate_fields"]: AliasType<{
+count?: [{	columns?:ValueTypes["order_status_select_column"][],	distinct?:boolean},true],
+	max?:ValueTypes["order_status_max_fields"],
+	min?:ValueTypes["order_status_min_fields"],
+		__typename?: true
+}>;
+	/** Boolean expression to filter rows from the table "order_status". All fields are combined with a logical 'AND'. */
+["order_status_bool_exp"]: {
+	_and?:ValueTypes["order_status_bool_exp"][],
+	_not?:ValueTypes["order_status_bool_exp"],
+	_or?:ValueTypes["order_status_bool_exp"][],
+	orders?:ValueTypes["order_bool_exp"],
+	status?:ValueTypes["String_comparison_exp"]
+};
+	/** unique or primary key constraints on table "order_status" */
+["order_status_constraint"]:order_status_constraint;
+	["order_status_enum"]:order_status_enum;
+	/** Boolean expression to compare columns of type "order_status_enum". All fields are combined with logical 'AND'. */
+["order_status_enum_comparison_exp"]: {
+	_eq?:ValueTypes["order_status_enum"],
+	_in?:ValueTypes["order_status_enum"][],
+	_is_null?:boolean,
+	_neq?:ValueTypes["order_status_enum"],
+	_nin?:ValueTypes["order_status_enum"][]
+};
+	/** input type for inserting data into table "order_status" */
+["order_status_insert_input"]: {
+	orders?:ValueTypes["order_arr_rel_insert_input"],
+	status?:string
+};
+	/** aggregate max on columns */
+["order_status_max_fields"]: AliasType<{
+	status?:true,
+		__typename?: true
+}>;
+	/** aggregate min on columns */
+["order_status_min_fields"]: AliasType<{
+	status?:true,
+		__typename?: true
+}>;
+	/** response of any mutation on the table "order_status" */
+["order_status_mutation_response"]: AliasType<{
+	/** number of rows affected by the mutation */
+	affected_rows?:true,
+	/** data from the rows affected by the mutation */
+	returning?:ValueTypes["order_status"],
+		__typename?: true
+}>;
+	/** input type for inserting object relation for remote table "order_status" */
+["order_status_obj_rel_insert_input"]: {
+	data:ValueTypes["order_status_insert_input"],
+	/** on conflict condition */
+	on_conflict?:ValueTypes["order_status_on_conflict"]
+};
+	/** on conflict condition type for table "order_status" */
+["order_status_on_conflict"]: {
+	constraint:ValueTypes["order_status_constraint"],
+	update_columns:ValueTypes["order_status_update_column"][],
+	where?:ValueTypes["order_status_bool_exp"]
+};
+	/** Ordering options when selecting data from "order_status". */
+["order_status_order_by"]: {
+	orders_aggregate?:ValueTypes["order_aggregate_order_by"],
+	status?:ValueTypes["order_by"]
+};
+	/** primary key columns input for table: order_status */
+["order_status_pk_columns_input"]: {
+	status:string
+};
+	/** select columns of table "order_status" */
+["order_status_select_column"]:order_status_select_column;
+	/** input type for updating data in table "order_status" */
+["order_status_set_input"]: {
+	status?:string
+};
+	/** update columns of table "order_status" */
+["order_status_update_column"]:order_status_update_column;
 	/** aggregate stddev on columns */
 ["order_stddev_fields"]: AliasType<{
 	billing_address_id?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	user_id?:true,
 		__typename?: true
@@ -1082,6 +1217,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_stddev_order_by"]: {
 	billing_address_id?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
@@ -1089,6 +1225,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_stddev_pop_fields"]: AliasType<{
 	billing_address_id?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	user_id?:true,
 		__typename?: true
@@ -1097,6 +1234,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_stddev_pop_order_by"]: {
 	billing_address_id?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
@@ -1104,6 +1242,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_stddev_samp_fields"]: AliasType<{
 	billing_address_id?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	user_id?:true,
 		__typename?: true
@@ -1112,6 +1251,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_stddev_samp_order_by"]: {
 	billing_address_id?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
@@ -1119,6 +1259,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_sum_fields"]: AliasType<{
 	billing_address_id?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	user_id?:true,
 		__typename?: true
@@ -1127,6 +1268,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_sum_order_by"]: {
 	billing_address_id?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
@@ -1136,6 +1278,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_var_pop_fields"]: AliasType<{
 	billing_address_id?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	user_id?:true,
 		__typename?: true
@@ -1144,6 +1287,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_var_pop_order_by"]: {
 	billing_address_id?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
@@ -1151,6 +1295,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_var_samp_fields"]: AliasType<{
 	billing_address_id?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	user_id?:true,
 		__typename?: true
@@ -1159,6 +1304,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_var_samp_order_by"]: {
 	billing_address_id?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
@@ -1166,6 +1312,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_variance_fields"]: AliasType<{
 	billing_address_id?:true,
 	id?:true,
+	order_total?:true,
 	shipping_address_id?:true,
 	user_id?:true,
 		__typename?: true
@@ -1174,6 +1321,7 @@ count?: [{	columns?:ValueTypes["order_product_select_column"][],	distinct?:boole
 ["order_variance_order_by"]: {
 	billing_address_id?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	order_total?:ValueTypes["order_by"],
 	shipping_address_id?:ValueTypes["order_by"],
 	user_id?:ValueTypes["order_by"]
 };
@@ -1263,6 +1411,7 @@ count?: [{	columns?:ValueTypes["product_select_column"][],	distinct?:boolean},tr
 	/** input type for inserting array relation for remote table "product" */
 ["product_arr_rel_insert_input"]: {
 	data:ValueTypes["product_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["product_on_conflict"]
 };
 	/** aggregate avg on columns */
@@ -1278,9 +1427,9 @@ count?: [{	columns?:ValueTypes["product_select_column"][],	distinct?:boolean},tr
 };
 	/** Boolean expression to filter rows from the table "product". All fields are combined with a logical 'AND'. */
 ["product_bool_exp"]: {
-	_and?:(ValueTypes["product_bool_exp"] | undefined)[],
+	_and?:ValueTypes["product_bool_exp"][],
 	_not?:ValueTypes["product_bool_exp"],
-	_or?:(ValueTypes["product_bool_exp"] | undefined)[],
+	_or?:ValueTypes["product_bool_exp"][],
 	brand?:ValueTypes["String_comparison_exp"],
 	category?:ValueTypes["product_category_enum_bool_exp"],
 	category_display_name?:ValueTypes["String_comparison_exp"],
@@ -1325,22 +1474,11 @@ count?: [{	columns?:ValueTypes["product_category_enum_select_column"][],	distinc
 	min?:ValueTypes["product_category_enum_min_fields"],
 		__typename?: true
 }>;
-	/** order by aggregate values of table "product_category_enum" */
-["product_category_enum_aggregate_order_by"]: {
-	count?:ValueTypes["order_by"],
-	max?:ValueTypes["product_category_enum_max_order_by"],
-	min?:ValueTypes["product_category_enum_min_order_by"]
-};
-	/** input type for inserting array relation for remote table "product_category_enum" */
-["product_category_enum_arr_rel_insert_input"]: {
-	data:ValueTypes["product_category_enum_insert_input"][],
-	on_conflict?:ValueTypes["product_category_enum_on_conflict"]
-};
 	/** Boolean expression to filter rows from the table "product_category_enum". All fields are combined with a logical 'AND'. */
 ["product_category_enum_bool_exp"]: {
-	_and?:(ValueTypes["product_category_enum_bool_exp"] | undefined)[],
+	_and?:ValueTypes["product_category_enum_bool_exp"][],
 	_not?:ValueTypes["product_category_enum_bool_exp"],
-	_or?:(ValueTypes["product_category_enum_bool_exp"] | undefined)[],
+	_or?:ValueTypes["product_category_enum_bool_exp"][],
 	display_name?:ValueTypes["String_comparison_exp"],
 	name?:ValueTypes["String_comparison_exp"],
 	products?:ValueTypes["product_bool_exp"]
@@ -1359,33 +1497,24 @@ count?: [{	columns?:ValueTypes["product_category_enum_select_column"][],	distinc
 	name?:true,
 		__typename?: true
 }>;
-	/** order by max() on columns of table "product_category_enum" */
-["product_category_enum_max_order_by"]: {
-	display_name?:ValueTypes["order_by"],
-	name?:ValueTypes["order_by"]
-};
 	/** aggregate min on columns */
 ["product_category_enum_min_fields"]: AliasType<{
 	display_name?:true,
 	name?:true,
 		__typename?: true
 }>;
-	/** order by min() on columns of table "product_category_enum" */
-["product_category_enum_min_order_by"]: {
-	display_name?:ValueTypes["order_by"],
-	name?:ValueTypes["order_by"]
-};
 	/** response of any mutation on the table "product_category_enum" */
 ["product_category_enum_mutation_response"]: AliasType<{
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows?:true,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning?:ValueTypes["product_category_enum"],
 		__typename?: true
 }>;
 	/** input type for inserting object relation for remote table "product_category_enum" */
 ["product_category_enum_obj_rel_insert_input"]: {
 	data:ValueTypes["product_category_enum_insert_input"],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["product_category_enum_on_conflict"]
 };
 	/** on conflict condition type for table "product_category_enum" */
@@ -1394,13 +1523,13 @@ count?: [{	columns?:ValueTypes["product_category_enum_select_column"][],	distinc
 	update_columns:ValueTypes["product_category_enum_update_column"][],
 	where?:ValueTypes["product_category_enum_bool_exp"]
 };
-	/** ordering options when selecting data from "product_category_enum" */
+	/** Ordering options when selecting data from "product_category_enum". */
 ["product_category_enum_order_by"]: {
 	display_name?:ValueTypes["order_by"],
 	name?:ValueTypes["order_by"],
 	products_aggregate?:ValueTypes["product_aggregate_order_by"]
 };
-	/** primary key columns input for table: "product_category_enum" */
+	/** primary key columns input for table: product_category_enum */
 ["product_category_enum_pk_columns_input"]: {
 	name:string
 };
@@ -1417,7 +1546,7 @@ count?: [{	columns?:ValueTypes["product_category_enum_select_column"][],	distinc
 ["product_constraint"]:product_constraint;
 	/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 ["product_delete_at_path_input"]: {
-	image_urls?:(string | undefined)[]
+	image_urls?:string[]
 };
 	/** delete the array element with specified index (negative integers count from the
 end). throws an error if top level container is not an array */
@@ -1428,7 +1557,7 @@ end). throws an error if top level container is not an array */
 ["product_delete_key_input"]: {
 	image_urls?:string
 };
-	/** input type for incrementing integer column in table "product" */
+	/** input type for incrementing numeric columns in table "product" */
 ["product_inc_input"]: {
 	id?:number,
 	price?:ValueTypes["numeric"]
@@ -1496,15 +1625,16 @@ end). throws an error if top level container is not an array */
 };
 	/** response of any mutation on the table "product" */
 ["product_mutation_response"]: AliasType<{
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows?:true,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning?:ValueTypes["product"],
 		__typename?: true
 }>;
 	/** input type for inserting object relation for remote table "product" */
 ["product_obj_rel_insert_input"]: {
 	data:ValueTypes["product_insert_input"],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["product_on_conflict"]
 };
 	/** on conflict condition type for table "product" */
@@ -1513,7 +1643,7 @@ end). throws an error if top level container is not an array */
 	update_columns:ValueTypes["product_update_column"][],
 	where?:ValueTypes["product_bool_exp"]
 };
-	/** ordering options when selecting data from "product" */
+	/** Ordering options when selecting data from "product". */
 ["product_order_by"]: {
 	brand?:ValueTypes["order_by"],
 	category?:ValueTypes["product_category_enum_order_by"],
@@ -1528,7 +1658,7 @@ end). throws an error if top level container is not an array */
 	product_reviews_aggregate?:ValueTypes["product_review_aggregate_order_by"],
 	updated_at?:ValueTypes["order_by"]
 };
-	/** primary key columns input for table: "product" */
+	/** primary key columns input for table: product */
 ["product_pk_columns_input"]: {
 	id:number
 };
@@ -1592,6 +1722,7 @@ count?: [{	columns?:ValueTypes["product_review_select_column"][],	distinct?:bool
 	/** input type for inserting array relation for remote table "product_review" */
 ["product_review_arr_rel_insert_input"]: {
 	data:ValueTypes["product_review_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["product_review_on_conflict"]
 };
 	/** aggregate avg on columns */
@@ -1611,9 +1742,9 @@ count?: [{	columns?:ValueTypes["product_review_select_column"][],	distinct?:bool
 };
 	/** Boolean expression to filter rows from the table "product_review". All fields are combined with a logical 'AND'. */
 ["product_review_bool_exp"]: {
-	_and?:(ValueTypes["product_review_bool_exp"] | undefined)[],
+	_and?:ValueTypes["product_review_bool_exp"][],
 	_not?:ValueTypes["product_review_bool_exp"],
-	_or?:(ValueTypes["product_review_bool_exp"] | undefined)[],
+	_or?:ValueTypes["product_review_bool_exp"][],
 	comment?:ValueTypes["String_comparison_exp"],
 	created_at?:ValueTypes["timestamptz_comparison_exp"],
 	id?:ValueTypes["Int_comparison_exp"],
@@ -1626,7 +1757,7 @@ count?: [{	columns?:ValueTypes["product_review_select_column"][],	distinct?:bool
 };
 	/** unique or primary key constraints on table "product_review" */
 ["product_review_constraint"]:product_review_constraint;
-	/** input type for incrementing integer column in table "product_review" */
+	/** input type for incrementing numeric columns in table "product_review" */
 ["product_review_inc_input"]: {
 	id?:number,
 	product_id?:number,
@@ -1689,24 +1820,19 @@ count?: [{	columns?:ValueTypes["product_review_select_column"][],	distinct?:bool
 };
 	/** response of any mutation on the table "product_review" */
 ["product_review_mutation_response"]: AliasType<{
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows?:true,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning?:ValueTypes["product_review"],
 		__typename?: true
 }>;
-	/** input type for inserting object relation for remote table "product_review" */
-["product_review_obj_rel_insert_input"]: {
-	data:ValueTypes["product_review_insert_input"],
-	on_conflict?:ValueTypes["product_review_on_conflict"]
-};
 	/** on conflict condition type for table "product_review" */
 ["product_review_on_conflict"]: {
 	constraint:ValueTypes["product_review_constraint"],
 	update_columns:ValueTypes["product_review_update_column"][],
 	where?:ValueTypes["product_review_bool_exp"]
 };
-	/** ordering options when selecting data from "product_review" */
+	/** Ordering options when selecting data from "product_review". */
 ["product_review_order_by"]: {
 	comment?:ValueTypes["order_by"],
 	created_at?:ValueTypes["order_by"],
@@ -1718,7 +1844,7 @@ count?: [{	columns?:ValueTypes["product_review_select_column"][],	distinct?:bool
 	user?:ValueTypes["user_order_by"],
 	user_id?:ValueTypes["order_by"]
 };
-	/** primary key columns input for table: "product_review" */
+	/** primary key columns input for table: product_review */
 ["product_review_pk_columns_input"]: {
 	id:number
 };
@@ -1934,8 +2060,7 @@ count?: [{	columns?:ValueTypes["product_review_select_column"][],	distinct?:bool
 	id?:ValueTypes["order_by"],
 	price?:ValueTypes["order_by"]
 };
-	/** query root */
-["query_root"]: AliasType<{
+	["query_root"]: AliasType<{
 address?: [{	/** distinct select on columns */
 	distinct_on?:ValueTypes["address_select_column"][],	/** limit the number of rows returned */
 	limit?:number,	/** skip the first n rows. Use only with order_by */
@@ -1976,6 +2101,19 @@ order_product_aggregate?: [{	/** distinct select on columns */
 	order_by?:ValueTypes["order_product_order_by"][],	/** filter the rows returned */
 	where?:ValueTypes["order_product_bool_exp"]},ValueTypes["order_product_aggregate"]],
 order_product_by_pk?: [{	id:number},ValueTypes["order_product"]],
+order_status?: [{	/** distinct select on columns */
+	distinct_on?:ValueTypes["order_status_select_column"][],	/** limit the number of rows returned */
+	limit?:number,	/** skip the first n rows. Use only with order_by */
+	offset?:number,	/** sort the rows by one or more columns */
+	order_by?:ValueTypes["order_status_order_by"][],	/** filter the rows returned */
+	where?:ValueTypes["order_status_bool_exp"]},ValueTypes["order_status"]],
+order_status_aggregate?: [{	/** distinct select on columns */
+	distinct_on?:ValueTypes["order_status_select_column"][],	/** limit the number of rows returned */
+	limit?:number,	/** skip the first n rows. Use only with order_by */
+	offset?:number,	/** sort the rows by one or more columns */
+	order_by?:ValueTypes["order_status_order_by"][],	/** filter the rows returned */
+	where?:ValueTypes["order_status_bool_exp"]},ValueTypes["order_status_aggregate"]],
+order_status_by_pk?: [{	status:string},ValueTypes["order_status"]],
 product?: [{	/** distinct select on columns */
 	distinct_on?:ValueTypes["product_select_column"][],	/** limit the number of rows returned */
 	limit?:number,	/** skip the first n rows. Use only with order_by */
@@ -2051,6 +2189,14 @@ user_by_pk?: [{	id:number},ValueTypes["user"]],
 	token?:true,
 		__typename?: true
 }>;
+	["SampleInput"]: {
+	password:string,
+	username:string
+};
+	["SampleOutput"]: AliasType<{
+	accessToken?:true,
+		__typename?: true
+}>;
 	["SignupInput"]: {
 	email:string,
 	name:string,
@@ -2064,8 +2210,10 @@ columns and relationships of "site_admin" */
 	created_at?:true,
 	email?:true,
 	id?:true,
+	name?:true,
 	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:true,
+	refresh_token?:true,
 	updated_at?:true,
 		__typename?: true
 }>;
@@ -2090,48 +2238,27 @@ count?: [{	columns?:ValueTypes["site_admin_select_column"][],	distinct?:boolean}
 	variance?:ValueTypes["site_admin_variance_fields"],
 		__typename?: true
 }>;
-	/** order by aggregate values of table "site_admin" */
-["site_admin_aggregate_order_by"]: {
-	avg?:ValueTypes["site_admin_avg_order_by"],
-	count?:ValueTypes["order_by"],
-	max?:ValueTypes["site_admin_max_order_by"],
-	min?:ValueTypes["site_admin_min_order_by"],
-	stddev?:ValueTypes["site_admin_stddev_order_by"],
-	stddev_pop?:ValueTypes["site_admin_stddev_pop_order_by"],
-	stddev_samp?:ValueTypes["site_admin_stddev_samp_order_by"],
-	sum?:ValueTypes["site_admin_sum_order_by"],
-	var_pop?:ValueTypes["site_admin_var_pop_order_by"],
-	var_samp?:ValueTypes["site_admin_var_samp_order_by"],
-	variance?:ValueTypes["site_admin_variance_order_by"]
-};
-	/** input type for inserting array relation for remote table "site_admin" */
-["site_admin_arr_rel_insert_input"]: {
-	data:ValueTypes["site_admin_insert_input"][],
-	on_conflict?:ValueTypes["site_admin_on_conflict"]
-};
 	/** aggregate avg on columns */
 ["site_admin_avg_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by avg() on columns of table "site_admin" */
-["site_admin_avg_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** Boolean expression to filter rows from the table "site_admin". All fields are combined with a logical 'AND'. */
 ["site_admin_bool_exp"]: {
-	_and?:(ValueTypes["site_admin_bool_exp"] | undefined)[],
+	_and?:ValueTypes["site_admin_bool_exp"][],
 	_not?:ValueTypes["site_admin_bool_exp"],
-	_or?:(ValueTypes["site_admin_bool_exp"] | undefined)[],
+	_or?:ValueTypes["site_admin_bool_exp"][],
 	created_at?:ValueTypes["timestamptz_comparison_exp"],
 	email?:ValueTypes["String_comparison_exp"],
 	id?:ValueTypes["Int_comparison_exp"],
+	name?:ValueTypes["String_comparison_exp"],
 	password?:ValueTypes["String_comparison_exp"],
+	refresh_token?:ValueTypes["String_comparison_exp"],
 	updated_at?:ValueTypes["timestamptz_comparison_exp"]
 };
 	/** unique or primary key constraints on table "site_admin" */
 ["site_admin_constraint"]:site_admin_constraint;
-	/** input type for incrementing integer column in table "site_admin" */
+	/** input type for incrementing numeric columns in table "site_admin" */
 ["site_admin_inc_input"]: {
 	id?:number
 };
@@ -2140,7 +2267,10 @@ count?: [{	columns?:ValueTypes["site_admin_select_column"][],	distinct?:boolean}
 	created_at?:ValueTypes["timestamptz"],
 	email?:string,
 	id?:number,
+	name?:string,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	refresh_token?:string,
 	updated_at?:ValueTypes["timestamptz"]
 };
 	/** aggregate max on columns */
@@ -2148,63 +2278,50 @@ count?: [{	columns?:ValueTypes["site_admin_select_column"][],	distinct?:boolean}
 	created_at?:true,
 	email?:true,
 	id?:true,
+	name?:true,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:true,
+	refresh_token?:true,
 	updated_at?:true,
 		__typename?: true
 }>;
-	/** order by max() on columns of table "site_admin" */
-["site_admin_max_order_by"]: {
-	created_at?:ValueTypes["order_by"],
-	email?:ValueTypes["order_by"],
-	id?:ValueTypes["order_by"],
-	password?:ValueTypes["order_by"],
-	updated_at?:ValueTypes["order_by"]
-};
 	/** aggregate min on columns */
 ["site_admin_min_fields"]: AliasType<{
 	created_at?:true,
 	email?:true,
 	id?:true,
+	name?:true,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:true,
+	refresh_token?:true,
 	updated_at?:true,
 		__typename?: true
 }>;
-	/** order by min() on columns of table "site_admin" */
-["site_admin_min_order_by"]: {
-	created_at?:ValueTypes["order_by"],
-	email?:ValueTypes["order_by"],
-	id?:ValueTypes["order_by"],
-	password?:ValueTypes["order_by"],
-	updated_at?:ValueTypes["order_by"]
-};
 	/** response of any mutation on the table "site_admin" */
 ["site_admin_mutation_response"]: AliasType<{
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows?:true,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning?:ValueTypes["site_admin"],
 		__typename?: true
 }>;
-	/** input type for inserting object relation for remote table "site_admin" */
-["site_admin_obj_rel_insert_input"]: {
-	data:ValueTypes["site_admin_insert_input"],
-	on_conflict?:ValueTypes["site_admin_on_conflict"]
-};
 	/** on conflict condition type for table "site_admin" */
 ["site_admin_on_conflict"]: {
 	constraint:ValueTypes["site_admin_constraint"],
 	update_columns:ValueTypes["site_admin_update_column"][],
 	where?:ValueTypes["site_admin_bool_exp"]
 };
-	/** ordering options when selecting data from "site_admin" */
+	/** Ordering options when selecting data from "site_admin". */
 ["site_admin_order_by"]: {
 	created_at?:ValueTypes["order_by"],
 	email?:ValueTypes["order_by"],
 	id?:ValueTypes["order_by"],
+	name?:ValueTypes["order_by"],
 	password?:ValueTypes["order_by"],
+	refresh_token?:ValueTypes["order_by"],
 	updated_at?:ValueTypes["order_by"]
 };
-	/** primary key columns input for table: "site_admin" */
+	/** primary key columns input for table: site_admin */
 ["site_admin_pk_columns_input"]: {
 	id:number
 };
@@ -2215,7 +2332,10 @@ count?: [{	columns?:ValueTypes["site_admin_select_column"][],	distinct?:boolean}
 	created_at?:ValueTypes["timestamptz"],
 	email?:string,
 	id?:number,
+	name?:string,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	refresh_token?:string,
 	updated_at?:ValueTypes["timestamptz"]
 };
 	/** aggregate stddev on columns */
@@ -2223,37 +2343,21 @@ count?: [{	columns?:ValueTypes["site_admin_select_column"][],	distinct?:boolean}
 	id?:true,
 		__typename?: true
 }>;
-	/** order by stddev() on columns of table "site_admin" */
-["site_admin_stddev_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate stddev_pop on columns */
 ["site_admin_stddev_pop_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by stddev_pop() on columns of table "site_admin" */
-["site_admin_stddev_pop_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate stddev_samp on columns */
 ["site_admin_stddev_samp_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by stddev_samp() on columns of table "site_admin" */
-["site_admin_stddev_samp_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate sum on columns */
 ["site_admin_sum_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by sum() on columns of table "site_admin" */
-["site_admin_sum_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** update columns of table "site_admin" */
 ["site_admin_update_column"]:site_admin_update_column;
 	/** aggregate var_pop on columns */
@@ -2261,48 +2365,49 @@ count?: [{	columns?:ValueTypes["site_admin_select_column"][],	distinct?:boolean}
 	id?:true,
 		__typename?: true
 }>;
-	/** order by var_pop() on columns of table "site_admin" */
-["site_admin_var_pop_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate var_samp on columns */
 ["site_admin_var_samp_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by var_samp() on columns of table "site_admin" */
-["site_admin_var_samp_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate variance on columns */
 ["site_admin_variance_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by variance() on columns of table "site_admin" */
-["site_admin_variance_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
-	/** expression to compare columns of type String. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 ["String_comparison_exp"]: {
 	_eq?:string,
 	_gt?:string,
 	_gte?:string,
+	/** does the column match the given case-insensitive pattern */
 	_ilike?:string,
 	_in?:string[],
+	/** does the column match the given POSIX regular expression, case insensitive */
+	_iregex?:string,
 	_is_null?:boolean,
+	/** does the column match the given pattern */
 	_like?:string,
 	_lt?:string,
 	_lte?:string,
 	_neq?:string,
+	/** does the column NOT match the given case-insensitive pattern */
 	_nilike?:string,
 	_nin?:string[],
+	/** does the column NOT match the given POSIX regular expression, case insensitive */
+	_niregex?:string,
+	/** does the column NOT match the given pattern */
 	_nlike?:string,
+	/** does the column NOT match the given POSIX regular expression, case sensitive */
+	_nregex?:string,
+	/** does the column NOT match the given SQL regular expression */
 	_nsimilar?:string,
+	/** does the column match the given POSIX regular expression, case sensitive */
+	_regex?:string,
+	/** does the column match the given SQL regular expression */
 	_similar?:string
 };
-	/** subscription root */
-["subscription_root"]: AliasType<{
+	["subscription_root"]: AliasType<{
 address?: [{	/** distinct select on columns */
 	distinct_on?:ValueTypes["address_select_column"][],	/** limit the number of rows returned */
 	limit?:number,	/** skip the first n rows. Use only with order_by */
@@ -2316,7 +2421,6 @@ address_aggregate?: [{	/** distinct select on columns */
 	order_by?:ValueTypes["address_order_by"][],	/** filter the rows returned */
 	where?:ValueTypes["address_bool_exp"]},ValueTypes["address_aggregate"]],
 address_by_pk?: [{	id:number},ValueTypes["address"]],
-adminLogin?: [{	params:ValueTypes["AdminLoginInput"]},ValueTypes["JWT"]],
 order?: [{	/** distinct select on columns */
 	distinct_on?:ValueTypes["order_select_column"][],	/** limit the number of rows returned */
 	limit?:number,	/** skip the first n rows. Use only with order_by */
@@ -2343,6 +2447,19 @@ order_product_aggregate?: [{	/** distinct select on columns */
 	order_by?:ValueTypes["order_product_order_by"][],	/** filter the rows returned */
 	where?:ValueTypes["order_product_bool_exp"]},ValueTypes["order_product_aggregate"]],
 order_product_by_pk?: [{	id:number},ValueTypes["order_product"]],
+order_status?: [{	/** distinct select on columns */
+	distinct_on?:ValueTypes["order_status_select_column"][],	/** limit the number of rows returned */
+	limit?:number,	/** skip the first n rows. Use only with order_by */
+	offset?:number,	/** sort the rows by one or more columns */
+	order_by?:ValueTypes["order_status_order_by"][],	/** filter the rows returned */
+	where?:ValueTypes["order_status_bool_exp"]},ValueTypes["order_status"]],
+order_status_aggregate?: [{	/** distinct select on columns */
+	distinct_on?:ValueTypes["order_status_select_column"][],	/** limit the number of rows returned */
+	limit?:number,	/** skip the first n rows. Use only with order_by */
+	offset?:number,	/** sort the rows by one or more columns */
+	order_by?:ValueTypes["order_status_order_by"][],	/** filter the rows returned */
+	where?:ValueTypes["order_status_bool_exp"]},ValueTypes["order_status_aggregate"]],
+order_status_by_pk?: [{	status:string},ValueTypes["order_status"]],
 product?: [{	/** distinct select on columns */
 	distinct_on?:ValueTypes["product_select_column"][],	/** limit the number of rows returned */
 	limit?:number,	/** skip the first n rows. Use only with order_by */
@@ -2382,7 +2499,6 @@ product_review_aggregate?: [{	/** distinct select on columns */
 	order_by?:ValueTypes["product_review_order_by"][],	/** filter the rows returned */
 	where?:ValueTypes["product_review_bool_exp"]},ValueTypes["product_review_aggregate"]],
 product_review_by_pk?: [{	id:number},ValueTypes["product_review"]],
-refreshToken?: [{	params:ValueTypes["RefreshTokenInput"]},ValueTypes["RefreshTokenJWT"]],
 site_admin?: [{	/** distinct select on columns */
 	distinct_on?:ValueTypes["site_admin_select_column"][],	/** limit the number of rows returned */
 	limit?:number,	/** skip the first n rows. Use only with order_by */
@@ -2412,7 +2528,7 @@ user_by_pk?: [{	id:number},ValueTypes["user"]],
 		__typename?: true
 }>;
 	["timestamptz"]:unknown;
-	/** expression to compare columns of type timestamptz. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 ["timestamptz_comparison_exp"]: {
 	_eq?:ValueTypes["timestamptz"],
 	_gt?:ValueTypes["timestamptz"],
@@ -2471,7 +2587,10 @@ product_reviews_aggregate?: [{	/** distinct select on columns */
 	offset?:number,	/** sort the rows by one or more columns */
 	order_by?:ValueTypes["product_review_order_by"][],	/** filter the rows returned */
 	where?:ValueTypes["product_review_bool_exp"]},ValueTypes["product_review_aggregate"]],
+	provider_id?:true,
+	provider_name?:true,
 	refresh_token?:true,
+	role?:true,
 	updated_at?:true,
 		__typename?: true
 }>;
@@ -2496,39 +2615,16 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	variance?:ValueTypes["user_variance_fields"],
 		__typename?: true
 }>;
-	/** order by aggregate values of table "user" */
-["user_aggregate_order_by"]: {
-	avg?:ValueTypes["user_avg_order_by"],
-	count?:ValueTypes["order_by"],
-	max?:ValueTypes["user_max_order_by"],
-	min?:ValueTypes["user_min_order_by"],
-	stddev?:ValueTypes["user_stddev_order_by"],
-	stddev_pop?:ValueTypes["user_stddev_pop_order_by"],
-	stddev_samp?:ValueTypes["user_stddev_samp_order_by"],
-	sum?:ValueTypes["user_sum_order_by"],
-	var_pop?:ValueTypes["user_var_pop_order_by"],
-	var_samp?:ValueTypes["user_var_samp_order_by"],
-	variance?:ValueTypes["user_variance_order_by"]
-};
-	/** input type for inserting array relation for remote table "user" */
-["user_arr_rel_insert_input"]: {
-	data:ValueTypes["user_insert_input"][],
-	on_conflict?:ValueTypes["user_on_conflict"]
-};
 	/** aggregate avg on columns */
 ["user_avg_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by avg() on columns of table "user" */
-["user_avg_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'. */
 ["user_bool_exp"]: {
-	_and?:(ValueTypes["user_bool_exp"] | undefined)[],
+	_and?:ValueTypes["user_bool_exp"][],
 	_not?:ValueTypes["user_bool_exp"],
-	_or?:(ValueTypes["user_bool_exp"] | undefined)[],
+	_or?:ValueTypes["user_bool_exp"][],
 	addresses?:ValueTypes["address_bool_exp"],
 	created_at?:ValueTypes["timestamptz_comparison_exp"],
 	email?:ValueTypes["String_comparison_exp"],
@@ -2537,12 +2633,15 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	orders?:ValueTypes["order_bool_exp"],
 	password?:ValueTypes["String_comparison_exp"],
 	product_reviews?:ValueTypes["product_review_bool_exp"],
+	provider_id?:ValueTypes["String_comparison_exp"],
+	provider_name?:ValueTypes["String_comparison_exp"],
 	refresh_token?:ValueTypes["String_comparison_exp"],
+	role?:ValueTypes["String_comparison_exp"],
 	updated_at?:ValueTypes["timestamptz_comparison_exp"]
 };
 	/** unique or primary key constraints on table "user" */
 ["user_constraint"]:user_constraint;
-	/** input type for incrementing integer column in table "user" */
+	/** input type for incrementing numeric columns in table "user" */
 ["user_inc_input"]: {
 	id?:number
 };
@@ -2554,9 +2653,13 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	id?:number,
 	name?:string,
 	orders?:ValueTypes["order_arr_rel_insert_input"],
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
 	product_reviews?:ValueTypes["product_review_arr_rel_insert_input"],
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at?:ValueTypes["timestamptz"]
 };
 	/** aggregate max on columns */
@@ -2565,53 +2668,42 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	email?:true,
 	id?:true,
 	name?:true,
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:true,
+	provider_id?:true,
+	provider_name?:true,
 	refresh_token?:true,
+	role?:true,
 	updated_at?:true,
 		__typename?: true
 }>;
-	/** order by max() on columns of table "user" */
-["user_max_order_by"]: {
-	created_at?:ValueTypes["order_by"],
-	email?:ValueTypes["order_by"],
-	id?:ValueTypes["order_by"],
-	name?:ValueTypes["order_by"],
-	password?:ValueTypes["order_by"],
-	refresh_token?:ValueTypes["order_by"],
-	updated_at?:ValueTypes["order_by"]
-};
 	/** aggregate min on columns */
 ["user_min_fields"]: AliasType<{
 	created_at?:true,
 	email?:true,
 	id?:true,
 	name?:true,
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:true,
+	provider_id?:true,
+	provider_name?:true,
 	refresh_token?:true,
+	role?:true,
 	updated_at?:true,
 		__typename?: true
 }>;
-	/** order by min() on columns of table "user" */
-["user_min_order_by"]: {
-	created_at?:ValueTypes["order_by"],
-	email?:ValueTypes["order_by"],
-	id?:ValueTypes["order_by"],
-	name?:ValueTypes["order_by"],
-	password?:ValueTypes["order_by"],
-	refresh_token?:ValueTypes["order_by"],
-	updated_at?:ValueTypes["order_by"]
-};
 	/** response of any mutation on the table "user" */
 ["user_mutation_response"]: AliasType<{
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows?:true,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning?:ValueTypes["user"],
 		__typename?: true
 }>;
 	/** input type for inserting object relation for remote table "user" */
 ["user_obj_rel_insert_input"]: {
 	data:ValueTypes["user_insert_input"],
+	/** on conflict condition */
 	on_conflict?:ValueTypes["user_on_conflict"]
 };
 	/** on conflict condition type for table "user" */
@@ -2620,7 +2712,7 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	update_columns:ValueTypes["user_update_column"][],
 	where?:ValueTypes["user_bool_exp"]
 };
-	/** ordering options when selecting data from "user" */
+	/** Ordering options when selecting data from "user". */
 ["user_order_by"]: {
 	addresses_aggregate?:ValueTypes["address_aggregate_order_by"],
 	created_at?:ValueTypes["order_by"],
@@ -2630,10 +2722,13 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	orders_aggregate?:ValueTypes["order_aggregate_order_by"],
 	password?:ValueTypes["order_by"],
 	product_reviews_aggregate?:ValueTypes["product_review_aggregate_order_by"],
+	provider_id?:ValueTypes["order_by"],
+	provider_name?:ValueTypes["order_by"],
 	refresh_token?:ValueTypes["order_by"],
+	role?:ValueTypes["order_by"],
 	updated_at?:ValueTypes["order_by"]
 };
-	/** primary key columns input for table: "user" */
+	/** primary key columns input for table: user */
 ["user_pk_columns_input"]: {
 	id:number
 };
@@ -2645,8 +2740,12 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	email?:string,
 	id?:number,
 	name?:string,
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at?:ValueTypes["timestamptz"]
 };
 	/** aggregate stddev on columns */
@@ -2654,37 +2753,21 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	id?:true,
 		__typename?: true
 }>;
-	/** order by stddev() on columns of table "user" */
-["user_stddev_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate stddev_pop on columns */
 ["user_stddev_pop_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by stddev_pop() on columns of table "user" */
-["user_stddev_pop_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate stddev_samp on columns */
 ["user_stddev_samp_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by stddev_samp() on columns of table "user" */
-["user_stddev_samp_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate sum on columns */
 ["user_sum_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by sum() on columns of table "user" */
-["user_sum_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** update columns of table "user" */
 ["user_update_column"]:user_update_column;
 	/** aggregate var_pop on columns */
@@ -2692,29 +2775,16 @@ count?: [{	columns?:ValueTypes["user_select_column"][],	distinct?:boolean},true]
 	id?:true,
 		__typename?: true
 }>;
-	/** order by var_pop() on columns of table "user" */
-["user_var_pop_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate var_samp on columns */
 ["user_var_samp_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
 }>;
-	/** order by var_samp() on columns of table "user" */
-["user_var_samp_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
 	/** aggregate variance on columns */
 ["user_variance_fields"]: AliasType<{
 	id?:true,
 		__typename?: true
-}>;
-	/** order by variance() on columns of table "user" */
-["user_variance_order_by"]: {
-	id?:ValueTypes["order_by"]
-};
-	["uuid"]:unknown
+}>
   }
 
 export type PartialObjects = {
@@ -2729,13 +2799,14 @@ columns and relationships of "address" */
 			city?:string,
 			created_at?:PartialObjects["timestamptz"],
 			id?:number,
+			name?:string,
 			/** An array relationship */
 	orders_with_billing_address?:PartialObjects["order"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	orders_with_billing_address_aggregate?:PartialObjects["order_aggregate"],
 			/** An array relationship */
 	orders_with_shipping_address?:PartialObjects["order"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	orders_with_shipping_address_aggregate?:PartialObjects["order_aggregate"],
 			state?:string,
 			updated_at?:PartialObjects["timestamptz"],
@@ -2782,6 +2853,7 @@ columns and relationships of "address" */
 	/** input type for inserting array relation for remote table "address" */
 ["address_arr_rel_insert_input"]: {
 	data:PartialObjects["address_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["address_on_conflict"]
 },
 	/** aggregate avg on columns */
@@ -2797,14 +2869,15 @@ columns and relationships of "address" */
 },
 	/** Boolean expression to filter rows from the table "address". All fields are combined with a logical 'AND'. */
 ["address_bool_exp"]: {
-	_and?:(PartialObjects["address_bool_exp"] | undefined)[],
+	_and?:PartialObjects["address_bool_exp"][],
 	_not?:PartialObjects["address_bool_exp"],
-	_or?:(PartialObjects["address_bool_exp"] | undefined)[],
+	_or?:PartialObjects["address_bool_exp"][],
 	address_line_one?:PartialObjects["String_comparison_exp"],
 	address_line_two?:PartialObjects["String_comparison_exp"],
 	city?:PartialObjects["String_comparison_exp"],
 	created_at?:PartialObjects["timestamptz_comparison_exp"],
 	id?:PartialObjects["Int_comparison_exp"],
+	name?:PartialObjects["String_comparison_exp"],
 	orders_with_billing_address?:PartialObjects["order_bool_exp"],
 	orders_with_shipping_address?:PartialObjects["order_bool_exp"],
 	state?:PartialObjects["String_comparison_exp"],
@@ -2815,7 +2888,7 @@ columns and relationships of "address" */
 },
 	/** unique or primary key constraints on table "address" */
 ["address_constraint"]:address_constraint,
-	/** input type for incrementing integer column in table "address" */
+	/** input type for incrementing numeric columns in table "address" */
 ["address_inc_input"]: {
 	id?:number,
 	user_id?:number
@@ -2827,6 +2900,7 @@ columns and relationships of "address" */
 	city?:string,
 	created_at?:PartialObjects["timestamptz"],
 	id?:number,
+	name?:string,
 	orders_with_billing_address?:PartialObjects["order_arr_rel_insert_input"],
 	orders_with_shipping_address?:PartialObjects["order_arr_rel_insert_input"],
 	state?:string,
@@ -2843,6 +2917,7 @@ columns and relationships of "address" */
 			city?:string,
 			created_at?:PartialObjects["timestamptz"],
 			id?:number,
+			name?:string,
 			state?:string,
 			updated_at?:PartialObjects["timestamptz"],
 			user_id?:number,
@@ -2855,6 +2930,7 @@ columns and relationships of "address" */
 	city?:PartialObjects["order_by"],
 	created_at?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	name?:PartialObjects["order_by"],
 	state?:PartialObjects["order_by"],
 	updated_at?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"],
@@ -2868,6 +2944,7 @@ columns and relationships of "address" */
 			city?:string,
 			created_at?:PartialObjects["timestamptz"],
 			id?:number,
+			name?:string,
 			state?:string,
 			updated_at?:PartialObjects["timestamptz"],
 			user_id?:number,
@@ -2880,6 +2957,7 @@ columns and relationships of "address" */
 	city?:PartialObjects["order_by"],
 	created_at?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	name?:PartialObjects["order_by"],
 	state?:PartialObjects["order_by"],
 	updated_at?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"],
@@ -2888,14 +2966,15 @@ columns and relationships of "address" */
 	/** response of any mutation on the table "address" */
 ["address_mutation_response"]: {
 		__typename?: "address_mutation_response";
-			/** number of affected rows by the mutation */
+			/** number of rows affected by the mutation */
 	affected_rows?:number,
-			/** data of the affected rows by the mutation */
+			/** data from the rows affected by the mutation */
 	returning?:PartialObjects["address"][]
 	},
 	/** input type for inserting object relation for remote table "address" */
 ["address_obj_rel_insert_input"]: {
 	data:PartialObjects["address_insert_input"],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["address_on_conflict"]
 },
 	/** on conflict condition type for table "address" */
@@ -2904,13 +2983,14 @@ columns and relationships of "address" */
 	update_columns:PartialObjects["address_update_column"][],
 	where?:PartialObjects["address_bool_exp"]
 },
-	/** ordering options when selecting data from "address" */
+	/** Ordering options when selecting data from "address". */
 ["address_order_by"]: {
 	address_line_one?:PartialObjects["order_by"],
 	address_line_two?:PartialObjects["order_by"],
 	city?:PartialObjects["order_by"],
 	created_at?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	name?:PartialObjects["order_by"],
 	orders_with_billing_address_aggregate?:PartialObjects["order_aggregate_order_by"],
 	orders_with_shipping_address_aggregate?:PartialObjects["order_aggregate_order_by"],
 	state?:PartialObjects["order_by"],
@@ -2919,7 +2999,7 @@ columns and relationships of "address" */
 	user_id?:PartialObjects["order_by"],
 	zipcode?:PartialObjects["order_by"]
 },
-	/** primary key columns input for table: "address" */
+	/** primary key columns input for table: address */
 ["address_pk_columns_input"]: {
 	id:number
 },
@@ -2932,6 +3012,7 @@ columns and relationships of "address" */
 	city?:string,
 	created_at?:PartialObjects["timestamptz"],
 	id?:number,
+	name?:string,
 	state?:string,
 	updated_at?:PartialObjects["timestamptz"],
 	user_id?:number,
@@ -3025,7 +3106,7 @@ columns and relationships of "address" */
 	name:string,
 	password:string
 },
-	/** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 ["Boolean_comparison_exp"]: {
 	_eq?:boolean,
 	_gt?:boolean,
@@ -3040,7 +3121,7 @@ columns and relationships of "address" */
 	["CreatePaymentIntentInput"]: {
 	paymentAmount:number
 },
-	/** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 ["Int_comparison_exp"]: {
 	_eq?:number,
 	_gt?:number,
@@ -3052,21 +3133,8 @@ columns and relationships of "address" */
 	_neq?:number,
 	_nin?:number[]
 },
-	["json"]:any,
-	/** expression to compare columns of type json. All fields are combined with logical 'AND'. */
-["json_comparison_exp"]: {
-	_eq?:PartialObjects["json"],
-	_gt?:PartialObjects["json"],
-	_gte?:PartialObjects["json"],
-	_in?:PartialObjects["json"][],
-	_is_null?:boolean,
-	_lt?:PartialObjects["json"],
-	_lte?:PartialObjects["json"],
-	_neq?:PartialObjects["json"],
-	_nin?:PartialObjects["json"][]
-},
 	["jsonb"]:any,
-	/** expression to compare columns of type jsonb. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 ["jsonb_comparison_exp"]: {
 	/** is the column contained in the given json value */
 	_contained_in?:PartialObjects["jsonb"],
@@ -3102,10 +3170,10 @@ columns and relationships of "address" */
 	/** mutation root */
 ["mutation_root"]: {
 		__typename?: "mutation_root";
-			/** perform the action: "adminSignup" */
-	adminSignup?:PartialObjects["JWT"],
-			/** perform the action: "createPaymentIntent" */
-	createPaymentIntent?:PartialObjects["PaymentIntentClientSecret"],
+			/** Test action login */
+	actionLoginTest?:PartialObjects["SampleOutput"],
+			adminSignup?:PartialObjects["JWT"],
+			createPaymentIntent?:PartialObjects["PaymentIntentClientSecret"],
 			/** delete data from the table: "address" */
 	delete_address?:PartialObjects["address_mutation_response"],
 			/** delete single row from the table: "address" */
@@ -3118,6 +3186,10 @@ columns and relationships of "address" */
 	delete_order_product?:PartialObjects["order_product_mutation_response"],
 			/** delete single row from the table: "order_product" */
 	delete_order_product_by_pk?:PartialObjects["order_product"],
+			/** delete data from the table: "order_status" */
+	delete_order_status?:PartialObjects["order_status_mutation_response"],
+			/** delete single row from the table: "order_status" */
+	delete_order_status_by_pk?:PartialObjects["order_status"],
 			/** delete data from the table: "product" */
 	delete_product?:PartialObjects["product_mutation_response"],
 			/** delete single row from the table: "product" */
@@ -3150,6 +3222,10 @@ columns and relationships of "address" */
 	insert_order_product?:PartialObjects["order_product_mutation_response"],
 			/** insert a single row into the table: "order_product" */
 	insert_order_product_one?:PartialObjects["order_product"],
+			/** insert data into the table: "order_status" */
+	insert_order_status?:PartialObjects["order_status_mutation_response"],
+			/** insert a single row into the table: "order_status" */
+	insert_order_status_one?:PartialObjects["order_status"],
 			/** insert data into the table: "product" */
 	insert_product?:PartialObjects["product_mutation_response"],
 			/** insert data into the table: "product_category_enum" */
@@ -3170,10 +3246,8 @@ columns and relationships of "address" */
 	insert_user?:PartialObjects["user_mutation_response"],
 			/** insert a single row into the table: "user" */
 	insert_user_one?:PartialObjects["user"],
-			/** perform the action: "login" */
-	login?:PartialObjects["JWT"],
-			/** perform the action: "signup" */
-	signup?:PartialObjects["JWT"],
+			login?:PartialObjects["JWT"],
+			signup?:PartialObjects["JWT"],
 			/** update data of the table: "address" */
 	update_address?:PartialObjects["address_mutation_response"],
 			/** update single row of the table: "address" */
@@ -3186,6 +3260,10 @@ columns and relationships of "address" */
 	update_order_product?:PartialObjects["order_product_mutation_response"],
 			/** update single row of the table: "order_product" */
 	update_order_product_by_pk?:PartialObjects["order_product"],
+			/** update data of the table: "order_status" */
+	update_order_status?:PartialObjects["order_status_mutation_response"],
+			/** update single row of the table: "order_status" */
+	update_order_status_by_pk?:PartialObjects["order_status"],
 			/** update data of the table: "product" */
 	update_product?:PartialObjects["product_mutation_response"],
 			/** update single row of the table: "product" */
@@ -3208,7 +3286,7 @@ columns and relationships of "address" */
 	update_user_by_pk?:PartialObjects["user"]
 	},
 	["numeric"]:any,
-	/** expression to compare columns of type numeric. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
 ["numeric_comparison_exp"]: {
 	_eq?:PartialObjects["numeric"],
 	_gt?:PartialObjects["numeric"],
@@ -3232,13 +3310,17 @@ columns and relationships of "order" */
 			created_at?:PartialObjects["timestamptz"],
 			id?:number,
 			is_shipped?:boolean,
+			/** An object relationship */
+	order_status?:PartialObjects["order_status"],
+			order_total?:PartialObjects["numeric"],
 			/** An array relationship */
 	products?:PartialObjects["order_product"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	products_aggregate?:PartialObjects["order_product_aggregate"],
 			/** An object relationship */
 	shipping_address?:PartialObjects["address"],
 			shipping_address_id?:number,
+			status?:PartialObjects["order_status_enum"],
 			updated_at?:PartialObjects["timestamptz"],
 			/** An object relationship */
 	user?:PartialObjects["user"],
@@ -3282,6 +3364,7 @@ columns and relationships of "order" */
 	/** input type for inserting array relation for remote table "order" */
 ["order_arr_rel_insert_input"]: {
 	data:PartialObjects["order_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["order_on_conflict"]
 },
 	/** aggregate avg on columns */
@@ -3289,6 +3372,7 @@ columns and relationships of "order" */
 		__typename?: "order_avg_fields";
 			billing_address_id?:number,
 			id?:number,
+			order_total?:number,
 			shipping_address_id?:number,
 			user_id?:number
 	},
@@ -3296,22 +3380,26 @@ columns and relationships of "order" */
 ["order_avg_order_by"]: {
 	billing_address_id?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
 },
 	/** Boolean expression to filter rows from the table "order". All fields are combined with a logical 'AND'. */
 ["order_bool_exp"]: {
-	_and?:(PartialObjects["order_bool_exp"] | undefined)[],
+	_and?:PartialObjects["order_bool_exp"][],
 	_not?:PartialObjects["order_bool_exp"],
-	_or?:(PartialObjects["order_bool_exp"] | undefined)[],
+	_or?:PartialObjects["order_bool_exp"][],
 	billing_address?:PartialObjects["address_bool_exp"],
 	billing_address_id?:PartialObjects["Int_comparison_exp"],
 	created_at?:PartialObjects["timestamptz_comparison_exp"],
 	id?:PartialObjects["Int_comparison_exp"],
 	is_shipped?:PartialObjects["Boolean_comparison_exp"],
+	order_status?:PartialObjects["order_status_bool_exp"],
+	order_total?:PartialObjects["numeric_comparison_exp"],
 	products?:PartialObjects["order_product_bool_exp"],
 	shipping_address?:PartialObjects["address_bool_exp"],
 	shipping_address_id?:PartialObjects["Int_comparison_exp"],
+	status?:PartialObjects["order_status_enum_comparison_exp"],
 	updated_at?:PartialObjects["timestamptz_comparison_exp"],
 	user?:PartialObjects["user_bool_exp"],
 	user_id?:PartialObjects["Int_comparison_exp"]
@@ -3320,10 +3408,11 @@ columns and relationships of "order" */
 ["order_by"]:order_by,
 	/** unique or primary key constraints on table "order" */
 ["order_constraint"]:order_constraint,
-	/** input type for incrementing integer column in table "order" */
+	/** input type for incrementing numeric columns in table "order" */
 ["order_inc_input"]: {
 	billing_address_id?:number,
 	id?:number,
+	order_total?:PartialObjects["numeric"],
 	shipping_address_id?:number,
 	user_id?:number
 },
@@ -3334,9 +3423,12 @@ columns and relationships of "order" */
 	created_at?:PartialObjects["timestamptz"],
 	id?:number,
 	is_shipped?:boolean,
+	order_status?:PartialObjects["order_status_obj_rel_insert_input"],
+	order_total?:PartialObjects["numeric"],
 	products?:PartialObjects["order_product_arr_rel_insert_input"],
 	shipping_address?:PartialObjects["address_obj_rel_insert_input"],
 	shipping_address_id?:number,
+	status?:PartialObjects["order_status_enum"],
 	updated_at?:PartialObjects["timestamptz"],
 	user?:PartialObjects["user_obj_rel_insert_input"],
 	user_id?:number
@@ -3347,6 +3439,7 @@ columns and relationships of "order" */
 			billing_address_id?:number,
 			created_at?:PartialObjects["timestamptz"],
 			id?:number,
+			order_total?:PartialObjects["numeric"],
 			shipping_address_id?:number,
 			updated_at?:PartialObjects["timestamptz"],
 			user_id?:number
@@ -3356,6 +3449,7 @@ columns and relationships of "order" */
 	billing_address_id?:PartialObjects["order_by"],
 	created_at?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	updated_at?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
@@ -3366,6 +3460,7 @@ columns and relationships of "order" */
 			billing_address_id?:number,
 			created_at?:PartialObjects["timestamptz"],
 			id?:number,
+			order_total?:PartialObjects["numeric"],
 			shipping_address_id?:number,
 			updated_at?:PartialObjects["timestamptz"],
 			user_id?:number
@@ -3375,6 +3470,7 @@ columns and relationships of "order" */
 	billing_address_id?:PartialObjects["order_by"],
 	created_at?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	updated_at?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
@@ -3382,14 +3478,15 @@ columns and relationships of "order" */
 	/** response of any mutation on the table "order" */
 ["order_mutation_response"]: {
 		__typename?: "order_mutation_response";
-			/** number of affected rows by the mutation */
+			/** number of rows affected by the mutation */
 	affected_rows?:number,
-			/** data of the affected rows by the mutation */
+			/** data from the rows affected by the mutation */
 	returning?:PartialObjects["order"][]
 	},
 	/** input type for inserting object relation for remote table "order" */
 ["order_obj_rel_insert_input"]: {
 	data:PartialObjects["order_insert_input"],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["order_on_conflict"]
 },
 	/** on conflict condition type for table "order" */
@@ -3398,21 +3495,24 @@ columns and relationships of "order" */
 	update_columns:PartialObjects["order_update_column"][],
 	where?:PartialObjects["order_bool_exp"]
 },
-	/** ordering options when selecting data from "order" */
+	/** Ordering options when selecting data from "order". */
 ["order_order_by"]: {
 	billing_address?:PartialObjects["address_order_by"],
 	billing_address_id?:PartialObjects["order_by"],
 	created_at?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
 	is_shipped?:PartialObjects["order_by"],
+	order_status?:PartialObjects["order_status_order_by"],
+	order_total?:PartialObjects["order_by"],
 	products_aggregate?:PartialObjects["order_product_aggregate_order_by"],
 	shipping_address?:PartialObjects["address_order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
+	status?:PartialObjects["order_by"],
 	updated_at?:PartialObjects["order_by"],
 	user?:PartialObjects["user_order_by"],
 	user_id?:PartialObjects["order_by"]
 },
-	/** primary key columns input for table: "order" */
+	/** primary key columns input for table: order */
 ["order_pk_columns_input"]: {
 	id:number
 },
@@ -3471,6 +3571,7 @@ columns and relationships of "order_product" */
 	/** input type for inserting array relation for remote table "order_product" */
 ["order_product_arr_rel_insert_input"]: {
 	data:PartialObjects["order_product_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["order_product_on_conflict"]
 },
 	/** aggregate avg on columns */
@@ -3490,9 +3591,9 @@ columns and relationships of "order_product" */
 },
 	/** Boolean expression to filter rows from the table "order_product". All fields are combined with a logical 'AND'. */
 ["order_product_bool_exp"]: {
-	_and?:(PartialObjects["order_product_bool_exp"] | undefined)[],
+	_and?:PartialObjects["order_product_bool_exp"][],
 	_not?:PartialObjects["order_product_bool_exp"],
-	_or?:(PartialObjects["order_product_bool_exp"] | undefined)[],
+	_or?:PartialObjects["order_product_bool_exp"][],
 	created_at?:PartialObjects["timestamptz_comparison_exp"],
 	id?:PartialObjects["Int_comparison_exp"],
 	order?:PartialObjects["order_bool_exp"],
@@ -3504,7 +3605,7 @@ columns and relationships of "order_product" */
 },
 	/** unique or primary key constraints on table "order_product" */
 ["order_product_constraint"]:order_product_constraint,
-	/** input type for incrementing integer column in table "order_product" */
+	/** input type for incrementing numeric columns in table "order_product" */
 ["order_product_inc_input"]: {
 	id?:number,
 	order_id?:number,
@@ -3563,23 +3664,18 @@ columns and relationships of "order_product" */
 	/** response of any mutation on the table "order_product" */
 ["order_product_mutation_response"]: {
 		__typename?: "order_product_mutation_response";
-			/** number of affected rows by the mutation */
+			/** number of rows affected by the mutation */
 	affected_rows?:number,
-			/** data of the affected rows by the mutation */
+			/** data from the rows affected by the mutation */
 	returning?:PartialObjects["order_product"][]
 	},
-	/** input type for inserting object relation for remote table "order_product" */
-["order_product_obj_rel_insert_input"]: {
-	data:PartialObjects["order_product_insert_input"],
-	on_conflict?:PartialObjects["order_product_on_conflict"]
-},
 	/** on conflict condition type for table "order_product" */
 ["order_product_on_conflict"]: {
 	constraint:PartialObjects["order_product_constraint"],
 	update_columns:PartialObjects["order_product_update_column"][],
 	where?:PartialObjects["order_product_bool_exp"]
 },
-	/** ordering options when selecting data from "order_product" */
+	/** Ordering options when selecting data from "order_product". */
 ["order_product_order_by"]: {
 	created_at?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
@@ -3590,7 +3686,7 @@ columns and relationships of "order_product" */
 	quantity?:PartialObjects["order_by"],
 	updated_at?:PartialObjects["order_by"]
 },
-	/** primary key columns input for table: "order_product" */
+	/** primary key columns input for table: order_product */
 ["order_product_pk_columns_input"]: {
 	id:number
 },
@@ -3720,15 +3816,111 @@ columns and relationships of "order_product" */
 	created_at?:PartialObjects["timestamptz"],
 	id?:number,
 	is_shipped?:boolean,
+	order_total?:PartialObjects["numeric"],
 	shipping_address_id?:number,
+	status?:PartialObjects["order_status_enum"],
 	updated_at?:PartialObjects["timestamptz"],
 	user_id?:number
 },
+	/** columns and relationships of "order_status" */
+["order_status"]: {
+		__typename?: "order_status";
+			/** An array relationship */
+	orders?:PartialObjects["order"][],
+			/** An aggregate relationship */
+	orders_aggregate?:PartialObjects["order_aggregate"],
+			status?:string
+	},
+	/** aggregated selection of "order_status" */
+["order_status_aggregate"]: {
+		__typename?: "order_status_aggregate";
+			aggregate?:PartialObjects["order_status_aggregate_fields"],
+			nodes?:PartialObjects["order_status"][]
+	},
+	/** aggregate fields of "order_status" */
+["order_status_aggregate_fields"]: {
+		__typename?: "order_status_aggregate_fields";
+			count?:number,
+			max?:PartialObjects["order_status_max_fields"],
+			min?:PartialObjects["order_status_min_fields"]
+	},
+	/** Boolean expression to filter rows from the table "order_status". All fields are combined with a logical 'AND'. */
+["order_status_bool_exp"]: {
+	_and?:PartialObjects["order_status_bool_exp"][],
+	_not?:PartialObjects["order_status_bool_exp"],
+	_or?:PartialObjects["order_status_bool_exp"][],
+	orders?:PartialObjects["order_bool_exp"],
+	status?:PartialObjects["String_comparison_exp"]
+},
+	/** unique or primary key constraints on table "order_status" */
+["order_status_constraint"]:order_status_constraint,
+	["order_status_enum"]:order_status_enum,
+	/** Boolean expression to compare columns of type "order_status_enum". All fields are combined with logical 'AND'. */
+["order_status_enum_comparison_exp"]: {
+	_eq?:PartialObjects["order_status_enum"],
+	_in?:PartialObjects["order_status_enum"][],
+	_is_null?:boolean,
+	_neq?:PartialObjects["order_status_enum"],
+	_nin?:PartialObjects["order_status_enum"][]
+},
+	/** input type for inserting data into table "order_status" */
+["order_status_insert_input"]: {
+	orders?:PartialObjects["order_arr_rel_insert_input"],
+	status?:string
+},
+	/** aggregate max on columns */
+["order_status_max_fields"]: {
+		__typename?: "order_status_max_fields";
+			status?:string
+	},
+	/** aggregate min on columns */
+["order_status_min_fields"]: {
+		__typename?: "order_status_min_fields";
+			status?:string
+	},
+	/** response of any mutation on the table "order_status" */
+["order_status_mutation_response"]: {
+		__typename?: "order_status_mutation_response";
+			/** number of rows affected by the mutation */
+	affected_rows?:number,
+			/** data from the rows affected by the mutation */
+	returning?:PartialObjects["order_status"][]
+	},
+	/** input type for inserting object relation for remote table "order_status" */
+["order_status_obj_rel_insert_input"]: {
+	data:PartialObjects["order_status_insert_input"],
+	/** on conflict condition */
+	on_conflict?:PartialObjects["order_status_on_conflict"]
+},
+	/** on conflict condition type for table "order_status" */
+["order_status_on_conflict"]: {
+	constraint:PartialObjects["order_status_constraint"],
+	update_columns:PartialObjects["order_status_update_column"][],
+	where?:PartialObjects["order_status_bool_exp"]
+},
+	/** Ordering options when selecting data from "order_status". */
+["order_status_order_by"]: {
+	orders_aggregate?:PartialObjects["order_aggregate_order_by"],
+	status?:PartialObjects["order_by"]
+},
+	/** primary key columns input for table: order_status */
+["order_status_pk_columns_input"]: {
+	status:string
+},
+	/** select columns of table "order_status" */
+["order_status_select_column"]:order_status_select_column,
+	/** input type for updating data in table "order_status" */
+["order_status_set_input"]: {
+	status?:string
+},
+	/** update columns of table "order_status" */
+["order_status_update_column"]:order_status_update_column,
 	/** aggregate stddev on columns */
 ["order_stddev_fields"]: {
 		__typename?: "order_stddev_fields";
 			billing_address_id?:number,
 			id?:number,
+			order_total?:number,
 			shipping_address_id?:number,
 			user_id?:number
 	},
@@ -3736,6 +3928,7 @@ columns and relationships of "order_product" */
 ["order_stddev_order_by"]: {
 	billing_address_id?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
 },
@@ -3744,6 +3937,7 @@ columns and relationships of "order_product" */
 		__typename?: "order_stddev_pop_fields";
 			billing_address_id?:number,
 			id?:number,
+			order_total?:number,
 			shipping_address_id?:number,
 			user_id?:number
 	},
@@ -3751,6 +3945,7 @@ columns and relationships of "order_product" */
 ["order_stddev_pop_order_by"]: {
 	billing_address_id?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
 },
@@ -3759,6 +3954,7 @@ columns and relationships of "order_product" */
 		__typename?: "order_stddev_samp_fields";
 			billing_address_id?:number,
 			id?:number,
+			order_total?:number,
 			shipping_address_id?:number,
 			user_id?:number
 	},
@@ -3766,6 +3962,7 @@ columns and relationships of "order_product" */
 ["order_stddev_samp_order_by"]: {
 	billing_address_id?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
 },
@@ -3774,6 +3971,7 @@ columns and relationships of "order_product" */
 		__typename?: "order_sum_fields";
 			billing_address_id?:number,
 			id?:number,
+			order_total?:PartialObjects["numeric"],
 			shipping_address_id?:number,
 			user_id?:number
 	},
@@ -3781,6 +3979,7 @@ columns and relationships of "order_product" */
 ["order_sum_order_by"]: {
 	billing_address_id?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
 },
@@ -3791,6 +3990,7 @@ columns and relationships of "order_product" */
 		__typename?: "order_var_pop_fields";
 			billing_address_id?:number,
 			id?:number,
+			order_total?:number,
 			shipping_address_id?:number,
 			user_id?:number
 	},
@@ -3798,6 +3998,7 @@ columns and relationships of "order_product" */
 ["order_var_pop_order_by"]: {
 	billing_address_id?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
 },
@@ -3806,6 +4007,7 @@ columns and relationships of "order_product" */
 		__typename?: "order_var_samp_fields";
 			billing_address_id?:number,
 			id?:number,
+			order_total?:number,
 			shipping_address_id?:number,
 			user_id?:number
 	},
@@ -3813,6 +4015,7 @@ columns and relationships of "order_product" */
 ["order_var_samp_order_by"]: {
 	billing_address_id?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
 },
@@ -3821,6 +4024,7 @@ columns and relationships of "order_product" */
 		__typename?: "order_variance_fields";
 			billing_address_id?:number,
 			id?:number,
+			order_total?:number,
 			shipping_address_id?:number,
 			user_id?:number
 	},
@@ -3828,6 +4032,7 @@ columns and relationships of "order_product" */
 ["order_variance_order_by"]: {
 	billing_address_id?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	order_total?:PartialObjects["order_by"],
 	shipping_address_id?:PartialObjects["order_by"],
 	user_id?:PartialObjects["order_by"]
 },
@@ -3849,12 +4054,12 @@ columns and relationships of "order_product" */
 			name?:string,
 			/** An array relationship */
 	orders?:PartialObjects["order_product"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	orders_aggregate?:PartialObjects["order_product_aggregate"],
 			price?:PartialObjects["numeric"],
 			/** An array relationship */
 	product_reviews?:PartialObjects["product_review"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	product_reviews_aggregate?:PartialObjects["product_review_aggregate"],
 			updated_at?:PartialObjects["timestamptz"]
 	},
@@ -3900,6 +4105,7 @@ columns and relationships of "order_product" */
 	/** input type for inserting array relation for remote table "product" */
 ["product_arr_rel_insert_input"]: {
 	data:PartialObjects["product_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["product_on_conflict"]
 },
 	/** aggregate avg on columns */
@@ -3915,9 +4121,9 @@ columns and relationships of "order_product" */
 },
 	/** Boolean expression to filter rows from the table "product". All fields are combined with a logical 'AND'. */
 ["product_bool_exp"]: {
-	_and?:(PartialObjects["product_bool_exp"] | undefined)[],
+	_and?:PartialObjects["product_bool_exp"][],
 	_not?:PartialObjects["product_bool_exp"],
-	_or?:(PartialObjects["product_bool_exp"] | undefined)[],
+	_or?:PartialObjects["product_bool_exp"][],
 	brand?:PartialObjects["String_comparison_exp"],
 	category?:PartialObjects["product_category_enum_bool_exp"],
 	category_display_name?:PartialObjects["String_comparison_exp"],
@@ -3938,7 +4144,7 @@ columns and relationships of "order_product" */
 			name?:string,
 			/** An array relationship */
 	products?:PartialObjects["product"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	products_aggregate?:PartialObjects["product_aggregate"]
 	},
 	/** aggregated selection of "product_category_enum" */
@@ -3954,22 +4160,11 @@ columns and relationships of "order_product" */
 			max?:PartialObjects["product_category_enum_max_fields"],
 			min?:PartialObjects["product_category_enum_min_fields"]
 	},
-	/** order by aggregate values of table "product_category_enum" */
-["product_category_enum_aggregate_order_by"]: {
-	count?:PartialObjects["order_by"],
-	max?:PartialObjects["product_category_enum_max_order_by"],
-	min?:PartialObjects["product_category_enum_min_order_by"]
-},
-	/** input type for inserting array relation for remote table "product_category_enum" */
-["product_category_enum_arr_rel_insert_input"]: {
-	data:PartialObjects["product_category_enum_insert_input"][],
-	on_conflict?:PartialObjects["product_category_enum_on_conflict"]
-},
 	/** Boolean expression to filter rows from the table "product_category_enum". All fields are combined with a logical 'AND'. */
 ["product_category_enum_bool_exp"]: {
-	_and?:(PartialObjects["product_category_enum_bool_exp"] | undefined)[],
+	_and?:PartialObjects["product_category_enum_bool_exp"][],
 	_not?:PartialObjects["product_category_enum_bool_exp"],
-	_or?:(PartialObjects["product_category_enum_bool_exp"] | undefined)[],
+	_or?:PartialObjects["product_category_enum_bool_exp"][],
 	display_name?:PartialObjects["String_comparison_exp"],
 	name?:PartialObjects["String_comparison_exp"],
 	products?:PartialObjects["product_bool_exp"]
@@ -3988,33 +4183,24 @@ columns and relationships of "order_product" */
 			display_name?:string,
 			name?:string
 	},
-	/** order by max() on columns of table "product_category_enum" */
-["product_category_enum_max_order_by"]: {
-	display_name?:PartialObjects["order_by"],
-	name?:PartialObjects["order_by"]
-},
 	/** aggregate min on columns */
 ["product_category_enum_min_fields"]: {
 		__typename?: "product_category_enum_min_fields";
 			display_name?:string,
 			name?:string
 	},
-	/** order by min() on columns of table "product_category_enum" */
-["product_category_enum_min_order_by"]: {
-	display_name?:PartialObjects["order_by"],
-	name?:PartialObjects["order_by"]
-},
 	/** response of any mutation on the table "product_category_enum" */
 ["product_category_enum_mutation_response"]: {
 		__typename?: "product_category_enum_mutation_response";
-			/** number of affected rows by the mutation */
+			/** number of rows affected by the mutation */
 	affected_rows?:number,
-			/** data of the affected rows by the mutation */
+			/** data from the rows affected by the mutation */
 	returning?:PartialObjects["product_category_enum"][]
 	},
 	/** input type for inserting object relation for remote table "product_category_enum" */
 ["product_category_enum_obj_rel_insert_input"]: {
 	data:PartialObjects["product_category_enum_insert_input"],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["product_category_enum_on_conflict"]
 },
 	/** on conflict condition type for table "product_category_enum" */
@@ -4023,13 +4209,13 @@ columns and relationships of "order_product" */
 	update_columns:PartialObjects["product_category_enum_update_column"][],
 	where?:PartialObjects["product_category_enum_bool_exp"]
 },
-	/** ordering options when selecting data from "product_category_enum" */
+	/** Ordering options when selecting data from "product_category_enum". */
 ["product_category_enum_order_by"]: {
 	display_name?:PartialObjects["order_by"],
 	name?:PartialObjects["order_by"],
 	products_aggregate?:PartialObjects["product_aggregate_order_by"]
 },
-	/** primary key columns input for table: "product_category_enum" */
+	/** primary key columns input for table: product_category_enum */
 ["product_category_enum_pk_columns_input"]: {
 	name:string
 },
@@ -4046,7 +4232,7 @@ columns and relationships of "order_product" */
 ["product_constraint"]:product_constraint,
 	/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 ["product_delete_at_path_input"]: {
-	image_urls?:(string | undefined)[]
+	image_urls?:string[]
 },
 	/** delete the array element with specified index (negative integers count from the
 end). throws an error if top level container is not an array */
@@ -4057,7 +4243,7 @@ end). throws an error if top level container is not an array */
 ["product_delete_key_input"]: {
 	image_urls?:string
 },
-	/** input type for incrementing integer column in table "product" */
+	/** input type for incrementing numeric columns in table "product" */
 ["product_inc_input"]: {
 	id?:number,
 	price?:PartialObjects["numeric"]
@@ -4126,14 +4312,15 @@ end). throws an error if top level container is not an array */
 	/** response of any mutation on the table "product" */
 ["product_mutation_response"]: {
 		__typename?: "product_mutation_response";
-			/** number of affected rows by the mutation */
+			/** number of rows affected by the mutation */
 	affected_rows?:number,
-			/** data of the affected rows by the mutation */
+			/** data from the rows affected by the mutation */
 	returning?:PartialObjects["product"][]
 	},
 	/** input type for inserting object relation for remote table "product" */
 ["product_obj_rel_insert_input"]: {
 	data:PartialObjects["product_insert_input"],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["product_on_conflict"]
 },
 	/** on conflict condition type for table "product" */
@@ -4142,7 +4329,7 @@ end). throws an error if top level container is not an array */
 	update_columns:PartialObjects["product_update_column"][],
 	where?:PartialObjects["product_bool_exp"]
 },
-	/** ordering options when selecting data from "product" */
+	/** Ordering options when selecting data from "product". */
 ["product_order_by"]: {
 	brand?:PartialObjects["order_by"],
 	category?:PartialObjects["product_category_enum_order_by"],
@@ -4157,7 +4344,7 @@ end). throws an error if top level container is not an array */
 	product_reviews_aggregate?:PartialObjects["product_review_aggregate_order_by"],
 	updated_at?:PartialObjects["order_by"]
 },
-	/** primary key columns input for table: "product" */
+	/** primary key columns input for table: product */
 ["product_pk_columns_input"]: {
 	id:number
 },
@@ -4221,6 +4408,7 @@ columns and relationships of "product_review" */
 	/** input type for inserting array relation for remote table "product_review" */
 ["product_review_arr_rel_insert_input"]: {
 	data:PartialObjects["product_review_insert_input"][],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["product_review_on_conflict"]
 },
 	/** aggregate avg on columns */
@@ -4240,9 +4428,9 @@ columns and relationships of "product_review" */
 },
 	/** Boolean expression to filter rows from the table "product_review". All fields are combined with a logical 'AND'. */
 ["product_review_bool_exp"]: {
-	_and?:(PartialObjects["product_review_bool_exp"] | undefined)[],
+	_and?:PartialObjects["product_review_bool_exp"][],
 	_not?:PartialObjects["product_review_bool_exp"],
-	_or?:(PartialObjects["product_review_bool_exp"] | undefined)[],
+	_or?:PartialObjects["product_review_bool_exp"][],
 	comment?:PartialObjects["String_comparison_exp"],
 	created_at?:PartialObjects["timestamptz_comparison_exp"],
 	id?:PartialObjects["Int_comparison_exp"],
@@ -4255,7 +4443,7 @@ columns and relationships of "product_review" */
 },
 	/** unique or primary key constraints on table "product_review" */
 ["product_review_constraint"]:product_review_constraint,
-	/** input type for incrementing integer column in table "product_review" */
+	/** input type for incrementing numeric columns in table "product_review" */
 ["product_review_inc_input"]: {
 	id?:number,
 	product_id?:number,
@@ -4319,23 +4507,18 @@ columns and relationships of "product_review" */
 	/** response of any mutation on the table "product_review" */
 ["product_review_mutation_response"]: {
 		__typename?: "product_review_mutation_response";
-			/** number of affected rows by the mutation */
+			/** number of rows affected by the mutation */
 	affected_rows?:number,
-			/** data of the affected rows by the mutation */
+			/** data from the rows affected by the mutation */
 	returning?:PartialObjects["product_review"][]
 	},
-	/** input type for inserting object relation for remote table "product_review" */
-["product_review_obj_rel_insert_input"]: {
-	data:PartialObjects["product_review_insert_input"],
-	on_conflict?:PartialObjects["product_review_on_conflict"]
-},
 	/** on conflict condition type for table "product_review" */
 ["product_review_on_conflict"]: {
 	constraint:PartialObjects["product_review_constraint"],
 	update_columns:PartialObjects["product_review_update_column"][],
 	where?:PartialObjects["product_review_bool_exp"]
 },
-	/** ordering options when selecting data from "product_review" */
+	/** Ordering options when selecting data from "product_review". */
 ["product_review_order_by"]: {
 	comment?:PartialObjects["order_by"],
 	created_at?:PartialObjects["order_by"],
@@ -4347,7 +4530,7 @@ columns and relationships of "product_review" */
 	user?:PartialObjects["user_order_by"],
 	user_id?:PartialObjects["order_by"]
 },
-	/** primary key columns input for table: "product_review" */
+	/** primary key columns input for table: product_review */
 ["product_review_pk_columns_input"]: {
 	id:number
 },
@@ -4563,8 +4746,7 @@ columns and relationships of "product_review" */
 	id?:PartialObjects["order_by"],
 	price?:PartialObjects["order_by"]
 },
-	/** query root */
-["query_root"]: {
+	["query_root"]: {
 		__typename?: "query_root";
 			/** fetch data from the table: "address" */
 	address?:PartialObjects["address"][],
@@ -4572,8 +4754,7 @@ columns and relationships of "product_review" */
 	address_aggregate?:PartialObjects["address_aggregate"],
 			/** fetch data from the table: "address" using primary key columns */
 	address_by_pk?:PartialObjects["address"],
-			/** perform the action: "adminLogin" */
-	adminLogin?:PartialObjects["JWT"],
+			adminLogin?:PartialObjects["JWT"],
 			/** fetch data from the table: "order" */
 	order?:PartialObjects["order"][],
 			/** fetch aggregated fields from the table: "order" */
@@ -4586,6 +4767,12 @@ columns and relationships of "product_review" */
 	order_product_aggregate?:PartialObjects["order_product_aggregate"],
 			/** fetch data from the table: "order_product" using primary key columns */
 	order_product_by_pk?:PartialObjects["order_product"],
+			/** fetch data from the table: "order_status" */
+	order_status?:PartialObjects["order_status"][],
+			/** fetch aggregated fields from the table: "order_status" */
+	order_status_aggregate?:PartialObjects["order_status_aggregate"],
+			/** fetch data from the table: "order_status" using primary key columns */
+	order_status_by_pk?:PartialObjects["order_status"],
 			/** fetch data from the table: "product" */
 	product?:PartialObjects["product"][],
 			/** fetch aggregated fields from the table: "product" */
@@ -4604,8 +4791,7 @@ columns and relationships of "product_review" */
 	product_review_aggregate?:PartialObjects["product_review_aggregate"],
 			/** fetch data from the table: "product_review" using primary key columns */
 	product_review_by_pk?:PartialObjects["product_review"],
-			/** perform the action: "refreshToken" */
-	refreshToken?:PartialObjects["RefreshTokenJWT"],
+			refreshToken?:PartialObjects["RefreshTokenJWT"],
 			/** fetch data from the table: "site_admin" */
 	site_admin?:PartialObjects["site_admin"][],
 			/** fetch aggregated fields from the table: "site_admin" */
@@ -4626,6 +4812,14 @@ columns and relationships of "product_review" */
 		__typename?: "RefreshTokenJWT";
 			token?:string
 	},
+	["SampleInput"]: {
+	password:string,
+	username:string
+},
+	["SampleOutput"]: {
+		__typename?: "SampleOutput";
+			accessToken?:string
+	},
 	["SignupInput"]: {
 	email:string,
 	name:string,
@@ -4640,8 +4834,10 @@ columns and relationships of "site_admin" */
 			created_at?:PartialObjects["timestamptz"],
 			email?:string,
 			id?:number,
+			name?:string,
 			/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+			refresh_token?:string,
 			updated_at?:PartialObjects["timestamptz"]
 	},
 	/** aggregated selection of "site_admin" */
@@ -4665,48 +4861,27 @@ columns and relationships of "site_admin" */
 			var_samp?:PartialObjects["site_admin_var_samp_fields"],
 			variance?:PartialObjects["site_admin_variance_fields"]
 	},
-	/** order by aggregate values of table "site_admin" */
-["site_admin_aggregate_order_by"]: {
-	avg?:PartialObjects["site_admin_avg_order_by"],
-	count?:PartialObjects["order_by"],
-	max?:PartialObjects["site_admin_max_order_by"],
-	min?:PartialObjects["site_admin_min_order_by"],
-	stddev?:PartialObjects["site_admin_stddev_order_by"],
-	stddev_pop?:PartialObjects["site_admin_stddev_pop_order_by"],
-	stddev_samp?:PartialObjects["site_admin_stddev_samp_order_by"],
-	sum?:PartialObjects["site_admin_sum_order_by"],
-	var_pop?:PartialObjects["site_admin_var_pop_order_by"],
-	var_samp?:PartialObjects["site_admin_var_samp_order_by"],
-	variance?:PartialObjects["site_admin_variance_order_by"]
-},
-	/** input type for inserting array relation for remote table "site_admin" */
-["site_admin_arr_rel_insert_input"]: {
-	data:PartialObjects["site_admin_insert_input"][],
-	on_conflict?:PartialObjects["site_admin_on_conflict"]
-},
 	/** aggregate avg on columns */
 ["site_admin_avg_fields"]: {
 		__typename?: "site_admin_avg_fields";
 			id?:number
 	},
-	/** order by avg() on columns of table "site_admin" */
-["site_admin_avg_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** Boolean expression to filter rows from the table "site_admin". All fields are combined with a logical 'AND'. */
 ["site_admin_bool_exp"]: {
-	_and?:(PartialObjects["site_admin_bool_exp"] | undefined)[],
+	_and?:PartialObjects["site_admin_bool_exp"][],
 	_not?:PartialObjects["site_admin_bool_exp"],
-	_or?:(PartialObjects["site_admin_bool_exp"] | undefined)[],
+	_or?:PartialObjects["site_admin_bool_exp"][],
 	created_at?:PartialObjects["timestamptz_comparison_exp"],
 	email?:PartialObjects["String_comparison_exp"],
 	id?:PartialObjects["Int_comparison_exp"],
+	name?:PartialObjects["String_comparison_exp"],
 	password?:PartialObjects["String_comparison_exp"],
+	refresh_token?:PartialObjects["String_comparison_exp"],
 	updated_at?:PartialObjects["timestamptz_comparison_exp"]
 },
 	/** unique or primary key constraints on table "site_admin" */
 ["site_admin_constraint"]:site_admin_constraint,
-	/** input type for incrementing integer column in table "site_admin" */
+	/** input type for incrementing numeric columns in table "site_admin" */
 ["site_admin_inc_input"]: {
 	id?:number
 },
@@ -4715,7 +4890,10 @@ columns and relationships of "site_admin" */
 	created_at?:PartialObjects["timestamptz"],
 	email?:string,
 	id?:number,
+	name?:string,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	refresh_token?:string,
 	updated_at?:PartialObjects["timestamptz"]
 },
 	/** aggregate max on columns */
@@ -4724,62 +4902,49 @@ columns and relationships of "site_admin" */
 			created_at?:PartialObjects["timestamptz"],
 			email?:string,
 			id?:number,
-			password?:string,
+			name?:string,
+			/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
+	password?:string,
+			refresh_token?:string,
 			updated_at?:PartialObjects["timestamptz"]
 	},
-	/** order by max() on columns of table "site_admin" */
-["site_admin_max_order_by"]: {
-	created_at?:PartialObjects["order_by"],
-	email?:PartialObjects["order_by"],
-	id?:PartialObjects["order_by"],
-	password?:PartialObjects["order_by"],
-	updated_at?:PartialObjects["order_by"]
-},
 	/** aggregate min on columns */
 ["site_admin_min_fields"]: {
 		__typename?: "site_admin_min_fields";
 			created_at?:PartialObjects["timestamptz"],
 			email?:string,
 			id?:number,
-			password?:string,
+			name?:string,
+			/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
+	password?:string,
+			refresh_token?:string,
 			updated_at?:PartialObjects["timestamptz"]
 	},
-	/** order by min() on columns of table "site_admin" */
-["site_admin_min_order_by"]: {
-	created_at?:PartialObjects["order_by"],
-	email?:PartialObjects["order_by"],
-	id?:PartialObjects["order_by"],
-	password?:PartialObjects["order_by"],
-	updated_at?:PartialObjects["order_by"]
-},
 	/** response of any mutation on the table "site_admin" */
 ["site_admin_mutation_response"]: {
 		__typename?: "site_admin_mutation_response";
-			/** number of affected rows by the mutation */
+			/** number of rows affected by the mutation */
 	affected_rows?:number,
-			/** data of the affected rows by the mutation */
+			/** data from the rows affected by the mutation */
 	returning?:PartialObjects["site_admin"][]
 	},
-	/** input type for inserting object relation for remote table "site_admin" */
-["site_admin_obj_rel_insert_input"]: {
-	data:PartialObjects["site_admin_insert_input"],
-	on_conflict?:PartialObjects["site_admin_on_conflict"]
-},
 	/** on conflict condition type for table "site_admin" */
 ["site_admin_on_conflict"]: {
 	constraint:PartialObjects["site_admin_constraint"],
 	update_columns:PartialObjects["site_admin_update_column"][],
 	where?:PartialObjects["site_admin_bool_exp"]
 },
-	/** ordering options when selecting data from "site_admin" */
+	/** Ordering options when selecting data from "site_admin". */
 ["site_admin_order_by"]: {
 	created_at?:PartialObjects["order_by"],
 	email?:PartialObjects["order_by"],
 	id?:PartialObjects["order_by"],
+	name?:PartialObjects["order_by"],
 	password?:PartialObjects["order_by"],
+	refresh_token?:PartialObjects["order_by"],
 	updated_at?:PartialObjects["order_by"]
 },
-	/** primary key columns input for table: "site_admin" */
+	/** primary key columns input for table: site_admin */
 ["site_admin_pk_columns_input"]: {
 	id:number
 },
@@ -4790,7 +4955,10 @@ columns and relationships of "site_admin" */
 	created_at?:PartialObjects["timestamptz"],
 	email?:string,
 	id?:number,
+	name?:string,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	refresh_token?:string,
 	updated_at?:PartialObjects["timestamptz"]
 },
 	/** aggregate stddev on columns */
@@ -4798,37 +4966,21 @@ columns and relationships of "site_admin" */
 		__typename?: "site_admin_stddev_fields";
 			id?:number
 	},
-	/** order by stddev() on columns of table "site_admin" */
-["site_admin_stddev_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate stddev_pop on columns */
 ["site_admin_stddev_pop_fields"]: {
 		__typename?: "site_admin_stddev_pop_fields";
 			id?:number
 	},
-	/** order by stddev_pop() on columns of table "site_admin" */
-["site_admin_stddev_pop_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate stddev_samp on columns */
 ["site_admin_stddev_samp_fields"]: {
 		__typename?: "site_admin_stddev_samp_fields";
 			id?:number
 	},
-	/** order by stddev_samp() on columns of table "site_admin" */
-["site_admin_stddev_samp_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate sum on columns */
 ["site_admin_sum_fields"]: {
 		__typename?: "site_admin_sum_fields";
 			id?:number
 	},
-	/** order by sum() on columns of table "site_admin" */
-["site_admin_sum_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** update columns of table "site_admin" */
 ["site_admin_update_column"]:site_admin_update_column,
 	/** aggregate var_pop on columns */
@@ -4836,48 +4988,49 @@ columns and relationships of "site_admin" */
 		__typename?: "site_admin_var_pop_fields";
 			id?:number
 	},
-	/** order by var_pop() on columns of table "site_admin" */
-["site_admin_var_pop_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate var_samp on columns */
 ["site_admin_var_samp_fields"]: {
 		__typename?: "site_admin_var_samp_fields";
 			id?:number
 	},
-	/** order by var_samp() on columns of table "site_admin" */
-["site_admin_var_samp_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate variance on columns */
 ["site_admin_variance_fields"]: {
 		__typename?: "site_admin_variance_fields";
 			id?:number
 	},
-	/** order by variance() on columns of table "site_admin" */
-["site_admin_variance_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
-	/** expression to compare columns of type String. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 ["String_comparison_exp"]: {
 	_eq?:string,
 	_gt?:string,
 	_gte?:string,
+	/** does the column match the given case-insensitive pattern */
 	_ilike?:string,
 	_in?:string[],
+	/** does the column match the given POSIX regular expression, case insensitive */
+	_iregex?:string,
 	_is_null?:boolean,
+	/** does the column match the given pattern */
 	_like?:string,
 	_lt?:string,
 	_lte?:string,
 	_neq?:string,
+	/** does the column NOT match the given case-insensitive pattern */
 	_nilike?:string,
 	_nin?:string[],
+	/** does the column NOT match the given POSIX regular expression, case insensitive */
+	_niregex?:string,
+	/** does the column NOT match the given pattern */
 	_nlike?:string,
+	/** does the column NOT match the given POSIX regular expression, case sensitive */
+	_nregex?:string,
+	/** does the column NOT match the given SQL regular expression */
 	_nsimilar?:string,
+	/** does the column match the given POSIX regular expression, case sensitive */
+	_regex?:string,
+	/** does the column match the given SQL regular expression */
 	_similar?:string
 },
-	/** subscription root */
-["subscription_root"]: {
+	["subscription_root"]: {
 		__typename?: "subscription_root";
 			/** fetch data from the table: "address" */
 	address?:PartialObjects["address"][],
@@ -4885,8 +5038,6 @@ columns and relationships of "site_admin" */
 	address_aggregate?:PartialObjects["address_aggregate"],
 			/** fetch data from the table: "address" using primary key columns */
 	address_by_pk?:PartialObjects["address"],
-			/** perform the action: "adminLogin" */
-	adminLogin?:PartialObjects["JWT"],
 			/** fetch data from the table: "order" */
 	order?:PartialObjects["order"][],
 			/** fetch aggregated fields from the table: "order" */
@@ -4899,6 +5050,12 @@ columns and relationships of "site_admin" */
 	order_product_aggregate?:PartialObjects["order_product_aggregate"],
 			/** fetch data from the table: "order_product" using primary key columns */
 	order_product_by_pk?:PartialObjects["order_product"],
+			/** fetch data from the table: "order_status" */
+	order_status?:PartialObjects["order_status"][],
+			/** fetch aggregated fields from the table: "order_status" */
+	order_status_aggregate?:PartialObjects["order_status_aggregate"],
+			/** fetch data from the table: "order_status" using primary key columns */
+	order_status_by_pk?:PartialObjects["order_status"],
 			/** fetch data from the table: "product" */
 	product?:PartialObjects["product"][],
 			/** fetch aggregated fields from the table: "product" */
@@ -4917,8 +5074,6 @@ columns and relationships of "site_admin" */
 	product_review_aggregate?:PartialObjects["product_review_aggregate"],
 			/** fetch data from the table: "product_review" using primary key columns */
 	product_review_by_pk?:PartialObjects["product_review"],
-			/** perform the action: "refreshToken" */
-	refreshToken?:PartialObjects["RefreshTokenJWT"],
 			/** fetch data from the table: "site_admin" */
 	site_admin?:PartialObjects["site_admin"][],
 			/** fetch aggregated fields from the table: "site_admin" */
@@ -4933,7 +5088,7 @@ columns and relationships of "site_admin" */
 	user_by_pk?:PartialObjects["user"]
 	},
 	["timestamptz"]:any,
-	/** expression to compare columns of type timestamptz. All fields are combined with logical 'AND'. */
+	/** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 ["timestamptz_comparison_exp"]: {
 	_eq?:PartialObjects["timestamptz"],
 	_gt?:PartialObjects["timestamptz"],
@@ -4953,7 +5108,7 @@ columns and relationships of "user" */
 		__typename?: "user";
 			/** An array relationship */
 	addresses?:PartialObjects["address"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	addresses_aggregate?:PartialObjects["address_aggregate"],
 			created_at?:PartialObjects["timestamptz"],
 			email?:string,
@@ -4961,15 +5116,18 @@ columns and relationships of "user" */
 			name?:string,
 			/** An array relationship */
 	orders?:PartialObjects["order"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	orders_aggregate?:PartialObjects["order_aggregate"],
 			/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
 			/** An array relationship */
 	product_reviews?:PartialObjects["product_review"][],
-			/** An aggregated array relationship */
+			/** An aggregate relationship */
 	product_reviews_aggregate?:PartialObjects["product_review_aggregate"],
+			provider_id?:string,
+			provider_name?:string,
 			refresh_token?:string,
+			role?:string,
 			updated_at?:PartialObjects["timestamptz"]
 	},
 	/** aggregated selection of "user" */
@@ -4993,39 +5151,16 @@ columns and relationships of "user" */
 			var_samp?:PartialObjects["user_var_samp_fields"],
 			variance?:PartialObjects["user_variance_fields"]
 	},
-	/** order by aggregate values of table "user" */
-["user_aggregate_order_by"]: {
-	avg?:PartialObjects["user_avg_order_by"],
-	count?:PartialObjects["order_by"],
-	max?:PartialObjects["user_max_order_by"],
-	min?:PartialObjects["user_min_order_by"],
-	stddev?:PartialObjects["user_stddev_order_by"],
-	stddev_pop?:PartialObjects["user_stddev_pop_order_by"],
-	stddev_samp?:PartialObjects["user_stddev_samp_order_by"],
-	sum?:PartialObjects["user_sum_order_by"],
-	var_pop?:PartialObjects["user_var_pop_order_by"],
-	var_samp?:PartialObjects["user_var_samp_order_by"],
-	variance?:PartialObjects["user_variance_order_by"]
-},
-	/** input type for inserting array relation for remote table "user" */
-["user_arr_rel_insert_input"]: {
-	data:PartialObjects["user_insert_input"][],
-	on_conflict?:PartialObjects["user_on_conflict"]
-},
 	/** aggregate avg on columns */
 ["user_avg_fields"]: {
 		__typename?: "user_avg_fields";
 			id?:number
 	},
-	/** order by avg() on columns of table "user" */
-["user_avg_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'. */
 ["user_bool_exp"]: {
-	_and?:(PartialObjects["user_bool_exp"] | undefined)[],
+	_and?:PartialObjects["user_bool_exp"][],
 	_not?:PartialObjects["user_bool_exp"],
-	_or?:(PartialObjects["user_bool_exp"] | undefined)[],
+	_or?:PartialObjects["user_bool_exp"][],
 	addresses?:PartialObjects["address_bool_exp"],
 	created_at?:PartialObjects["timestamptz_comparison_exp"],
 	email?:PartialObjects["String_comparison_exp"],
@@ -5034,12 +5169,15 @@ columns and relationships of "user" */
 	orders?:PartialObjects["order_bool_exp"],
 	password?:PartialObjects["String_comparison_exp"],
 	product_reviews?:PartialObjects["product_review_bool_exp"],
+	provider_id?:PartialObjects["String_comparison_exp"],
+	provider_name?:PartialObjects["String_comparison_exp"],
 	refresh_token?:PartialObjects["String_comparison_exp"],
+	role?:PartialObjects["String_comparison_exp"],
 	updated_at?:PartialObjects["timestamptz_comparison_exp"]
 },
 	/** unique or primary key constraints on table "user" */
 ["user_constraint"]:user_constraint,
-	/** input type for incrementing integer column in table "user" */
+	/** input type for incrementing numeric columns in table "user" */
 ["user_inc_input"]: {
 	id?:number
 },
@@ -5051,9 +5189,13 @@ columns and relationships of "user" */
 	id?:number,
 	name?:string,
 	orders?:PartialObjects["order_arr_rel_insert_input"],
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
 	product_reviews?:PartialObjects["product_review_arr_rel_insert_input"],
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at?:PartialObjects["timestamptz"]
 },
 	/** aggregate max on columns */
@@ -5063,20 +5205,14 @@ columns and relationships of "user" */
 			email?:string,
 			id?:number,
 			name?:string,
-			password?:string,
+			/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
+	password?:string,
+			provider_id?:string,
+			provider_name?:string,
 			refresh_token?:string,
+			role?:string,
 			updated_at?:PartialObjects["timestamptz"]
 	},
-	/** order by max() on columns of table "user" */
-["user_max_order_by"]: {
-	created_at?:PartialObjects["order_by"],
-	email?:PartialObjects["order_by"],
-	id?:PartialObjects["order_by"],
-	name?:PartialObjects["order_by"],
-	password?:PartialObjects["order_by"],
-	refresh_token?:PartialObjects["order_by"],
-	updated_at?:PartialObjects["order_by"]
-},
 	/** aggregate min on columns */
 ["user_min_fields"]: {
 		__typename?: "user_min_fields";
@@ -5084,31 +5220,26 @@ columns and relationships of "user" */
 			email?:string,
 			id?:number,
 			name?:string,
-			password?:string,
+			/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
+	password?:string,
+			provider_id?:string,
+			provider_name?:string,
 			refresh_token?:string,
+			role?:string,
 			updated_at?:PartialObjects["timestamptz"]
 	},
-	/** order by min() on columns of table "user" */
-["user_min_order_by"]: {
-	created_at?:PartialObjects["order_by"],
-	email?:PartialObjects["order_by"],
-	id?:PartialObjects["order_by"],
-	name?:PartialObjects["order_by"],
-	password?:PartialObjects["order_by"],
-	refresh_token?:PartialObjects["order_by"],
-	updated_at?:PartialObjects["order_by"]
-},
 	/** response of any mutation on the table "user" */
 ["user_mutation_response"]: {
 		__typename?: "user_mutation_response";
-			/** number of affected rows by the mutation */
+			/** number of rows affected by the mutation */
 	affected_rows?:number,
-			/** data of the affected rows by the mutation */
+			/** data from the rows affected by the mutation */
 	returning?:PartialObjects["user"][]
 	},
 	/** input type for inserting object relation for remote table "user" */
 ["user_obj_rel_insert_input"]: {
 	data:PartialObjects["user_insert_input"],
+	/** on conflict condition */
 	on_conflict?:PartialObjects["user_on_conflict"]
 },
 	/** on conflict condition type for table "user" */
@@ -5117,7 +5248,7 @@ columns and relationships of "user" */
 	update_columns:PartialObjects["user_update_column"][],
 	where?:PartialObjects["user_bool_exp"]
 },
-	/** ordering options when selecting data from "user" */
+	/** Ordering options when selecting data from "user". */
 ["user_order_by"]: {
 	addresses_aggregate?:PartialObjects["address_aggregate_order_by"],
 	created_at?:PartialObjects["order_by"],
@@ -5127,10 +5258,13 @@ columns and relationships of "user" */
 	orders_aggregate?:PartialObjects["order_aggregate_order_by"],
 	password?:PartialObjects["order_by"],
 	product_reviews_aggregate?:PartialObjects["product_review_aggregate_order_by"],
+	provider_id?:PartialObjects["order_by"],
+	provider_name?:PartialObjects["order_by"],
 	refresh_token?:PartialObjects["order_by"],
+	role?:PartialObjects["order_by"],
 	updated_at?:PartialObjects["order_by"]
 },
-	/** primary key columns input for table: "user" */
+	/** primary key columns input for table: user */
 ["user_pk_columns_input"]: {
 	id:number
 },
@@ -5142,8 +5276,12 @@ columns and relationships of "user" */
 	email?:string,
 	id?:number,
 	name?:string,
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at?:PartialObjects["timestamptz"]
 },
 	/** aggregate stddev on columns */
@@ -5151,37 +5289,21 @@ columns and relationships of "user" */
 		__typename?: "user_stddev_fields";
 			id?:number
 	},
-	/** order by stddev() on columns of table "user" */
-["user_stddev_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate stddev_pop on columns */
 ["user_stddev_pop_fields"]: {
 		__typename?: "user_stddev_pop_fields";
 			id?:number
 	},
-	/** order by stddev_pop() on columns of table "user" */
-["user_stddev_pop_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate stddev_samp on columns */
 ["user_stddev_samp_fields"]: {
 		__typename?: "user_stddev_samp_fields";
 			id?:number
 	},
-	/** order by stddev_samp() on columns of table "user" */
-["user_stddev_samp_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate sum on columns */
 ["user_sum_fields"]: {
 		__typename?: "user_sum_fields";
 			id?:number
 	},
-	/** order by sum() on columns of table "user" */
-["user_sum_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** update columns of table "user" */
 ["user_update_column"]:user_update_column,
 	/** aggregate var_pop on columns */
@@ -5189,30 +5311,19 @@ columns and relationships of "user" */
 		__typename?: "user_var_pop_fields";
 			id?:number
 	},
-	/** order by var_pop() on columns of table "user" */
-["user_var_pop_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate var_samp on columns */
 ["user_var_samp_fields"]: {
 		__typename?: "user_var_samp_fields";
 			id?:number
 	},
-	/** order by var_samp() on columns of table "user" */
-["user_var_samp_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
 	/** aggregate variance on columns */
 ["user_variance_fields"]: {
 		__typename?: "user_variance_fields";
 			id?:number
-	},
-	/** order by variance() on columns of table "user" */
-["user_variance_order_by"]: {
-	id?:PartialObjects["order_by"]
-},
-	["uuid"]:any
+	}
   }
+
+
 
 /** A physical billing/shipping address, attached to a user account
 
@@ -5225,13 +5336,14 @@ export type address = {
 	city:string,
 	created_at:timestamptz,
 	id:number,
+	name?:string,
 	/** An array relationship */
 	orders_with_billing_address:order[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	orders_with_billing_address_aggregate:order_aggregate,
 	/** An array relationship */
 	orders_with_shipping_address:order[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	orders_with_shipping_address_aggregate:order_aggregate,
 	state:string,
 	updated_at:timestamptz,
@@ -5252,7 +5364,7 @@ export type address_aggregate = {
 export type address_aggregate_fields = {
 	__typename?: "address_aggregate_fields",
 	avg?:address_avg_fields,
-	count?:number,
+	count:number,
 	max?:address_max_fields,
 	min?:address_min_fields,
 	stddev?:address_stddev_fields,
@@ -5282,6 +5394,7 @@ export type address_aggregate_order_by = {
 /** input type for inserting array relation for remote table "address" */
 export type address_arr_rel_insert_input = {
 		data:address_insert_input[],
+	/** on conflict condition */
 	on_conflict?:address_on_conflict
 }
 
@@ -5300,14 +5413,15 @@ export type address_avg_order_by = {
 
 /** Boolean expression to filter rows from the table "address". All fields are combined with a logical 'AND'. */
 export type address_bool_exp = {
-		_and?:(address_bool_exp | undefined)[],
+		_and?:address_bool_exp[],
 	_not?:address_bool_exp,
-	_or?:(address_bool_exp | undefined)[],
+	_or?:address_bool_exp[],
 	address_line_one?:String_comparison_exp,
 	address_line_two?:String_comparison_exp,
 	city?:String_comparison_exp,
 	created_at?:timestamptz_comparison_exp,
 	id?:Int_comparison_exp,
+	name?:String_comparison_exp,
 	orders_with_billing_address?:order_bool_exp,
 	orders_with_shipping_address?:order_bool_exp,
 	state?:String_comparison_exp,
@@ -5322,7 +5436,7 @@ export enum address_constraint {
 	address_pkey = "address_pkey"
 }
 
-/** input type for incrementing integer column in table "address" */
+/** input type for incrementing numeric columns in table "address" */
 export type address_inc_input = {
 		id?:number,
 	user_id?:number
@@ -5335,6 +5449,7 @@ export type address_insert_input = {
 	city?:string,
 	created_at?:timestamptz,
 	id?:number,
+	name?:string,
 	orders_with_billing_address?:order_arr_rel_insert_input,
 	orders_with_shipping_address?:order_arr_rel_insert_input,
 	state?:string,
@@ -5352,6 +5467,7 @@ export type address_max_fields = {
 	city?:string,
 	created_at?:timestamptz,
 	id?:number,
+	name?:string,
 	state?:string,
 	updated_at?:timestamptz,
 	user_id?:number,
@@ -5365,6 +5481,7 @@ export type address_max_order_by = {
 	city?:order_by,
 	created_at?:order_by,
 	id?:order_by,
+	name?:order_by,
 	state?:order_by,
 	updated_at?:order_by,
 	user_id?:order_by,
@@ -5379,6 +5496,7 @@ export type address_min_fields = {
 	city?:string,
 	created_at?:timestamptz,
 	id?:number,
+	name?:string,
 	state?:string,
 	updated_at?:timestamptz,
 	user_id?:number,
@@ -5392,6 +5510,7 @@ export type address_min_order_by = {
 	city?:order_by,
 	created_at?:order_by,
 	id?:order_by,
+	name?:order_by,
 	state?:order_by,
 	updated_at?:order_by,
 	user_id?:order_by,
@@ -5401,15 +5520,16 @@ export type address_min_order_by = {
 /** response of any mutation on the table "address" */
 export type address_mutation_response = {
 	__typename?: "address_mutation_response",
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows:number,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning:address[]
 }
 
 /** input type for inserting object relation for remote table "address" */
 export type address_obj_rel_insert_input = {
 		data:address_insert_input,
+	/** on conflict condition */
 	on_conflict?:address_on_conflict
 }
 
@@ -5420,13 +5540,14 @@ export type address_on_conflict = {
 	where?:address_bool_exp
 }
 
-/** ordering options when selecting data from "address" */
+/** Ordering options when selecting data from "address". */
 export type address_order_by = {
 		address_line_one?:order_by,
 	address_line_two?:order_by,
 	city?:order_by,
 	created_at?:order_by,
 	id?:order_by,
+	name?:order_by,
 	orders_with_billing_address_aggregate?:order_aggregate_order_by,
 	orders_with_shipping_address_aggregate?:order_aggregate_order_by,
 	state?:order_by,
@@ -5436,7 +5557,7 @@ export type address_order_by = {
 	zipcode?:order_by
 }
 
-/** primary key columns input for table: "address" */
+/** primary key columns input for table: address */
 export type address_pk_columns_input = {
 		id:number
 }
@@ -5448,6 +5569,7 @@ export enum address_select_column {
 	city = "city",
 	created_at = "created_at",
 	id = "id",
+	name = "name",
 	state = "state",
 	updated_at = "updated_at",
 	user_id = "user_id",
@@ -5461,6 +5583,7 @@ export type address_set_input = {
 	city?:string,
 	created_at?:timestamptz,
 	id?:number,
+	name?:string,
 	state?:string,
 	updated_at?:timestamptz,
 	user_id?:number,
@@ -5526,6 +5649,7 @@ export enum address_update_column {
 	city = "city",
 	created_at = "created_at",
 	id = "id",
+	name = "name",
 	state = "state",
 	updated_at = "updated_at",
 	user_id = "user_id",
@@ -5582,7 +5706,7 @@ export type AdminSignupInput = {
 	password:string
 }
 
-/** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_comparison_exp = {
 		_eq?:boolean,
 	_gt?:boolean,
@@ -5599,7 +5723,7 @@ export type CreatePaymentIntentInput = {
 		paymentAmount:number
 }
 
-/** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_comparison_exp = {
 		_eq?:number,
 	_gt?:number,
@@ -5612,24 +5736,9 @@ export type Int_comparison_exp = {
 	_nin?:number[]
 }
 
-export type json = any
-
-/** expression to compare columns of type json. All fields are combined with logical 'AND'. */
-export type json_comparison_exp = {
-		_eq?:json,
-	_gt?:json,
-	_gte?:json,
-	_in?:json[],
-	_is_null?:boolean,
-	_lt?:json,
-	_lte?:json,
-	_neq?:json,
-	_nin?:json[]
-}
-
 export type jsonb = any
 
-/** expression to compare columns of type jsonb. All fields are combined with logical 'AND'. */
+/** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 export type jsonb_comparison_exp = {
 		/** is the column contained in the given json value */
 	_contained_in?:jsonb,
@@ -5668,9 +5777,9 @@ export type LoginInput = {
 /** mutation root */
 export type mutation_root = {
 	__typename?: "mutation_root",
-	/** perform the action: "adminSignup" */
+	/** Test action login */
+	actionLoginTest?:SampleOutput,
 	adminSignup?:JWT,
-	/** perform the action: "createPaymentIntent" */
 	createPaymentIntent?:PaymentIntentClientSecret,
 	/** delete data from the table: "address" */
 	delete_address?:address_mutation_response,
@@ -5684,6 +5793,10 @@ export type mutation_root = {
 	delete_order_product?:order_product_mutation_response,
 	/** delete single row from the table: "order_product" */
 	delete_order_product_by_pk?:order_product,
+	/** delete data from the table: "order_status" */
+	delete_order_status?:order_status_mutation_response,
+	/** delete single row from the table: "order_status" */
+	delete_order_status_by_pk?:order_status,
 	/** delete data from the table: "product" */
 	delete_product?:product_mutation_response,
 	/** delete single row from the table: "product" */
@@ -5716,6 +5829,10 @@ export type mutation_root = {
 	insert_order_product?:order_product_mutation_response,
 	/** insert a single row into the table: "order_product" */
 	insert_order_product_one?:order_product,
+	/** insert data into the table: "order_status" */
+	insert_order_status?:order_status_mutation_response,
+	/** insert a single row into the table: "order_status" */
+	insert_order_status_one?:order_status,
 	/** insert data into the table: "product" */
 	insert_product?:product_mutation_response,
 	/** insert data into the table: "product_category_enum" */
@@ -5736,9 +5853,7 @@ export type mutation_root = {
 	insert_user?:user_mutation_response,
 	/** insert a single row into the table: "user" */
 	insert_user_one?:user,
-	/** perform the action: "login" */
 	login?:JWT,
-	/** perform the action: "signup" */
 	signup?:JWT,
 	/** update data of the table: "address" */
 	update_address?:address_mutation_response,
@@ -5752,6 +5867,10 @@ export type mutation_root = {
 	update_order_product?:order_product_mutation_response,
 	/** update single row of the table: "order_product" */
 	update_order_product_by_pk?:order_product,
+	/** update data of the table: "order_status" */
+	update_order_status?:order_status_mutation_response,
+	/** update single row of the table: "order_status" */
+	update_order_status_by_pk?:order_status,
 	/** update data of the table: "product" */
 	update_product?:product_mutation_response,
 	/** update single row of the table: "product" */
@@ -5776,7 +5895,7 @@ export type mutation_root = {
 
 export type numeric = any
 
-/** expression to compare columns of type numeric. All fields are combined with logical 'AND'. */
+/** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
 export type numeric_comparison_exp = {
 		_eq?:numeric,
 	_gt?:numeric,
@@ -5801,13 +5920,17 @@ export type order = {
 	created_at:timestamptz,
 	id:number,
 	is_shipped:boolean,
+	/** An object relationship */
+	order_status:order_status,
+	order_total?:numeric,
 	/** An array relationship */
 	products:order_product[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	products_aggregate:order_product_aggregate,
 	/** An object relationship */
 	shipping_address:address,
 	shipping_address_id:number,
+	status:order_status_enum,
 	updated_at:timestamptz,
 	/** An object relationship */
 	user:user,
@@ -5825,7 +5948,7 @@ export type order_aggregate = {
 export type order_aggregate_fields = {
 	__typename?: "order_aggregate_fields",
 	avg?:order_avg_fields,
-	count?:number,
+	count:number,
 	max?:order_max_fields,
 	min?:order_min_fields,
 	stddev?:order_stddev_fields,
@@ -5855,6 +5978,7 @@ export type order_aggregate_order_by = {
 /** input type for inserting array relation for remote table "order" */
 export type order_arr_rel_insert_input = {
 		data:order_insert_input[],
+	/** on conflict condition */
 	on_conflict?:order_on_conflict
 }
 
@@ -5863,6 +5987,7 @@ export type order_avg_fields = {
 	__typename?: "order_avg_fields",
 	billing_address_id?:number,
 	id?:number,
+	order_total?:number,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -5871,23 +5996,27 @@ export type order_avg_fields = {
 export type order_avg_order_by = {
 		billing_address_id?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	user_id?:order_by
 }
 
 /** Boolean expression to filter rows from the table "order". All fields are combined with a logical 'AND'. */
 export type order_bool_exp = {
-		_and?:(order_bool_exp | undefined)[],
+		_and?:order_bool_exp[],
 	_not?:order_bool_exp,
-	_or?:(order_bool_exp | undefined)[],
+	_or?:order_bool_exp[],
 	billing_address?:address_bool_exp,
 	billing_address_id?:Int_comparison_exp,
 	created_at?:timestamptz_comparison_exp,
 	id?:Int_comparison_exp,
 	is_shipped?:Boolean_comparison_exp,
+	order_status?:order_status_bool_exp,
+	order_total?:numeric_comparison_exp,
 	products?:order_product_bool_exp,
 	shipping_address?:address_bool_exp,
 	shipping_address_id?:Int_comparison_exp,
+	status?:order_status_enum_comparison_exp,
 	updated_at?:timestamptz_comparison_exp,
 	user?:user_bool_exp,
 	user_id?:Int_comparison_exp
@@ -5908,10 +6037,11 @@ export enum order_constraint {
 	order_pkey = "order_pkey"
 }
 
-/** input type for incrementing integer column in table "order" */
+/** input type for incrementing numeric columns in table "order" */
 export type order_inc_input = {
 		billing_address_id?:number,
 	id?:number,
+	order_total?:numeric,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -5923,9 +6053,12 @@ export type order_insert_input = {
 	created_at?:timestamptz,
 	id?:number,
 	is_shipped?:boolean,
+	order_status?:order_status_obj_rel_insert_input,
+	order_total?:numeric,
 	products?:order_product_arr_rel_insert_input,
 	shipping_address?:address_obj_rel_insert_input,
 	shipping_address_id?:number,
+	status?:order_status_enum,
 	updated_at?:timestamptz,
 	user?:user_obj_rel_insert_input,
 	user_id?:number
@@ -5937,6 +6070,7 @@ export type order_max_fields = {
 	billing_address_id?:number,
 	created_at?:timestamptz,
 	id?:number,
+	order_total?:numeric,
 	shipping_address_id?:number,
 	updated_at?:timestamptz,
 	user_id?:number
@@ -5947,6 +6081,7 @@ export type order_max_order_by = {
 		billing_address_id?:order_by,
 	created_at?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	updated_at?:order_by,
 	user_id?:order_by
@@ -5958,6 +6093,7 @@ export type order_min_fields = {
 	billing_address_id?:number,
 	created_at?:timestamptz,
 	id?:number,
+	order_total?:numeric,
 	shipping_address_id?:number,
 	updated_at?:timestamptz,
 	user_id?:number
@@ -5968,6 +6104,7 @@ export type order_min_order_by = {
 		billing_address_id?:order_by,
 	created_at?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	updated_at?:order_by,
 	user_id?:order_by
@@ -5976,15 +6113,16 @@ export type order_min_order_by = {
 /** response of any mutation on the table "order" */
 export type order_mutation_response = {
 	__typename?: "order_mutation_response",
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows:number,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning:order[]
 }
 
 /** input type for inserting object relation for remote table "order" */
 export type order_obj_rel_insert_input = {
 		data:order_insert_input,
+	/** on conflict condition */
 	on_conflict?:order_on_conflict
 }
 
@@ -5995,22 +6133,25 @@ export type order_on_conflict = {
 	where?:order_bool_exp
 }
 
-/** ordering options when selecting data from "order" */
+/** Ordering options when selecting data from "order". */
 export type order_order_by = {
 		billing_address?:address_order_by,
 	billing_address_id?:order_by,
 	created_at?:order_by,
 	id?:order_by,
 	is_shipped?:order_by,
+	order_status?:order_status_order_by,
+	order_total?:order_by,
 	products_aggregate?:order_product_aggregate_order_by,
 	shipping_address?:address_order_by,
 	shipping_address_id?:order_by,
+	status?:order_by,
 	updated_at?:order_by,
 	user?:user_order_by,
 	user_id?:order_by
 }
 
-/** primary key columns input for table: "order" */
+/** primary key columns input for table: order */
 export type order_pk_columns_input = {
 		id:number
 }
@@ -6044,7 +6185,7 @@ export type order_product_aggregate = {
 export type order_product_aggregate_fields = {
 	__typename?: "order_product_aggregate_fields",
 	avg?:order_product_avg_fields,
-	count?:number,
+	count:number,
 	max?:order_product_max_fields,
 	min?:order_product_min_fields,
 	stddev?:order_product_stddev_fields,
@@ -6074,6 +6215,7 @@ export type order_product_aggregate_order_by = {
 /** input type for inserting array relation for remote table "order_product" */
 export type order_product_arr_rel_insert_input = {
 		data:order_product_insert_input[],
+	/** on conflict condition */
 	on_conflict?:order_product_on_conflict
 }
 
@@ -6096,9 +6238,9 @@ export type order_product_avg_order_by = {
 
 /** Boolean expression to filter rows from the table "order_product". All fields are combined with a logical 'AND'. */
 export type order_product_bool_exp = {
-		_and?:(order_product_bool_exp | undefined)[],
+		_and?:order_product_bool_exp[],
 	_not?:order_product_bool_exp,
-	_or?:(order_product_bool_exp | undefined)[],
+	_or?:order_product_bool_exp[],
 	created_at?:timestamptz_comparison_exp,
 	id?:Int_comparison_exp,
 	order?:order_bool_exp,
@@ -6114,7 +6256,7 @@ export enum order_product_constraint {
 	order_product_pkey = "order_product_pkey"
 }
 
-/** input type for incrementing integer column in table "order_product" */
+/** input type for incrementing numeric columns in table "order_product" */
 export type order_product_inc_input = {
 		id?:number,
 	order_id?:number,
@@ -6179,16 +6321,10 @@ export type order_product_min_order_by = {
 /** response of any mutation on the table "order_product" */
 export type order_product_mutation_response = {
 	__typename?: "order_product_mutation_response",
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows:number,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning:order_product[]
-}
-
-/** input type for inserting object relation for remote table "order_product" */
-export type order_product_obj_rel_insert_input = {
-		data:order_product_insert_input,
-	on_conflict?:order_product_on_conflict
 }
 
 /** on conflict condition type for table "order_product" */
@@ -6198,7 +6334,7 @@ export type order_product_on_conflict = {
 	where?:order_product_bool_exp
 }
 
-/** ordering options when selecting data from "order_product" */
+/** Ordering options when selecting data from "order_product". */
 export type order_product_order_by = {
 		created_at?:order_by,
 	id?:order_by,
@@ -6210,7 +6346,7 @@ export type order_product_order_by = {
 	updated_at?:order_by
 }
 
-/** primary key columns input for table: "order_product" */
+/** primary key columns input for table: order_product */
 export type order_product_pk_columns_input = {
 		id:number
 }
@@ -6370,7 +6506,9 @@ export enum order_select_column {
 	created_at = "created_at",
 	id = "id",
 	is_shipped = "is_shipped",
+	order_total = "order_total",
 	shipping_address_id = "shipping_address_id",
+	status = "status",
 	updated_at = "updated_at",
 	user_id = "user_id"
 }
@@ -6381,9 +6519,135 @@ export type order_set_input = {
 	created_at?:timestamptz,
 	id?:number,
 	is_shipped?:boolean,
+	order_total?:numeric,
 	shipping_address_id?:number,
+	status?:order_status_enum,
 	updated_at?:timestamptz,
 	user_id?:number
+}
+
+/** columns and relationships of "order_status" */
+export type order_status = {
+	__typename?: "order_status",
+	/** An array relationship */
+	orders:order[],
+	/** An aggregate relationship */
+	orders_aggregate:order_aggregate,
+	status:string
+}
+
+/** aggregated selection of "order_status" */
+export type order_status_aggregate = {
+	__typename?: "order_status_aggregate",
+	aggregate?:order_status_aggregate_fields,
+	nodes:order_status[]
+}
+
+/** aggregate fields of "order_status" */
+export type order_status_aggregate_fields = {
+	__typename?: "order_status_aggregate_fields",
+	count:number,
+	max?:order_status_max_fields,
+	min?:order_status_min_fields
+}
+
+/** Boolean expression to filter rows from the table "order_status". All fields are combined with a logical 'AND'. */
+export type order_status_bool_exp = {
+		_and?:order_status_bool_exp[],
+	_not?:order_status_bool_exp,
+	_or?:order_status_bool_exp[],
+	orders?:order_bool_exp,
+	status?:String_comparison_exp
+}
+
+/** unique or primary key constraints on table "order_status" */
+export enum order_status_constraint {
+	order_status_pkey = "order_status_pkey"
+}
+
+export enum order_status_enum {
+	CANCELLED = "CANCELLED",
+	CREATED = "CREATED",
+	DELIVERED = "DELIVERED",
+	PAID = "PAID",
+	REFUNDED = "REFUNDED",
+	SHIPPED = "SHIPPED"
+}
+
+/** Boolean expression to compare columns of type "order_status_enum". All fields are combined with logical 'AND'. */
+export type order_status_enum_comparison_exp = {
+		_eq?:order_status_enum,
+	_in?:order_status_enum[],
+	_is_null?:boolean,
+	_neq?:order_status_enum,
+	_nin?:order_status_enum[]
+}
+
+/** input type for inserting data into table "order_status" */
+export type order_status_insert_input = {
+		orders?:order_arr_rel_insert_input,
+	status?:string
+}
+
+/** aggregate max on columns */
+export type order_status_max_fields = {
+	__typename?: "order_status_max_fields",
+	status?:string
+}
+
+/** aggregate min on columns */
+export type order_status_min_fields = {
+	__typename?: "order_status_min_fields",
+	status?:string
+}
+
+/** response of any mutation on the table "order_status" */
+export type order_status_mutation_response = {
+	__typename?: "order_status_mutation_response",
+	/** number of rows affected by the mutation */
+	affected_rows:number,
+	/** data from the rows affected by the mutation */
+	returning:order_status[]
+}
+
+/** input type for inserting object relation for remote table "order_status" */
+export type order_status_obj_rel_insert_input = {
+		data:order_status_insert_input,
+	/** on conflict condition */
+	on_conflict?:order_status_on_conflict
+}
+
+/** on conflict condition type for table "order_status" */
+export type order_status_on_conflict = {
+		constraint:order_status_constraint,
+	update_columns:order_status_update_column[],
+	where?:order_status_bool_exp
+}
+
+/** Ordering options when selecting data from "order_status". */
+export type order_status_order_by = {
+		orders_aggregate?:order_aggregate_order_by,
+	status?:order_by
+}
+
+/** primary key columns input for table: order_status */
+export type order_status_pk_columns_input = {
+		status:string
+}
+
+/** select columns of table "order_status" */
+export enum order_status_select_column {
+	status = "status"
+}
+
+/** input type for updating data in table "order_status" */
+export type order_status_set_input = {
+		status?:string
+}
+
+/** update columns of table "order_status" */
+export enum order_status_update_column {
+	status = "status"
 }
 
 /** aggregate stddev on columns */
@@ -6391,6 +6655,7 @@ export type order_stddev_fields = {
 	__typename?: "order_stddev_fields",
 	billing_address_id?:number,
 	id?:number,
+	order_total?:number,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -6399,6 +6664,7 @@ export type order_stddev_fields = {
 export type order_stddev_order_by = {
 		billing_address_id?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	user_id?:order_by
 }
@@ -6408,6 +6674,7 @@ export type order_stddev_pop_fields = {
 	__typename?: "order_stddev_pop_fields",
 	billing_address_id?:number,
 	id?:number,
+	order_total?:number,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -6416,6 +6683,7 @@ export type order_stddev_pop_fields = {
 export type order_stddev_pop_order_by = {
 		billing_address_id?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	user_id?:order_by
 }
@@ -6425,6 +6693,7 @@ export type order_stddev_samp_fields = {
 	__typename?: "order_stddev_samp_fields",
 	billing_address_id?:number,
 	id?:number,
+	order_total?:number,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -6433,6 +6702,7 @@ export type order_stddev_samp_fields = {
 export type order_stddev_samp_order_by = {
 		billing_address_id?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	user_id?:order_by
 }
@@ -6442,6 +6712,7 @@ export type order_sum_fields = {
 	__typename?: "order_sum_fields",
 	billing_address_id?:number,
 	id?:number,
+	order_total?:numeric,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -6450,6 +6721,7 @@ export type order_sum_fields = {
 export type order_sum_order_by = {
 		billing_address_id?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	user_id?:order_by
 }
@@ -6460,7 +6732,9 @@ export enum order_update_column {
 	created_at = "created_at",
 	id = "id",
 	is_shipped = "is_shipped",
+	order_total = "order_total",
 	shipping_address_id = "shipping_address_id",
+	status = "status",
 	updated_at = "updated_at",
 	user_id = "user_id"
 }
@@ -6470,6 +6744,7 @@ export type order_var_pop_fields = {
 	__typename?: "order_var_pop_fields",
 	billing_address_id?:number,
 	id?:number,
+	order_total?:number,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -6478,6 +6753,7 @@ export type order_var_pop_fields = {
 export type order_var_pop_order_by = {
 		billing_address_id?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	user_id?:order_by
 }
@@ -6487,6 +6763,7 @@ export type order_var_samp_fields = {
 	__typename?: "order_var_samp_fields",
 	billing_address_id?:number,
 	id?:number,
+	order_total?:number,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -6495,6 +6772,7 @@ export type order_var_samp_fields = {
 export type order_var_samp_order_by = {
 		billing_address_id?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	user_id?:order_by
 }
@@ -6504,6 +6782,7 @@ export type order_variance_fields = {
 	__typename?: "order_variance_fields",
 	billing_address_id?:number,
 	id?:number,
+	order_total?:number,
 	shipping_address_id?:number,
 	user_id?:number
 }
@@ -6512,6 +6791,7 @@ export type order_variance_fields = {
 export type order_variance_order_by = {
 		billing_address_id?:order_by,
 	id?:order_by,
+	order_total?:order_by,
 	shipping_address_id?:order_by,
 	user_id?:order_by
 }
@@ -6535,12 +6815,12 @@ export type product = {
 	name:string,
 	/** An array relationship */
 	orders:order_product[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	orders_aggregate:order_product_aggregate,
 	price:numeric,
 	/** An array relationship */
 	product_reviews:product_review[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	product_reviews_aggregate:product_review_aggregate,
 	updated_at:timestamptz
 }
@@ -6556,7 +6836,7 @@ export type product_aggregate = {
 export type product_aggregate_fields = {
 	__typename?: "product_aggregate_fields",
 	avg?:product_avg_fields,
-	count?:number,
+	count:number,
 	max?:product_max_fields,
 	min?:product_min_fields,
 	stddev?:product_stddev_fields,
@@ -6591,6 +6871,7 @@ export type product_append_input = {
 /** input type for inserting array relation for remote table "product" */
 export type product_arr_rel_insert_input = {
 		data:product_insert_input[],
+	/** on conflict condition */
 	on_conflict?:product_on_conflict
 }
 
@@ -6609,9 +6890,9 @@ export type product_avg_order_by = {
 
 /** Boolean expression to filter rows from the table "product". All fields are combined with a logical 'AND'. */
 export type product_bool_exp = {
-		_and?:(product_bool_exp | undefined)[],
+		_and?:product_bool_exp[],
 	_not?:product_bool_exp,
-	_or?:(product_bool_exp | undefined)[],
+	_or?:product_bool_exp[],
 	brand?:String_comparison_exp,
 	category?:product_category_enum_bool_exp,
 	category_display_name?:String_comparison_exp,
@@ -6633,7 +6914,7 @@ export type product_category_enum = {
 	name:string,
 	/** An array relationship */
 	products:product[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	products_aggregate:product_aggregate
 }
 
@@ -6647,29 +6928,16 @@ export type product_category_enum_aggregate = {
 /** aggregate fields of "product_category_enum" */
 export type product_category_enum_aggregate_fields = {
 	__typename?: "product_category_enum_aggregate_fields",
-	count?:number,
+	count:number,
 	max?:product_category_enum_max_fields,
 	min?:product_category_enum_min_fields
 }
 
-/** order by aggregate values of table "product_category_enum" */
-export type product_category_enum_aggregate_order_by = {
-		count?:order_by,
-	max?:product_category_enum_max_order_by,
-	min?:product_category_enum_min_order_by
-}
-
-/** input type for inserting array relation for remote table "product_category_enum" */
-export type product_category_enum_arr_rel_insert_input = {
-		data:product_category_enum_insert_input[],
-	on_conflict?:product_category_enum_on_conflict
-}
-
 /** Boolean expression to filter rows from the table "product_category_enum". All fields are combined with a logical 'AND'. */
 export type product_category_enum_bool_exp = {
-		_and?:(product_category_enum_bool_exp | undefined)[],
+		_and?:product_category_enum_bool_exp[],
 	_not?:product_category_enum_bool_exp,
-	_or?:(product_category_enum_bool_exp | undefined)[],
+	_or?:product_category_enum_bool_exp[],
 	display_name?:String_comparison_exp,
 	name?:String_comparison_exp,
 	products?:product_bool_exp
@@ -6695,12 +6963,6 @@ export type product_category_enum_max_fields = {
 	name?:string
 }
 
-/** order by max() on columns of table "product_category_enum" */
-export type product_category_enum_max_order_by = {
-		display_name?:order_by,
-	name?:order_by
-}
-
 /** aggregate min on columns */
 export type product_category_enum_min_fields = {
 	__typename?: "product_category_enum_min_fields",
@@ -6708,24 +6970,19 @@ export type product_category_enum_min_fields = {
 	name?:string
 }
 
-/** order by min() on columns of table "product_category_enum" */
-export type product_category_enum_min_order_by = {
-		display_name?:order_by,
-	name?:order_by
-}
-
 /** response of any mutation on the table "product_category_enum" */
 export type product_category_enum_mutation_response = {
 	__typename?: "product_category_enum_mutation_response",
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows:number,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning:product_category_enum[]
 }
 
 /** input type for inserting object relation for remote table "product_category_enum" */
 export type product_category_enum_obj_rel_insert_input = {
 		data:product_category_enum_insert_input,
+	/** on conflict condition */
 	on_conflict?:product_category_enum_on_conflict
 }
 
@@ -6736,14 +6993,14 @@ export type product_category_enum_on_conflict = {
 	where?:product_category_enum_bool_exp
 }
 
-/** ordering options when selecting data from "product_category_enum" */
+/** Ordering options when selecting data from "product_category_enum". */
 export type product_category_enum_order_by = {
 		display_name?:order_by,
 	name?:order_by,
 	products_aggregate?:product_aggregate_order_by
 }
 
-/** primary key columns input for table: "product_category_enum" */
+/** primary key columns input for table: product_category_enum */
 export type product_category_enum_pk_columns_input = {
 		name:string
 }
@@ -6773,7 +7030,7 @@ export enum product_constraint {
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type product_delete_at_path_input = {
-		image_urls?:(string | undefined)[]
+		image_urls?:string[]
 }
 
 /** delete the array element with specified index (negative integers count from the
@@ -6787,7 +7044,7 @@ export type product_delete_key_input = {
 		image_urls?:string
 }
 
-/** input type for incrementing integer column in table "product" */
+/** input type for incrementing numeric columns in table "product" */
 export type product_inc_input = {
 		id?:number,
 	price?:numeric
@@ -6862,15 +7119,16 @@ export type product_min_order_by = {
 /** response of any mutation on the table "product" */
 export type product_mutation_response = {
 	__typename?: "product_mutation_response",
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows:number,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning:product[]
 }
 
 /** input type for inserting object relation for remote table "product" */
 export type product_obj_rel_insert_input = {
 		data:product_insert_input,
+	/** on conflict condition */
 	on_conflict?:product_on_conflict
 }
 
@@ -6881,7 +7139,7 @@ export type product_on_conflict = {
 	where?:product_bool_exp
 }
 
-/** ordering options when selecting data from "product" */
+/** Ordering options when selecting data from "product". */
 export type product_order_by = {
 		brand?:order_by,
 	category?:product_category_enum_order_by,
@@ -6897,7 +7155,7 @@ export type product_order_by = {
 	updated_at?:order_by
 }
 
-/** primary key columns input for table: "product" */
+/** primary key columns input for table: product */
 export type product_pk_columns_input = {
 		id:number
 }
@@ -6937,7 +7195,7 @@ export type product_review_aggregate = {
 export type product_review_aggregate_fields = {
 	__typename?: "product_review_aggregate_fields",
 	avg?:product_review_avg_fields,
-	count?:number,
+	count:number,
 	max?:product_review_max_fields,
 	min?:product_review_min_fields,
 	stddev?:product_review_stddev_fields,
@@ -6967,6 +7225,7 @@ export type product_review_aggregate_order_by = {
 /** input type for inserting array relation for remote table "product_review" */
 export type product_review_arr_rel_insert_input = {
 		data:product_review_insert_input[],
+	/** on conflict condition */
 	on_conflict?:product_review_on_conflict
 }
 
@@ -6989,9 +7248,9 @@ export type product_review_avg_order_by = {
 
 /** Boolean expression to filter rows from the table "product_review". All fields are combined with a logical 'AND'. */
 export type product_review_bool_exp = {
-		_and?:(product_review_bool_exp | undefined)[],
+		_and?:product_review_bool_exp[],
 	_not?:product_review_bool_exp,
-	_or?:(product_review_bool_exp | undefined)[],
+	_or?:product_review_bool_exp[],
 	comment?:String_comparison_exp,
 	created_at?:timestamptz_comparison_exp,
 	id?:Int_comparison_exp,
@@ -7009,7 +7268,7 @@ export enum product_review_constraint {
 	product_review_pkey = "product_review_pkey"
 }
 
-/** input type for incrementing integer column in table "product_review" */
+/** input type for incrementing numeric columns in table "product_review" */
 export type product_review_inc_input = {
 		id?:number,
 	product_id?:number,
@@ -7079,16 +7338,10 @@ export type product_review_min_order_by = {
 /** response of any mutation on the table "product_review" */
 export type product_review_mutation_response = {
 	__typename?: "product_review_mutation_response",
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows:number,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning:product_review[]
-}
-
-/** input type for inserting object relation for remote table "product_review" */
-export type product_review_obj_rel_insert_input = {
-		data:product_review_insert_input,
-	on_conflict?:product_review_on_conflict
 }
 
 /** on conflict condition type for table "product_review" */
@@ -7098,7 +7351,7 @@ export type product_review_on_conflict = {
 	where?:product_review_bool_exp
 }
 
-/** ordering options when selecting data from "product_review" */
+/** Ordering options when selecting data from "product_review". */
 export type product_review_order_by = {
 		comment?:order_by,
 	created_at?:order_by,
@@ -7111,7 +7364,7 @@ export type product_review_order_by = {
 	user_id?:order_by
 }
 
-/** primary key columns input for table: "product_review" */
+/** primary key columns input for table: product_review */
 export type product_review_pk_columns_input = {
 		id:number
 }
@@ -7398,7 +7651,6 @@ export type product_variance_order_by = {
 	price?:order_by
 }
 
-/** query root */
 export type query_root = {
 	__typename?: "query_root",
 	/** fetch data from the table: "address" */
@@ -7407,7 +7659,6 @@ export type query_root = {
 	address_aggregate:address_aggregate,
 	/** fetch data from the table: "address" using primary key columns */
 	address_by_pk?:address,
-	/** perform the action: "adminLogin" */
 	adminLogin?:JWT,
 	/** fetch data from the table: "order" */
 	order:order[],
@@ -7421,6 +7672,12 @@ export type query_root = {
 	order_product_aggregate:order_product_aggregate,
 	/** fetch data from the table: "order_product" using primary key columns */
 	order_product_by_pk?:order_product,
+	/** fetch data from the table: "order_status" */
+	order_status:order_status[],
+	/** fetch aggregated fields from the table: "order_status" */
+	order_status_aggregate:order_status_aggregate,
+	/** fetch data from the table: "order_status" using primary key columns */
+	order_status_by_pk?:order_status,
 	/** fetch data from the table: "product" */
 	product:product[],
 	/** fetch aggregated fields from the table: "product" */
@@ -7439,7 +7696,6 @@ export type query_root = {
 	product_review_aggregate:product_review_aggregate,
 	/** fetch data from the table: "product_review" using primary key columns */
 	product_review_by_pk?:product_review,
-	/** perform the action: "refreshToken" */
 	refreshToken?:RefreshTokenJWT,
 	/** fetch data from the table: "site_admin" */
 	site_admin:site_admin[],
@@ -7464,6 +7720,16 @@ export type RefreshTokenJWT = {
 	token:string
 }
 
+export type SampleInput = {
+		password:string,
+	username:string
+}
+
+export type SampleOutput = {
+	__typename?: "SampleOutput",
+	accessToken:string
+}
+
 export type SignupInput = {
 		email:string,
 	name:string,
@@ -7479,8 +7745,10 @@ export type site_admin = {
 	created_at:timestamptz,
 	email:string,
 	id:number,
+	name:string,
 	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password:string,
+	refresh_token?:string,
 	updated_at:timestamptz
 }
 
@@ -7495,7 +7763,7 @@ export type site_admin_aggregate = {
 export type site_admin_aggregate_fields = {
 	__typename?: "site_admin_aggregate_fields",
 	avg?:site_admin_avg_fields,
-	count?:number,
+	count:number,
 	max?:site_admin_max_fields,
 	min?:site_admin_min_fields,
 	stddev?:site_admin_stddev_fields,
@@ -7507,57 +7775,34 @@ export type site_admin_aggregate_fields = {
 	variance?:site_admin_variance_fields
 }
 
-/** order by aggregate values of table "site_admin" */
-export type site_admin_aggregate_order_by = {
-		avg?:site_admin_avg_order_by,
-	count?:order_by,
-	max?:site_admin_max_order_by,
-	min?:site_admin_min_order_by,
-	stddev?:site_admin_stddev_order_by,
-	stddev_pop?:site_admin_stddev_pop_order_by,
-	stddev_samp?:site_admin_stddev_samp_order_by,
-	sum?:site_admin_sum_order_by,
-	var_pop?:site_admin_var_pop_order_by,
-	var_samp?:site_admin_var_samp_order_by,
-	variance?:site_admin_variance_order_by
-}
-
-/** input type for inserting array relation for remote table "site_admin" */
-export type site_admin_arr_rel_insert_input = {
-		data:site_admin_insert_input[],
-	on_conflict?:site_admin_on_conflict
-}
-
 /** aggregate avg on columns */
 export type site_admin_avg_fields = {
 	__typename?: "site_admin_avg_fields",
 	id?:number
 }
 
-/** order by avg() on columns of table "site_admin" */
-export type site_admin_avg_order_by = {
-		id?:order_by
-}
-
 /** Boolean expression to filter rows from the table "site_admin". All fields are combined with a logical 'AND'. */
 export type site_admin_bool_exp = {
-		_and?:(site_admin_bool_exp | undefined)[],
+		_and?:site_admin_bool_exp[],
 	_not?:site_admin_bool_exp,
-	_or?:(site_admin_bool_exp | undefined)[],
+	_or?:site_admin_bool_exp[],
 	created_at?:timestamptz_comparison_exp,
 	email?:String_comparison_exp,
 	id?:Int_comparison_exp,
+	name?:String_comparison_exp,
 	password?:String_comparison_exp,
+	refresh_token?:String_comparison_exp,
 	updated_at?:timestamptz_comparison_exp
 }
 
 /** unique or primary key constraints on table "site_admin" */
 export enum site_admin_constraint {
 	site_admin_email_key = "site_admin_email_key",
-	site_admin_pkey = "site_admin_pkey"
+	site_admin_pkey = "site_admin_pkey",
+	site_admin_refresh_token_key = "site_admin_refresh_token_key"
 }
 
-/** input type for incrementing integer column in table "site_admin" */
+/** input type for incrementing numeric columns in table "site_admin" */
 export type site_admin_inc_input = {
 		id?:number
 }
@@ -7567,7 +7812,10 @@ export type site_admin_insert_input = {
 		created_at?:timestamptz,
 	email?:string,
 	id?:number,
+	name?:string,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	refresh_token?:string,
 	updated_at?:timestamptz
 }
 
@@ -7577,17 +7825,11 @@ export type site_admin_max_fields = {
 	created_at?:timestamptz,
 	email?:string,
 	id?:number,
+	name?:string,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	refresh_token?:string,
 	updated_at?:timestamptz
-}
-
-/** order by max() on columns of table "site_admin" */
-export type site_admin_max_order_by = {
-		created_at?:order_by,
-	email?:order_by,
-	id?:order_by,
-	password?:order_by,
-	updated_at?:order_by
 }
 
 /** aggregate min on columns */
@@ -7596,32 +7838,20 @@ export type site_admin_min_fields = {
 	created_at?:timestamptz,
 	email?:string,
 	id?:number,
+	name?:string,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	refresh_token?:string,
 	updated_at?:timestamptz
-}
-
-/** order by min() on columns of table "site_admin" */
-export type site_admin_min_order_by = {
-		created_at?:order_by,
-	email?:order_by,
-	id?:order_by,
-	password?:order_by,
-	updated_at?:order_by
 }
 
 /** response of any mutation on the table "site_admin" */
 export type site_admin_mutation_response = {
 	__typename?: "site_admin_mutation_response",
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows:number,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning:site_admin[]
-}
-
-/** input type for inserting object relation for remote table "site_admin" */
-export type site_admin_obj_rel_insert_input = {
-		data:site_admin_insert_input,
-	on_conflict?:site_admin_on_conflict
 }
 
 /** on conflict condition type for table "site_admin" */
@@ -7631,16 +7861,18 @@ export type site_admin_on_conflict = {
 	where?:site_admin_bool_exp
 }
 
-/** ordering options when selecting data from "site_admin" */
+/** Ordering options when selecting data from "site_admin". */
 export type site_admin_order_by = {
 		created_at?:order_by,
 	email?:order_by,
 	id?:order_by,
+	name?:order_by,
 	password?:order_by,
+	refresh_token?:order_by,
 	updated_at?:order_by
 }
 
-/** primary key columns input for table: "site_admin" */
+/** primary key columns input for table: site_admin */
 export type site_admin_pk_columns_input = {
 		id:number
 }
@@ -7650,7 +7882,9 @@ export enum site_admin_select_column {
 	created_at = "created_at",
 	email = "email",
 	id = "id",
+	name = "name",
 	password = "password",
+	refresh_token = "refresh_token",
 	updated_at = "updated_at"
 }
 
@@ -7659,7 +7893,10 @@ export type site_admin_set_input = {
 		created_at?:timestamptz,
 	email?:string,
 	id?:number,
+	name?:string,
+	/** A bcrypt-hashed version of the admin password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	refresh_token?:string,
 	updated_at?:timestamptz
 }
 
@@ -7669,20 +7906,10 @@ export type site_admin_stddev_fields = {
 	id?:number
 }
 
-/** order by stddev() on columns of table "site_admin" */
-export type site_admin_stddev_order_by = {
-		id?:order_by
-}
-
 /** aggregate stddev_pop on columns */
 export type site_admin_stddev_pop_fields = {
 	__typename?: "site_admin_stddev_pop_fields",
 	id?:number
-}
-
-/** order by stddev_pop() on columns of table "site_admin" */
-export type site_admin_stddev_pop_order_by = {
-		id?:order_by
 }
 
 /** aggregate stddev_samp on columns */
@@ -7691,20 +7918,10 @@ export type site_admin_stddev_samp_fields = {
 	id?:number
 }
 
-/** order by stddev_samp() on columns of table "site_admin" */
-export type site_admin_stddev_samp_order_by = {
-		id?:order_by
-}
-
 /** aggregate sum on columns */
 export type site_admin_sum_fields = {
 	__typename?: "site_admin_sum_fields",
 	id?:number
-}
-
-/** order by sum() on columns of table "site_admin" */
-export type site_admin_sum_order_by = {
-		id?:order_by
 }
 
 /** update columns of table "site_admin" */
@@ -7712,7 +7929,9 @@ export enum site_admin_update_column {
 	created_at = "created_at",
 	email = "email",
 	id = "id",
+	name = "name",
 	password = "password",
+	refresh_token = "refresh_token",
 	updated_at = "updated_at"
 }
 
@@ -7722,20 +7941,10 @@ export type site_admin_var_pop_fields = {
 	id?:number
 }
 
-/** order by var_pop() on columns of table "site_admin" */
-export type site_admin_var_pop_order_by = {
-		id?:order_by
-}
-
 /** aggregate var_samp on columns */
 export type site_admin_var_samp_fields = {
 	__typename?: "site_admin_var_samp_fields",
 	id?:number
-}
-
-/** order by var_samp() on columns of table "site_admin" */
-export type site_admin_var_samp_order_by = {
-		id?:order_by
 }
 
 /** aggregate variance on columns */
@@ -7744,31 +7953,39 @@ export type site_admin_variance_fields = {
 	id?:number
 }
 
-/** order by variance() on columns of table "site_admin" */
-export type site_admin_variance_order_by = {
-		id?:order_by
-}
-
-/** expression to compare columns of type String. All fields are combined with logical 'AND'. */
+/** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_comparison_exp = {
 		_eq?:string,
 	_gt?:string,
 	_gte?:string,
+	/** does the column match the given case-insensitive pattern */
 	_ilike?:string,
 	_in?:string[],
+	/** does the column match the given POSIX regular expression, case insensitive */
+	_iregex?:string,
 	_is_null?:boolean,
+	/** does the column match the given pattern */
 	_like?:string,
 	_lt?:string,
 	_lte?:string,
 	_neq?:string,
+	/** does the column NOT match the given case-insensitive pattern */
 	_nilike?:string,
 	_nin?:string[],
+	/** does the column NOT match the given POSIX regular expression, case insensitive */
+	_niregex?:string,
+	/** does the column NOT match the given pattern */
 	_nlike?:string,
+	/** does the column NOT match the given POSIX regular expression, case sensitive */
+	_nregex?:string,
+	/** does the column NOT match the given SQL regular expression */
 	_nsimilar?:string,
+	/** does the column match the given POSIX regular expression, case sensitive */
+	_regex?:string,
+	/** does the column match the given SQL regular expression */
 	_similar?:string
 }
 
-/** subscription root */
 export type subscription_root = {
 	__typename?: "subscription_root",
 	/** fetch data from the table: "address" */
@@ -7777,8 +7994,6 @@ export type subscription_root = {
 	address_aggregate:address_aggregate,
 	/** fetch data from the table: "address" using primary key columns */
 	address_by_pk?:address,
-	/** perform the action: "adminLogin" */
-	adminLogin?:JWT,
 	/** fetch data from the table: "order" */
 	order:order[],
 	/** fetch aggregated fields from the table: "order" */
@@ -7791,6 +8006,12 @@ export type subscription_root = {
 	order_product_aggregate:order_product_aggregate,
 	/** fetch data from the table: "order_product" using primary key columns */
 	order_product_by_pk?:order_product,
+	/** fetch data from the table: "order_status" */
+	order_status:order_status[],
+	/** fetch aggregated fields from the table: "order_status" */
+	order_status_aggregate:order_status_aggregate,
+	/** fetch data from the table: "order_status" using primary key columns */
+	order_status_by_pk?:order_status,
 	/** fetch data from the table: "product" */
 	product:product[],
 	/** fetch aggregated fields from the table: "product" */
@@ -7809,8 +8030,6 @@ export type subscription_root = {
 	product_review_aggregate:product_review_aggregate,
 	/** fetch data from the table: "product_review" using primary key columns */
 	product_review_by_pk?:product_review,
-	/** perform the action: "refreshToken" */
-	refreshToken?:RefreshTokenJWT,
 	/** fetch data from the table: "site_admin" */
 	site_admin:site_admin[],
 	/** fetch aggregated fields from the table: "site_admin" */
@@ -7827,7 +8046,7 @@ export type subscription_root = {
 
 export type timestamptz = any
 
-/** expression to compare columns of type timestamptz. All fields are combined with logical 'AND'. */
+/** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type timestamptz_comparison_exp = {
 		_eq?:timestamptz,
 	_gt?:timestamptz,
@@ -7848,7 +8067,7 @@ export type user = {
 	__typename?: "user",
 	/** An array relationship */
 	addresses:address[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	addresses_aggregate:address_aggregate,
 	created_at:timestamptz,
 	email:string,
@@ -7856,15 +8075,18 @@ export type user = {
 	name:string,
 	/** An array relationship */
 	orders:order[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	orders_aggregate:order_aggregate,
 	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password:string,
 	/** An array relationship */
 	product_reviews:product_review[],
-	/** An aggregated array relationship */
+	/** An aggregate relationship */
 	product_reviews_aggregate:product_review_aggregate,
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at:timestamptz
 }
 
@@ -7879,7 +8101,7 @@ export type user_aggregate = {
 export type user_aggregate_fields = {
 	__typename?: "user_aggregate_fields",
 	avg?:user_avg_fields,
-	count?:number,
+	count:number,
 	max?:user_max_fields,
 	min?:user_min_fields,
 	stddev?:user_stddev_fields,
@@ -7891,43 +8113,17 @@ export type user_aggregate_fields = {
 	variance?:user_variance_fields
 }
 
-/** order by aggregate values of table "user" */
-export type user_aggregate_order_by = {
-		avg?:user_avg_order_by,
-	count?:order_by,
-	max?:user_max_order_by,
-	min?:user_min_order_by,
-	stddev?:user_stddev_order_by,
-	stddev_pop?:user_stddev_pop_order_by,
-	stddev_samp?:user_stddev_samp_order_by,
-	sum?:user_sum_order_by,
-	var_pop?:user_var_pop_order_by,
-	var_samp?:user_var_samp_order_by,
-	variance?:user_variance_order_by
-}
-
-/** input type for inserting array relation for remote table "user" */
-export type user_arr_rel_insert_input = {
-		data:user_insert_input[],
-	on_conflict?:user_on_conflict
-}
-
 /** aggregate avg on columns */
 export type user_avg_fields = {
 	__typename?: "user_avg_fields",
 	id?:number
 }
 
-/** order by avg() on columns of table "user" */
-export type user_avg_order_by = {
-		id?:order_by
-}
-
 /** Boolean expression to filter rows from the table "user". All fields are combined with a logical 'AND'. */
 export type user_bool_exp = {
-		_and?:(user_bool_exp | undefined)[],
+		_and?:user_bool_exp[],
 	_not?:user_bool_exp,
-	_or?:(user_bool_exp | undefined)[],
+	_or?:user_bool_exp[],
 	addresses?:address_bool_exp,
 	created_at?:timestamptz_comparison_exp,
 	email?:String_comparison_exp,
@@ -7936,7 +8132,10 @@ export type user_bool_exp = {
 	orders?:order_bool_exp,
 	password?:String_comparison_exp,
 	product_reviews?:product_review_bool_exp,
+	provider_id?:String_comparison_exp,
+	provider_name?:String_comparison_exp,
 	refresh_token?:String_comparison_exp,
+	role?:String_comparison_exp,
 	updated_at?:timestamptz_comparison_exp
 }
 
@@ -7947,7 +8146,7 @@ export enum user_constraint {
 	user_refresh_token_key = "user_refresh_token_key"
 }
 
-/** input type for incrementing integer column in table "user" */
+/** input type for incrementing numeric columns in table "user" */
 export type user_inc_input = {
 		id?:number
 }
@@ -7960,9 +8159,13 @@ export type user_insert_input = {
 	id?:number,
 	name?:string,
 	orders?:order_arr_rel_insert_input,
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
 	product_reviews?:product_review_arr_rel_insert_input,
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at?:timestamptz
 }
 
@@ -7973,20 +8176,13 @@ export type user_max_fields = {
 	email?:string,
 	id?:number,
 	name?:string,
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at?:timestamptz
-}
-
-/** order by max() on columns of table "user" */
-export type user_max_order_by = {
-		created_at?:order_by,
-	email?:order_by,
-	id?:order_by,
-	name?:order_by,
-	password?:order_by,
-	refresh_token?:order_by,
-	updated_at?:order_by
 }
 
 /** aggregate min on columns */
@@ -7996,34 +8192,28 @@ export type user_min_fields = {
 	email?:string,
 	id?:number,
 	name?:string,
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at?:timestamptz
-}
-
-/** order by min() on columns of table "user" */
-export type user_min_order_by = {
-		created_at?:order_by,
-	email?:order_by,
-	id?:order_by,
-	name?:order_by,
-	password?:order_by,
-	refresh_token?:order_by,
-	updated_at?:order_by
 }
 
 /** response of any mutation on the table "user" */
 export type user_mutation_response = {
 	__typename?: "user_mutation_response",
-	/** number of affected rows by the mutation */
+	/** number of rows affected by the mutation */
 	affected_rows:number,
-	/** data of the affected rows by the mutation */
+	/** data from the rows affected by the mutation */
 	returning:user[]
 }
 
 /** input type for inserting object relation for remote table "user" */
 export type user_obj_rel_insert_input = {
 		data:user_insert_input,
+	/** on conflict condition */
 	on_conflict?:user_on_conflict
 }
 
@@ -8034,7 +8224,7 @@ export type user_on_conflict = {
 	where?:user_bool_exp
 }
 
-/** ordering options when selecting data from "user" */
+/** Ordering options when selecting data from "user". */
 export type user_order_by = {
 		addresses_aggregate?:address_aggregate_order_by,
 	created_at?:order_by,
@@ -8044,11 +8234,14 @@ export type user_order_by = {
 	orders_aggregate?:order_aggregate_order_by,
 	password?:order_by,
 	product_reviews_aggregate?:product_review_aggregate_order_by,
+	provider_id?:order_by,
+	provider_name?:order_by,
 	refresh_token?:order_by,
+	role?:order_by,
 	updated_at?:order_by
 }
 
-/** primary key columns input for table: "user" */
+/** primary key columns input for table: user */
 export type user_pk_columns_input = {
 		id:number
 }
@@ -8060,7 +8253,10 @@ export enum user_select_column {
 	id = "id",
 	name = "name",
 	password = "password",
+	provider_id = "provider_id",
+	provider_name = "provider_name",
 	refresh_token = "refresh_token",
+	role = "role",
 	updated_at = "updated_at"
 }
 
@@ -8070,8 +8266,12 @@ export type user_set_input = {
 	email?:string,
 	id?:number,
 	name?:string,
+	/** A bcrypt-hashed version of the user password, compared against securely in the JWT Auth API handler for sign-in */
 	password?:string,
+	provider_id?:string,
+	provider_name?:string,
 	refresh_token?:string,
+	role?:string,
 	updated_at?:timestamptz
 }
 
@@ -8081,20 +8281,10 @@ export type user_stddev_fields = {
 	id?:number
 }
 
-/** order by stddev() on columns of table "user" */
-export type user_stddev_order_by = {
-		id?:order_by
-}
-
 /** aggregate stddev_pop on columns */
 export type user_stddev_pop_fields = {
 	__typename?: "user_stddev_pop_fields",
 	id?:number
-}
-
-/** order by stddev_pop() on columns of table "user" */
-export type user_stddev_pop_order_by = {
-		id?:order_by
 }
 
 /** aggregate stddev_samp on columns */
@@ -8103,20 +8293,10 @@ export type user_stddev_samp_fields = {
 	id?:number
 }
 
-/** order by stddev_samp() on columns of table "user" */
-export type user_stddev_samp_order_by = {
-		id?:order_by
-}
-
 /** aggregate sum on columns */
 export type user_sum_fields = {
 	__typename?: "user_sum_fields",
 	id?:number
-}
-
-/** order by sum() on columns of table "user" */
-export type user_sum_order_by = {
-		id?:order_by
 }
 
 /** update columns of table "user" */
@@ -8126,7 +8306,10 @@ export enum user_update_column {
 	id = "id",
 	name = "name",
 	password = "password",
+	provider_id = "provider_id",
+	provider_name = "provider_name",
 	refresh_token = "refresh_token",
+	role = "role",
 	updated_at = "updated_at"
 }
 
@@ -8136,20 +8319,10 @@ export type user_var_pop_fields = {
 	id?:number
 }
 
-/** order by var_pop() on columns of table "user" */
-export type user_var_pop_order_by = {
-		id?:order_by
-}
-
 /** aggregate var_samp on columns */
 export type user_var_samp_fields = {
 	__typename?: "user_var_samp_fields",
 	id?:number
-}
-
-/** order by var_samp() on columns of table "user" */
-export type user_var_samp_order_by = {
-		id?:order_by
 }
 
 /** aggregate variance on columns */
@@ -8158,14 +8331,17 @@ export type user_variance_fields = {
 	id?:number
 }
 
-/** order by variance() on columns of table "user" */
-export type user_variance_order_by = {
-		id?:order_by
-}
-
-export type uuid = any
-
 export const AllTypesProps: Record<string,any> = {
+	cached:{
+		ttl:{
+			60:{
+				type:"IntValue",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		}
+	},
 	address:{
 		orders_with_billing_address:{
 			distinct_on:{
@@ -8413,7 +8589,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"address_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		_not:{
 			type:"address_bool_exp",
@@ -8425,7 +8601,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"address_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		address_line_one:{
 			type:"String_comparison_exp",
@@ -8453,6 +8629,12 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		id:{
 			type:"Int_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		name:{
+			type:"String_comparison_exp",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -8546,6 +8728,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		name:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		orders_with_billing_address:{
 			type:"order_arr_rel_insert_input",
 			array:false,
@@ -8620,6 +8808,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		name:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		state:{
 			type:"order_by",
 			array:false,
@@ -8671,6 +8865,12 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		id:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		name:{
 			type:"order_by",
 			array:false,
 			arrayRequired:false,
@@ -8766,6 +8966,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		name:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		orders_with_billing_address_aggregate:{
 			type:"order_aggregate_order_by",
 			array:false,
@@ -8845,6 +9051,12 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		id:{
 			type:"Int",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		name:{
+			type:"String",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -9127,63 +9339,6 @@ export const AllTypesProps: Record<string,any> = {
 			required:true
 		}
 	},
-	json: "String",
-	json_comparison_exp:{
-		_eq:{
-			type:"json",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		_gt:{
-			type:"json",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		_gte:{
-			type:"json",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		_in:{
-			type:"json",
-			array:true,
-			arrayRequired:false,
-			required:true
-		},
-		_is_null:{
-			type:"Boolean",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		_lt:{
-			type:"json",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		_lte:{
-			type:"json",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		_neq:{
-			type:"json",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		_nin:{
-			type:"json",
-			array:true,
-			arrayRequired:false,
-			required:true
-		}
-	},
 	jsonb: "String",
 	jsonb_comparison_exp:{
 		_contained_in:{
@@ -9286,6 +9441,14 @@ export const AllTypesProps: Record<string,any> = {
 		}
 	},
 	mutation_root:{
+		actionLoginTest:{
+			params:{
+				type:"SampleInput",
+				array:false,
+				arrayRequired:false,
+				required:true
+			}
+		},
 		adminSignup:{
 			params:{
 				type:"AdminSignupInput",
@@ -9345,6 +9508,22 @@ export const AllTypesProps: Record<string,any> = {
 		delete_order_product_by_pk:{
 			id:{
 				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:true
+			}
+		},
+		delete_order_status:{
+			where:{
+				type:"order_status_bool_exp",
+				array:false,
+				arrayRequired:false,
+				required:true
+			}
+		},
+		delete_order_status_by_pk:{
+			status:{
+				type:"String",
 				array:false,
 				arrayRequired:false,
 				required:true
@@ -9509,6 +9688,34 @@ export const AllTypesProps: Record<string,any> = {
 			},
 			on_conflict:{
 				type:"order_product_on_conflict",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		},
+		insert_order_status:{
+			objects:{
+				type:"order_status_insert_input",
+				array:true,
+				arrayRequired:true,
+				required:true
+			},
+			on_conflict:{
+				type:"order_status_on_conflict",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		},
+		insert_order_status_one:{
+			object:{
+				type:"order_status_insert_input",
+				array:false,
+				arrayRequired:false,
+				required:true
+			},
+			on_conflict:{
+				type:"order_status_on_conflict",
 				array:false,
 				arrayRequired:false,
 				required:false
@@ -9785,6 +9992,34 @@ export const AllTypesProps: Record<string,any> = {
 			},
 			pk_columns:{
 				type:"order_product_pk_columns_input",
+				array:false,
+				arrayRequired:false,
+				required:true
+			}
+		},
+		update_order_status:{
+			_set:{
+				type:"order_status_set_input",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			where:{
+				type:"order_status_bool_exp",
+				array:false,
+				arrayRequired:false,
+				required:true
+			}
+		},
+		update_order_status_by_pk:{
+			_set:{
+				type:"order_status_set_input",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			pk_columns:{
+				type:"order_status_pk_columns_input",
 				array:false,
 				arrayRequired:false,
 				required:true
@@ -10273,6 +10508,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_total:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		shipping_address_id:{
 			type:"order_by",
 			array:false,
@@ -10291,7 +10532,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"order_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		_not:{
 			type:"order_bool_exp",
@@ -10303,7 +10544,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"order_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		billing_address:{
 			type:"address_bool_exp",
@@ -10335,6 +10576,18 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_status:{
+			type:"order_status_bool_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		order_total:{
+			type:"numeric_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		products:{
 			type:"order_product_bool_exp",
 			array:false,
@@ -10349,6 +10602,12 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		shipping_address_id:{
 			type:"Int_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		status:{
+			type:"order_status_enum_comparison_exp",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -10383,6 +10642,12 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		id:{
 			type:"Int",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		order_total:{
+			type:"numeric",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -10431,6 +10696,18 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_status:{
+			type:"order_status_obj_rel_insert_input",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		order_total:{
+			type:"numeric",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		products:{
 			type:"order_product_arr_rel_insert_input",
 			array:false,
@@ -10445,6 +10722,12 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		shipping_address_id:{
 			type:"Int",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		status:{
+			type:"order_status_enum",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -10487,6 +10770,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_total:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		shipping_address_id:{
 			type:"order_by",
 			array:false,
@@ -10520,6 +10809,12 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		id:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		order_total:{
 			type:"order_by",
 			array:false,
 			arrayRequired:false,
@@ -10609,6 +10904,18 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_status:{
+			type:"order_status_order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		order_total:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		products_aggregate:{
 			type:"order_product_aggregate_order_by",
 			array:false,
@@ -10622,6 +10929,12 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		shipping_address_id:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		status:{
 			type:"order_by",
 			array:false,
 			arrayRequired:false,
@@ -10783,7 +11096,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"order_product_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		_not:{
 			type:"order_product_bool_exp",
@@ -10795,7 +11108,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"order_product_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		created_at:{
 			type:"timestamptz_comparison_exp",
@@ -10994,20 +11307,6 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		updated_at:{
 			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	order_product_obj_rel_insert_input:{
-		data:{
-			type:"order_product_insert_input",
-			array:false,
-			arrayRequired:false,
-			required:true
-		},
-		on_conflict:{
-			type:"order_product_on_conflict",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -11339,8 +11638,20 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_total:{
+			type:"numeric",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		shipping_address_id:{
 			type:"Int",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		status:{
+			type:"order_status_enum",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -11358,6 +11669,234 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		}
 	},
+	order_status:{
+		orders:{
+			distinct_on:{
+				type:"order_select_column",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			limit:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			offset:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			order_by:{
+				type:"order_order_by",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			where:{
+				type:"order_bool_exp",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		},
+		orders_aggregate:{
+			distinct_on:{
+				type:"order_select_column",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			limit:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			offset:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			order_by:{
+				type:"order_order_by",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			where:{
+				type:"order_bool_exp",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		}
+	},
+	order_status_aggregate_fields:{
+		count:{
+			columns:{
+				type:"order_status_select_column",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			distinct:{
+				type:"Boolean",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		}
+	},
+	order_status_bool_exp:{
+		_and:{
+			type:"order_status_bool_exp",
+			array:true,
+			arrayRequired:false,
+			required:true
+		},
+		_not:{
+			type:"order_status_bool_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		_or:{
+			type:"order_status_bool_exp",
+			array:true,
+			arrayRequired:false,
+			required:true
+		},
+		orders:{
+			type:"order_bool_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		status:{
+			type:"String_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		}
+	},
+	order_status_constraint: "enum",
+	order_status_enum: "enum",
+	order_status_enum_comparison_exp:{
+		_eq:{
+			type:"order_status_enum",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		_in:{
+			type:"order_status_enum",
+			array:true,
+			arrayRequired:false,
+			required:true
+		},
+		_is_null:{
+			type:"Boolean",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		_neq:{
+			type:"order_status_enum",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		_nin:{
+			type:"order_status_enum",
+			array:true,
+			arrayRequired:false,
+			required:true
+		}
+	},
+	order_status_insert_input:{
+		orders:{
+			type:"order_arr_rel_insert_input",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		status:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		}
+	},
+	order_status_obj_rel_insert_input:{
+		data:{
+			type:"order_status_insert_input",
+			array:false,
+			arrayRequired:false,
+			required:true
+		},
+		on_conflict:{
+			type:"order_status_on_conflict",
+			array:false,
+			arrayRequired:false,
+			required:false
+		}
+	},
+	order_status_on_conflict:{
+		constraint:{
+			type:"order_status_constraint",
+			array:false,
+			arrayRequired:false,
+			required:true
+		},
+		update_columns:{
+			type:"order_status_update_column",
+			array:true,
+			arrayRequired:true,
+			required:true
+		},
+		where:{
+			type:"order_status_bool_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		}
+	},
+	order_status_order_by:{
+		orders_aggregate:{
+			type:"order_aggregate_order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		status:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		}
+	},
+	order_status_pk_columns_input:{
+		status:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:true
+		}
+	},
+	order_status_select_column: "enum",
+	order_status_set_input:{
+		status:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		}
+	},
+	order_status_update_column: "enum",
 	order_stddev_order_by:{
 		billing_address_id:{
 			type:"order_by",
@@ -11366,6 +11905,12 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		id:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		order_total:{
 			type:"order_by",
 			array:false,
 			arrayRequired:false,
@@ -11397,6 +11942,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_total:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		shipping_address_id:{
 			type:"order_by",
 			array:false,
@@ -11423,6 +11974,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_total:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		shipping_address_id:{
 			type:"order_by",
 			array:false,
@@ -11444,6 +12001,12 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		id:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		order_total:{
 			type:"order_by",
 			array:false,
 			arrayRequired:false,
@@ -11476,6 +12039,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_total:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		shipping_address_id:{
 			type:"order_by",
 			array:false,
@@ -11502,6 +12071,12 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		order_total:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		shipping_address_id:{
 			type:"order_by",
 			array:false,
@@ -11523,6 +12098,12 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		},
 		id:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		order_total:{
 			type:"order_by",
 			array:false,
 			arrayRequired:false,
@@ -11804,7 +12385,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"product_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		_not:{
 			type:"product_bool_exp",
@@ -11816,7 +12397,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"product_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		brand:{
 			type:"String_comparison_exp",
@@ -11973,46 +12554,12 @@ export const AllTypesProps: Record<string,any> = {
 			}
 		}
 	},
-	product_category_enum_aggregate_order_by:{
-		count:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		max:{
-			type:"product_category_enum_max_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		min:{
-			type:"product_category_enum_min_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	product_category_enum_arr_rel_insert_input:{
-		data:{
-			type:"product_category_enum_insert_input",
-			array:true,
-			arrayRequired:true,
-			required:true
-		},
-		on_conflict:{
-			type:"product_category_enum_on_conflict",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
 	product_category_enum_bool_exp:{
 		_and:{
 			type:"product_category_enum_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		_not:{
 			type:"product_category_enum_bool_exp",
@@ -12024,7 +12571,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"product_category_enum_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		display_name:{
 			type:"String_comparison_exp",
@@ -12061,34 +12608,6 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		products:{
 			type:"product_arr_rel_insert_input",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	product_category_enum_max_order_by:{
-		display_name:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		name:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	product_category_enum_min_order_by:{
-		display_name:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		name:{
-			type:"order_by",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -12178,7 +12697,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"String",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		}
 	},
 	product_delete_elem_input:{
@@ -12638,7 +13157,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"product_review_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		_not:{
 			type:"product_review_bool_exp",
@@ -12650,7 +13169,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"product_review_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		comment:{
 			type:"String_comparison_exp",
@@ -12873,20 +13392,6 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		user_id:{
 			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	product_review_obj_rel_insert_input:{
-		data:{
-			type:"product_review_insert_input",
-			array:false,
-			arrayRequired:false,
-			required:true
-		},
-		on_conflict:{
-			type:"product_review_on_conflict",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -13585,6 +14090,78 @@ export const AllTypesProps: Record<string,any> = {
 				required:true
 			}
 		},
+		order_status:{
+			distinct_on:{
+				type:"order_status_select_column",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			limit:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			offset:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			order_by:{
+				type:"order_status_order_by",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			where:{
+				type:"order_status_bool_exp",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		},
+		order_status_aggregate:{
+			distinct_on:{
+				type:"order_status_select_column",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			limit:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			offset:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			order_by:{
+				type:"order_status_order_by",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			where:{
+				type:"order_status_bool_exp",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		},
+		order_status_by_pk:{
+			status:{
+				type:"String",
+				array:false,
+				arrayRequired:false,
+				required:true
+			}
+		},
 		product:{
 			distinct_on:{
 				type:"product_select_column",
@@ -13962,6 +14539,20 @@ export const AllTypesProps: Record<string,any> = {
 			required:true
 		}
 	},
+	SampleInput:{
+		password:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:true
+		},
+		username:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:true
+		}
+	},
 	SignupInput:{
 		email:{
 			type:"String",
@@ -13998,102 +14589,12 @@ export const AllTypesProps: Record<string,any> = {
 			}
 		}
 	},
-	site_admin_aggregate_order_by:{
-		avg:{
-			type:"site_admin_avg_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		count:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		max:{
-			type:"site_admin_max_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		min:{
-			type:"site_admin_min_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		stddev:{
-			type:"site_admin_stddev_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		stddev_pop:{
-			type:"site_admin_stddev_pop_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		stddev_samp:{
-			type:"site_admin_stddev_samp_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		sum:{
-			type:"site_admin_sum_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		var_pop:{
-			type:"site_admin_var_pop_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		var_samp:{
-			type:"site_admin_var_samp_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		variance:{
-			type:"site_admin_variance_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_arr_rel_insert_input:{
-		data:{
-			type:"site_admin_insert_input",
-			array:true,
-			arrayRequired:true,
-			required:true
-		},
-		on_conflict:{
-			type:"site_admin_on_conflict",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_avg_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
 	site_admin_bool_exp:{
 		_and:{
 			type:"site_admin_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		_not:{
 			type:"site_admin_bool_exp",
@@ -14105,7 +14606,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"site_admin_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		created_at:{
 			type:"timestamptz_comparison_exp",
@@ -14125,7 +14626,19 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		name:{
+			type:"String_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		password:{
+			type:"String_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		refresh_token:{
 			type:"String_comparison_exp",
 			array:false,
 			arrayRequired:false,
@@ -14166,7 +14679,19 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		name:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		password:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		refresh_token:{
 			type:"String",
 			array:false,
 			arrayRequired:false,
@@ -14174,84 +14699,6 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		updated_at:{
 			type:"timestamptz",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_max_order_by:{
-		created_at:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		email:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		password:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		updated_at:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_min_order_by:{
-		created_at:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		email:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		password:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		updated_at:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_obj_rel_insert_input:{
-		data:{
-			type:"site_admin_insert_input",
-			array:false,
-			arrayRequired:false,
-			required:true
-		},
-		on_conflict:{
-			type:"site_admin_on_conflict",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -14296,7 +14743,19 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		name:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		password:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		refresh_token:{
 			type:"order_by",
 			array:false,
 			arrayRequired:false,
@@ -14337,7 +14796,19 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		name:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		password:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		refresh_token:{
 			type:"String",
 			array:false,
 			arrayRequired:false,
@@ -14350,63 +14821,7 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		}
 	},
-	site_admin_stddev_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_stddev_pop_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_stddev_samp_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_sum_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
 	site_admin_update_column: "enum",
-	site_admin_var_pop_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_var_samp_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	site_admin_variance_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
 	String_comparison_exp:{
 		_eq:{
 			type:"String",
@@ -14437,6 +14852,12 @@ export const AllTypesProps: Record<string,any> = {
 			array:true,
 			arrayRequired:false,
 			required:true
+		},
+		_iregex:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
 		},
 		_is_null:{
 			type:"Boolean",
@@ -14480,13 +14901,31 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:true
 		},
+		_niregex:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		_nlike:{
 			type:"String",
 			array:false,
 			arrayRequired:false,
 			required:false
 		},
+		_nregex:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		_nsimilar:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		_regex:{
 			type:"String",
 			array:false,
 			arrayRequired:false,
@@ -14567,14 +15006,6 @@ export const AllTypesProps: Record<string,any> = {
 		address_by_pk:{
 			id:{
 				type:"Int",
-				array:false,
-				arrayRequired:false,
-				required:true
-			}
-		},
-		adminLogin:{
-			params:{
-				type:"AdminLoginInput",
 				array:false,
 				arrayRequired:false,
 				required:true
@@ -14719,6 +15150,78 @@ export const AllTypesProps: Record<string,any> = {
 		order_product_by_pk:{
 			id:{
 				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:true
+			}
+		},
+		order_status:{
+			distinct_on:{
+				type:"order_status_select_column",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			limit:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			offset:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			order_by:{
+				type:"order_status_order_by",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			where:{
+				type:"order_status_bool_exp",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		},
+		order_status_aggregate:{
+			distinct_on:{
+				type:"order_status_select_column",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			limit:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			offset:{
+				type:"Int",
+				array:false,
+				arrayRequired:false,
+				required:false
+			},
+			order_by:{
+				type:"order_status_order_by",
+				array:true,
+				arrayRequired:false,
+				required:true
+			},
+			where:{
+				type:"order_status_bool_exp",
+				array:false,
+				arrayRequired:false,
+				required:false
+			}
+		},
+		order_status_by_pk:{
+			status:{
+				type:"String",
 				array:false,
 				arrayRequired:false,
 				required:true
@@ -14935,14 +15438,6 @@ export const AllTypesProps: Record<string,any> = {
 		product_review_by_pk:{
 			id:{
 				type:"Int",
-				array:false,
-				arrayRequired:false,
-				required:true
-			}
-		},
-		refreshToken:{
-			params:{
-				type:"RefreshTokenInput",
 				array:false,
 				arrayRequired:false,
 				required:true
@@ -15360,102 +15855,12 @@ export const AllTypesProps: Record<string,any> = {
 			}
 		}
 	},
-	user_aggregate_order_by:{
-		avg:{
-			type:"user_avg_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		count:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		max:{
-			type:"user_max_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		min:{
-			type:"user_min_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		stddev:{
-			type:"user_stddev_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		stddev_pop:{
-			type:"user_stddev_pop_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		stddev_samp:{
-			type:"user_stddev_samp_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		sum:{
-			type:"user_sum_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		var_pop:{
-			type:"user_var_pop_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		var_samp:{
-			type:"user_var_samp_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		variance:{
-			type:"user_variance_order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_arr_rel_insert_input:{
-		data:{
-			type:"user_insert_input",
-			array:true,
-			arrayRequired:true,
-			required:true
-		},
-		on_conflict:{
-			type:"user_on_conflict",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_avg_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
 	user_bool_exp:{
 		_and:{
 			type:"user_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		_not:{
 			type:"user_bool_exp",
@@ -15467,7 +15872,7 @@ export const AllTypesProps: Record<string,any> = {
 			type:"user_bool_exp",
 			array:true,
 			arrayRequired:false,
-			required:false
+			required:true
 		},
 		addresses:{
 			type:"address_bool_exp",
@@ -15517,7 +15922,25 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		provider_id:{
+			type:"String_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		provider_name:{
+			type:"String_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		refresh_token:{
+			type:"String_comparison_exp",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		role:{
 			type:"String_comparison_exp",
 			array:false,
 			arrayRequired:false,
@@ -15588,7 +16011,25 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		provider_id:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		provider_name:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		refresh_token:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		role:{
 			type:"String",
 			array:false,
 			arrayRequired:false,
@@ -15596,94 +16037,6 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		updated_at:{
 			type:"timestamptz",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_max_order_by:{
-		created_at:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		email:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		name:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		password:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		refresh_token:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		updated_at:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_min_order_by:{
-		created_at:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		email:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		name:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		password:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		refresh_token:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		},
-		updated_at:{
-			type:"order_by",
 			array:false,
 			arrayRequired:false,
 			required:false
@@ -15772,7 +16125,25 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		provider_id:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		provider_name:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		refresh_token:{
+			type:"order_by",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		role:{
 			type:"order_by",
 			array:false,
 			arrayRequired:false,
@@ -15825,7 +16196,25 @@ export const AllTypesProps: Record<string,any> = {
 			arrayRequired:false,
 			required:false
 		},
+		provider_id:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		provider_name:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
 		refresh_token:{
+			type:"String",
+			array:false,
+			arrayRequired:false,
+			required:false
+		},
+		role:{
 			type:"String",
 			array:false,
 			arrayRequired:false,
@@ -15838,64 +16227,7 @@ export const AllTypesProps: Record<string,any> = {
 			required:false
 		}
 	},
-	user_stddev_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_stddev_pop_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_stddev_samp_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_sum_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_update_column: "enum",
-	user_var_pop_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_var_samp_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	user_variance_order_by:{
-		id:{
-			type:"order_by",
-			array:false,
-			arrayRequired:false,
-			required:false
-		}
-	},
-	uuid: "String"
+	user_update_column: "enum"
 }
 
 export const ReturnTypes: Record<string,any> = {
@@ -15905,6 +16237,7 @@ export const ReturnTypes: Record<string,any> = {
 		city:"String",
 		created_at:"timestamptz",
 		id:"Int",
+		name:"String",
 		orders_with_billing_address:"order",
 		orders_with_billing_address_aggregate:"order_aggregate",
 		orders_with_shipping_address:"order",
@@ -15942,6 +16275,7 @@ export const ReturnTypes: Record<string,any> = {
 		city:"String",
 		created_at:"timestamptz",
 		id:"Int",
+		name:"String",
 		state:"String",
 		updated_at:"timestamptz",
 		user_id:"Int",
@@ -15953,6 +16287,7 @@ export const ReturnTypes: Record<string,any> = {
 		city:"String",
 		created_at:"timestamptz",
 		id:"Int",
+		name:"String",
 		state:"String",
 		updated_at:"timestamptz",
 		user_id:"Int",
@@ -15997,6 +16332,7 @@ export const ReturnTypes: Record<string,any> = {
 		token:"String"
 	},
 	mutation_root:{
+		actionLoginTest:"SampleOutput",
 		adminSignup:"JWT",
 		createPaymentIntent:"PaymentIntentClientSecret",
 		delete_address:"address_mutation_response",
@@ -16005,6 +16341,8 @@ export const ReturnTypes: Record<string,any> = {
 		delete_order_by_pk:"order",
 		delete_order_product:"order_product_mutation_response",
 		delete_order_product_by_pk:"order_product",
+		delete_order_status:"order_status_mutation_response",
+		delete_order_status_by_pk:"order_status",
 		delete_product:"product_mutation_response",
 		delete_product_by_pk:"product",
 		delete_product_category_enum:"product_category_enum_mutation_response",
@@ -16021,6 +16359,8 @@ export const ReturnTypes: Record<string,any> = {
 		insert_order_one:"order",
 		insert_order_product:"order_product_mutation_response",
 		insert_order_product_one:"order_product",
+		insert_order_status:"order_status_mutation_response",
+		insert_order_status_one:"order_status",
 		insert_product:"product_mutation_response",
 		insert_product_category_enum:"product_category_enum_mutation_response",
 		insert_product_category_enum_one:"product_category_enum",
@@ -16039,6 +16379,8 @@ export const ReturnTypes: Record<string,any> = {
 		update_order_by_pk:"order",
 		update_order_product:"order_product_mutation_response",
 		update_order_product_by_pk:"order_product",
+		update_order_status:"order_status_mutation_response",
+		update_order_status_by_pk:"order_status",
 		update_product:"product_mutation_response",
 		update_product_by_pk:"product",
 		update_product_category_enum:"product_category_enum_mutation_response",
@@ -16056,10 +16398,13 @@ export const ReturnTypes: Record<string,any> = {
 		created_at:"timestamptz",
 		id:"Int",
 		is_shipped:"Boolean",
+		order_status:"order_status",
+		order_total:"numeric",
 		products:"order_product",
 		products_aggregate:"order_product_aggregate",
 		shipping_address:"address",
 		shipping_address_id:"Int",
+		status:"order_status_enum",
 		updated_at:"timestamptz",
 		user:"user",
 		user_id:"Int"
@@ -16084,6 +16429,7 @@ export const ReturnTypes: Record<string,any> = {
 	order_avg_fields:{
 		billing_address_id:"Float",
 		id:"Float",
+		order_total:"Float",
 		shipping_address_id:"Float",
 		user_id:"Float"
 	},
@@ -16091,6 +16437,7 @@ export const ReturnTypes: Record<string,any> = {
 		billing_address_id:"Int",
 		created_at:"timestamptz",
 		id:"Int",
+		order_total:"numeric",
 		shipping_address_id:"Int",
 		updated_at:"timestamptz",
 		user_id:"Int"
@@ -16099,6 +16446,7 @@ export const ReturnTypes: Record<string,any> = {
 		billing_address_id:"Int",
 		created_at:"timestamptz",
 		id:"Int",
+		order_total:"numeric",
 		shipping_address_id:"Int",
 		updated_at:"timestamptz",
 		user_id:"Int"
@@ -16202,45 +16550,76 @@ export const ReturnTypes: Record<string,any> = {
 		product_id:"Float",
 		quantity:"Float"
 	},
+	order_status:{
+		orders:"order",
+		orders_aggregate:"order_aggregate",
+		status:"String"
+	},
+	order_status_aggregate:{
+		aggregate:"order_status_aggregate_fields",
+		nodes:"order_status"
+	},
+	order_status_aggregate_fields:{
+		count:"Int",
+		max:"order_status_max_fields",
+		min:"order_status_min_fields"
+	},
+	order_status_max_fields:{
+		status:"String"
+	},
+	order_status_min_fields:{
+		status:"String"
+	},
+	order_status_mutation_response:{
+		affected_rows:"Int",
+		returning:"order_status"
+	},
 	order_stddev_fields:{
 		billing_address_id:"Float",
 		id:"Float",
+		order_total:"Float",
 		shipping_address_id:"Float",
 		user_id:"Float"
 	},
 	order_stddev_pop_fields:{
 		billing_address_id:"Float",
 		id:"Float",
+		order_total:"Float",
 		shipping_address_id:"Float",
 		user_id:"Float"
 	},
 	order_stddev_samp_fields:{
 		billing_address_id:"Float",
 		id:"Float",
+		order_total:"Float",
 		shipping_address_id:"Float",
 		user_id:"Float"
 	},
 	order_sum_fields:{
 		billing_address_id:"Int",
 		id:"Int",
+		order_total:"numeric",
 		shipping_address_id:"Int",
 		user_id:"Int"
 	},
 	order_var_pop_fields:{
 		billing_address_id:"Float",
 		id:"Float",
+		order_total:"Float",
 		shipping_address_id:"Float",
 		user_id:"Float"
 	},
 	order_var_samp_fields:{
 		billing_address_id:"Float",
 		id:"Float",
+		order_total:"Float",
 		shipping_address_id:"Float",
 		user_id:"Float"
 	},
 	order_variance_fields:{
 		billing_address_id:"Float",
 		id:"Float",
+		order_total:"Float",
 		shipping_address_id:"Float",
 		user_id:"Float"
 	},
@@ -16472,6 +16851,9 @@ export const ReturnTypes: Record<string,any> = {
 		order_product:"order_product",
 		order_product_aggregate:"order_product_aggregate",
 		order_product_by_pk:"order_product",
+		order_status:"order_status",
+		order_status_aggregate:"order_status_aggregate",
+		order_status_by_pk:"order_status",
 		product:"product",
 		product_aggregate:"product_aggregate",
 		product_by_pk:"product",
@@ -16492,11 +16874,16 @@ export const ReturnTypes: Record<string,any> = {
 	RefreshTokenJWT:{
 		token:"String"
 	},
+	SampleOutput:{
+		accessToken:"String"
+	},
 	site_admin:{
 		created_at:"timestamptz",
 		email:"String",
 		id:"Int",
+		name:"String",
 		password:"String",
+		refresh_token:"String",
 		updated_at:"timestamptz"
 	},
 	site_admin_aggregate:{
@@ -16523,14 +16910,18 @@ export const ReturnTypes: Record<string,any> = {
 		created_at:"timestamptz",
 		email:"String",
 		id:"Int",
+		name:"String",
 		password:"String",
+		refresh_token:"String",
 		updated_at:"timestamptz"
 	},
 	site_admin_min_fields:{
 		created_at:"timestamptz",
 		email:"String",
 		id:"Int",
+		name:"String",
 		password:"String",
+		refresh_token:"String",
 		updated_at:"timestamptz"
 	},
 	site_admin_mutation_response:{
@@ -16562,13 +16953,15 @@ export const ReturnTypes: Record<string,any> = {
 		address:"address",
 		address_aggregate:"address_aggregate",
 		address_by_pk:"address",
-		adminLogin:"JWT",
 		order:"order",
 		order_aggregate:"order_aggregate",
 		order_by_pk:"order",
 		order_product:"order_product",
 		order_product_aggregate:"order_product_aggregate",
 		order_product_by_pk:"order_product",
+		order_status:"order_status",
+		order_status_aggregate:"order_status_aggregate",
+		order_status_by_pk:"order_status",
 		product:"product",
 		product_aggregate:"product_aggregate",
 		product_by_pk:"product",
@@ -16578,7 +16971,6 @@ export const ReturnTypes: Record<string,any> = {
 		product_review:"product_review",
 		product_review_aggregate:"product_review_aggregate",
 		product_review_by_pk:"product_review",
-		refreshToken:"RefreshTokenJWT",
 		site_admin:"site_admin",
 		site_admin_aggregate:"site_admin_aggregate",
 		site_admin_by_pk:"site_admin",
@@ -16598,7 +16990,10 @@ export const ReturnTypes: Record<string,any> = {
 		password:"String",
 		product_reviews:"product_review",
 		product_reviews_aggregate:"product_review_aggregate",
+		provider_id:"String",
+		provider_name:"String",
 		refresh_token:"String",
+		role:"String",
 		updated_at:"timestamptz"
 	},
 	user_aggregate:{
@@ -16627,7 +17022,10 @@ export const ReturnTypes: Record<string,any> = {
 		id:"Int",
 		name:"String",
 		password:"String",
+		provider_id:"String",
+		provider_name:"String",
 		refresh_token:"String",
+		role:"String",
 		updated_at:"timestamptz"
 	},
 	user_min_fields:{
@@ -16636,7 +17034,10 @@ export const ReturnTypes: Record<string,any> = {
 		id:"Int",
 		name:"String",
 		password:"String",
+		provider_id:"String",
+		provider_name:"String",
 		refresh_token:"String",
+		role:"String",
 		updated_at:"timestamptz"
 	},
 	user_mutation_response:{
@@ -17065,9 +17466,11 @@ export const $ = (t: TemplateStringsArray): any => `ZEUS_VAR$${t.join('')}`;
 const handleFetchResponse = (
   response: Parameters<Extract<Parameters<ReturnType<typeof fetch>['then']>[0], Function>>[0]
 ): Promise<GraphQLResponse> => {
+	console.log('responseData: ', response.ok);
   if (!response.ok) {
     return new Promise((_, reject) => {
       response.text().then(text => {
+		console.log('responseText: ', text);
         try { reject(JSON.parse(text)); }
         catch (err) { reject(text); }
       }).catch(reject);

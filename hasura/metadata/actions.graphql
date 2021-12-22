@@ -4,6 +4,11 @@ type Query {
   ): JWT
 }
 
+type Query {
+  actionLoginTest (
+    params: ActionLoginInput!
+  ): RefreshTokenJWT
+}
 
 type Mutation {
   adminSignup (
@@ -39,7 +44,10 @@ type Mutation {
   ): JWT
 }
 
-
+input ActionLoginInput {
+  username : String!
+  password : String!
+}
 
 
 input SignupInput {

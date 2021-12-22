@@ -1,4 +1,11 @@
 actions:
+- name: actionLoginTest
+  definition:
+    kind: ""
+    handler: '{{ENT_SERVER_URL}}/api/login'
+  permissions:
+  - role: anonymous
+  - role: user
 - name: adminLogin
   definition:
     kind: ""

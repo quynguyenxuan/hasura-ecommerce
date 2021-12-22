@@ -92,11 +92,14 @@ services:
       timeout: 20s
       retries: 3
   server-ent:
+    restart: always
     build:
       context: ./server-ent
       dockerfile: Dockerfile
       target: quynguyen/air
     image: quynguyen/air:latest
+    environment:
+      HASURA_GRAPHQL_TOKEN: HASURA_GRAPHQL_TOKEN
     working_dir: /go/src/entgo.io/quynguyen-todo
     volumes:
       - ./server-ent:/go/src/entgo.io/quynguyen-todo
